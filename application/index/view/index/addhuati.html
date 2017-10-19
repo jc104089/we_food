@@ -1,0 +1,156 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>用户登录-美食天下</title>
+<meta name="keywords" content="用户登录">
+<meta name="description" content="" />
+<meta name="renderer" content="webkit">
+<link rel="shortcut icon" href="http://static.meishichina.com/v6/img/lib/f.ico"/>
+<link rel="apple-touch-icon" href="http://static.meishichina.com/v6/img/lib/wapico.png" />
+<link rel="stylesheet" type="text/css" href="css/all.css">
+<link rel="stylesheet" type="text/css" href="css/user.css">
+
+
+</head>
+<body>
+<div class="top-bar" id="J_top_bar">
+<ul class="bar-left left">
+<li><a title="美食天下" href="http://www.meishichina.com/" target="_blank" class="top_bar_logo"><i>美食天下</i>首页</a></li>
+      <li> <a title="菜谱" href="http://home.meishichina.com/recipe.html" target="_blank">菜谱</a></li>
+      <li> <a title="食材" href="http://www.meishichina.com/YuanLiao/" target="_blank">食材</a></li>
+	  <li> <a title="珍选" href="http://zhen.meishichina.com/" target="_blank">珍选</a></li>
+	  <li> <a title="健康" href="http://www.meishichina.com/Health/" target="_blank">健康</a></li>
+	  <li> <a title="专题" href="http://www.meishichina.com/mofang/" target="_blank">专题</a></li>
+	  <li> <a title="社区" href="http://home.meishichina.com/" target="_blank">社区</a></li>
+	  <li> <a title="话题" href="http://home.meishichina.com/pai.html" target="_blank">话题</a></li>
+      <li> <a title="活动" href="http://home.meishichina.com/event/" target="_blank">活动</a></li>
+	  <li> <a title="搜索" href="http://home.meishichina.com/search/" target="_blank">搜索</a></li>
+	  <li class="top_bar_more"><i></i>
+	  <div>
+	  <a title="烘焙" href="http://hongbei.meishichina.com/" target="_blank">烘焙</a>
+	  <a title="妈妈派" href="http://mamapai.meishichina.com/" target="_blank">妈妈派</a>
+	  </div>
+	  </li>
+    </ul>
+
+<a href="http://www.meishichina.com/Mobile/" target="_blank" class="nr3"><img src="picture/nr3.png" width=18 height=18>客户端<img src="picture/msc_app.png" class="code">
+</a>
+
+<div class="right" id="J_top_bar_user"></div>				
+</div>
+
+	
+<div class="loginbox">
+<div class="loginbox_h">
+<a href="http://member.meishichina.com/user/register/" >注册</a>
+<a href="http://member.meishichina.com/user/login/" class="on">登录</a>
+</div>
+<div class="loginbox_c">
+<form id="loginform" name="loginform" action="http://member.meishichina.com/user/login/" method="post">
+<div class="loginbox_l">
+<ul class="mform_r">			
+<li><label for="username" >手机号/昵称：</label><input type="text" name="username" id="username"   /></li>
+<li style="border:0;"><label for="password" >密　码：</label><input type="password" name="password" id="password" /></li>
+</ul>
+<p class="clear">
+<label for="cookietime" ><input type="checkbox" id="cookietime" name="cookietime" value=""   />&nbsp;下次自动登录</label>
+<a href="http://member.meishichina.com/user/forgetpwd/" class="right">忘记密码？</a>
+</p>
+<input type="submit" id="loginbtn" class="loginbtn" value="登&nbsp;录"/>
+</div>
+</form>
+
+<div class="loginbox_r">
+<img src="picture/msc_app.png" width=110 style="margin:10px 0 0">
+<p>扫描二维码下载客户端</p>
+<a class="a1" href="http://home.meishichina.com/meishi2.php?ac=qqlogin&op=login" title="用QQ账号登录"></a>
+<a class="a3" href="http://home.meishichina.com/meishi2.php?ac=wechatlogin&op=login" title="微信登录"></a>
+<a class="a2" href="http://home.meishichina.com/meishi2.php?ac=sinalogin" title="用新浪微博账号登录"></a>
+<!--<a class="a3" href="#" title="用腾讯微博账号登录"></a>-->
+</div>
+
+</div>
+</div>
+
+	
+
+<!-- 引用全站js -->
+<script type="text/javascript" src="js/all.js"></script>
+
+<script type="text/javascript" src="js/jquery.vegas.min.js"></script>
+<script type="text/javascript">	
+var ibgs=['http://i3.meishichina.com/attachment/magic/2017/04/11/20170411149189588154913.jpg','http://i3.meishichina.com/attachment/magic/2016/07/20/20160720146900157818213.jpg','http://i3.meishichina.com/attachment/magic/2016/01/16/20160116145293986916713.jpg','http://i3.meishichina.com/attachment/magic/2015/12/08/201512081449543644253.jpg','http://i3.meishichina.com/attachment/magic/2015/11/24/201511241448337585505.jpg','http://i3.meishichina.com/attachment/magic/2015/10/13/20151013111553208843446.jpg','http://i3.meishichina.com/attachment/magic/2015/09/17/20150917103921456209891.jpg','http://i3.meishichina.com/attachment/magic/2015/08/31/20150831141046186920980.jpg'];
+var ibgs_ie='http://i3.meishichina.com/attachment/magic/2017/04/11/20170411149189588154913.jpg';
+</script>
+
+<script type="text/javascript">	
+msc.user.init();
+
+
+$("#username").focus();
+var IE6 = navigator.appVersion.search(/MSIE 6/i) != -1;
+var IE7 = navigator.appVersion.search(/MSIE 7/i) != -1;
+if (IE6 || IE7) {
+$('body').attr('style','background:url('images/22256f0ed67d4cd2a3db5026d7a9bd3b.gif') no-repeat center')
+}
+else{
+$.vegas( 'slideshow', {
+		delay: 8000,
+		backgrounds: [
+			{ src: ibgs[0], fade: 2000 },
+			{ src: ibgs[1], fade: 2000 },
+			{ src: ibgs[2], fade: 2000 },
+			{ src: ibgs[3], fade: 2000 }
+		],
+		 walk:function(step) {
+//console.log( 'N°' +step+ ' is now displayed' );
+}
+	} )('overlay');
+}
+
+$("#loginform").submit(function(){
+if($("#username").val()==''){
+msc.ui.dialog.error("手机号/昵称不能为空");
+$("#username").focus();
+return false;
+}
+if($("#password").val()==''){
+msc.ui.dialog.error("密码不能为空");
+$("#password").focus();
+return false;
+}
+
+return true;
+}
+);
+</script>
+
+
+<script>
+
+$("li.top_bar_more").hoverDelay(function(){
+$("li.top_bar_more div").show();
+},function(){
+$("li.top_bar_more div").hide();
+},200,200);
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script> </body>
+</html>
+
