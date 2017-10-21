@@ -6,7 +6,7 @@ use \think\Validate;
 
 class User extends Controller
 {
-	protected $rule = [
+	/*protected $rule = [
 		'name'       => 'require|length:3,25',
 		'password'   => 'require|length:6,16',
 		'repassword' =>'require|confirm:password',
@@ -33,22 +33,43 @@ class User extends Controller
 		'phone'    => ['phone'],
 		
 		'email'    => ['email'],
-	];
+	];*/
     public function login()
     {
     	return $this->fetch();
     }
     public function reg()
     {
+    	$filed = ['username','password','phone','repwd'];
     	$arr = $this->request->param();
     	$key = key($arr);
+    	if (is_array($key)){
+    		$key = $key['repwd'];
+    	}
+    	if (in_array($key, $filed)){
+	    	$result = $this->validate($arr,"User.$key");
+			if(true !== $result){
+			// 验证失败 输出错误信息
+				echo json_encode($result);
+			}
+		}else {
+			echo $key;
+		}
 
-		$validate = new Validate($this->rule,$this->message);
-		//dump($this->rule);
-		$result = $validate($arr);
-		//dump(json_encode($key));
-		echo $validate->getError();
-    	//echo json_encode($arr);
-    	//return $this->fetch();
+		/*public function phoneVer()
+	{
+		//var_dump($_POST);
+		if (empty($_POST['phoneNum'])) {
+			exit("<script>alert('请输入手机号');window.location.href='index.php?m=index&c=index&a=reg'</script>");
+		} else {
+			$phoneyz = new Phoneyz($_POST['phoneNum']);
+			$phoneyz->getYzm();
+			$_SESSION['pcode'] = $phoneyz->randNum;
+			header('location:index.php?m=index&c=index&a=reg');
+		}
+	
+		
+		//var_dump($pcode);
+	}*/
     }
 }

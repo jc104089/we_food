@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache" />
-<meta property="qc:admins" content="10660160706551301301616375" />
+
 <title>美食天下_原创菜谱与美食生活社区，我所有的朋友都是吃货！</title>
 <meta name="keywords" content="美食,菜谱,烹饪,家常菜谱大全,美食网,美食天下" />
 <meta name="description" content="美食天下是最大的中文美食网站与厨艺交流社区，拥有海量的优质原创美食菜谱，聚集超千万美食家。我所有的朋友都是吃货，欢迎您加入！" />
@@ -65,7 +65,7 @@
                 <div class="input_item input_item_yzm">
                     <div class="icon_yzm_item">
                         <i class="icon_yzm"></i>
-                        <input type="text" name="captcha" class="loginyzm" maxlength="4" value="验证码"  id="loginyzm"  />
+                        <input type="text" name="captcha" class="loginyzm" maxlength="4" placeholder="验证码"  id="loginyzm"  />
                     </div>
                     <div class="yzm_H_item">
                         <div style="float: right;margin-right: 5px;"><img src="{:captcha_src()}" alt="验证码" onclick="this.src=this.src"/></div>
@@ -96,7 +96,7 @@
                 <div class="input_item" >
                     <div class="icon_yzm_item">
                         <i class="icon_yzm"></i>
-                        <input type="text" name="captcha" class="loginyzm" maxlength="4" value="验证码" eg="验证码" id="loginyzmPhone"   />
+                        <input type="text" name="captcha" class="loginyzm" maxlength="4" placeholder="验证码" id="loginyzmPhone"   />
                     </div>
                     <div class="yzm_H_item">
                      
@@ -143,28 +143,34 @@
 						<div class="reg-data">
 						<span class="rp">*</span><span class="reg-words">用户名：</span>
 							<input type="text" name="username" />
+							 <span class="error_info" ></span>
 						</div>
 						<div class="reg-line"></div>
 						<div class="reg-data">
 						<span class="rp">*</span><span class="reg-words">密码：</span>
 							<input type="password" name="password" />
+							<span class="error_info" style="display:none;"></span>
 						</div>
 						<div class="reg-line"></div>
 						<div class="reg-data">
 						<span class="rp">*</span><span class="reg-words">确认密码：</span>
 							<input type="password" name="repwd" />
+							<span class="error_info" style="display:none;"></span>
 						</div>
 						
 						<div class="reg-line"></div>
 						<div class="reg-data">
 						<span class="rp">*</span><span class="reg-words">手机号：</span>
 							<input type="text" name="phone" />
+							<span class="error_info" style="display:none;"></span>
 						</div>
 						<div class="reg-line"></div>
 						<div class="reg-data">
 						<span class="rp">*</span><span class="reg-words">手机验证码：</span>
 							<input type="text" name="phoneCode" />
+
 							<input type="button" style="border-radius: 3px;border:1px solid #E3E3E3;background: #F3F5F7;color:#333;outline: none;width: 80;height:30px;margin-left: 10px;width: 100px;cursor: pointer;" id="jishi" value="发送验证码">
+							<span class="errorPhoneCode" style="display:none;"></span>
 						</div>
 
 						<div class="reg-line"></div>
@@ -205,22 +211,22 @@
 				<!-- 轮播图 -->
 				<ul>
 					<li>
-					<a title="“素食”甜品，迎接最美秋天" href="http://www.meishichina.com/mofang/qiujisushitianpin/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D1&hmci=4212" target="_blank"><img src="__PIC__/20160909147338481710613.jpg" srcset="http://i3.meishichina.com/attachment/magic/2016/09/09/20160909147338481898713.jpg 2x"></a>
+					<a title="“素食”甜品，迎接最美秋天" href="http://www.meishichina.com/mofang/qiujisushitianpin/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D1&hmci=4212" target="_blank"><img src="__PIC__/20160909147338481710613.jpg" srcset="__PIC__/20160909147338481898713.jpg 2x"></a>
 					</li>
 					<li>
-					<a title="秋季补水护肤，想美趁早" href="http://www.meishichina.com/mofang/qiujibushui/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D2&hmci=6712" target="_blank"><img src="__PIC__/20170927150647848071613.jpg" srcset="http://i3.meishichina.com/attachment/magic/2017/09/27/20170927150647848036813.jpg 2x"></a>
+					<a title="秋季补水护肤，想美趁早" href="http://www.meishichina.com/mofang/qiujibushui/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D2&hmci=6712" target="_blank"><img src="__PIC__/20170927150647848071613.jpg" srcset="__PIC__/20170927150647848036813.jpg 2x"></a>
 					</li>
 					<li>
-					<a title="秋天，总有一份对桂花的执念" href="http://www.meishichina.com/mofang/guihuadezuofa/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D3&hmci=6706" target="_blank"><img src="__PIC__/20170925150630476269613.jpg" srcset="http://i3.meishichina.com/attachment/magic/2017/09/25/20170925150630476378313.jpg 2x"></a>
+					<a title="秋天，总有一份对桂花的执念" href="http://www.meishichina.com/mofang/guihuadezuofa/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D3&hmci=6706" target="_blank"><img src="__PIC__/20170925150630476269613.jpg" srcset="__PIC__/20170925150630476378313.jpg 2x"></a>
 					</li>
 					<li>
-					<a title="秋风响，蟹脚痒" href="http://www.meishichina.com/mofang/dazhaxiezuofadaquan/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D4&hmci=6668" target="_blank"><img src="__PIC__/20170919150578617377913.jpg" srcset="http://i3.meishichina.com/attachment/magic/2017/09/19/20170919150578617373113.jpg 2x"></a>
+					<a title="秋风响，蟹脚痒" href="http://www.meishichina.com/mofang/dazhaxiezuofadaquan/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D4&hmci=6668" target="_blank"><img src="__PIC__/20170919150578617377913.jpg" srcset="__PIC__/20170919150578617373113.jpg 2x"></a>
 					</li>
 					<li>
-					<a title="撒椒" href="http://www.meishichina.com/mofang/sajiao/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D5&hmci=6629" target="_blank"><img src="__PIC__/20170913150527329845913.jpg" srcset="http://i3.meishichina.com/attachment/magic/2017/09/13/20170913150527329821413.jpg 2x"></a>
+					<a title="撒椒" href="http://www.meishichina.com/mofang/sajiao/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D5&hmci=6629" target="_blank"><img src="__PIC__/20170913150527329845913.jpg" srcset="__PIC__/20170913150527329821413.jpg 2x"></a>
 					</li>
 					<li>
-					<a title="地下果：长在地下的精灵们" href="http://www.meishichina.com/mofang/dixiaguo/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D6&hmci=6623" target="_blank"><img src="__PIC__/20170913150529144066413.jpg" srcset="http://i3.meishichina.com/attachment/magic/2017/09/13/20170913150529144022413.jpg 2x"></a>
+					<a title="地下果：长在地下的精灵们" href="http://www.meishichina.com/mofang/dixiaguo/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D6&hmci=6623" target="_blank"><img src="__PIC__/20170913150529144066413.jpg" srcset="__PIC__/20170913150529144022413.jpg 2x"></a>
 					</li>
 				</ul>
 			</div>
@@ -343,7 +349,7 @@
 				</div>
 				</div>
 				<div class="live on">
-					<a title="养好血管病自消，常吃5种食物" href="http://www.meishichina.com/mofang/qinglixueguan/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/magic/2017/09/25/20170925150630483372813.jpg" width="310" height="124" class="imgLoad" /></a>
+					<a title="养好血管病自消，常吃5种食物" href="http://www.meishichina.com/mofang/qinglixueguan/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="__PIC__/20170925150630483372813.jpg" width="310" height="124" class="imgLoad" /></a>
 					<ul class="tuijian">
 					<li><a title="贴完秋膘减秋膘，快速减掉小肚腩" href="http://www.meishichina.com/Health/Pulchritude/201710/217592.html" target="_blank">贴完秋膘减秋膘，快速减掉小肚腩</a></li>
 					<li><a title="秋季养生 记得多吃瓜" href="http://www.meishichina.com/Health/JianKang/201710/217584.html" target="_blank">秋季养生 记得多吃瓜</a></li>
@@ -370,7 +376,7 @@
 				</div>
 				</div>
 				<div class="live on">
-					<a title="面包，我喜欢有嚼劲的！" href="http://www.meishichina.com/mofang/jiaojinmianbao/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/magic/2017/09/15/20170915150544177850013.jpg" width="310" height="124" class="imgLoad" /></a>
+					<a title="面包，我喜欢有嚼劲的！" href="http://www.meishichina.com/mofang/jiaojinmianbao/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="__PIC__/20170915150544177850013.jpg" width="310" height="124" class="imgLoad" /></a>
 					<ul class="tuijian">
 						<li><a title="初春の粉红 - 樱花马卡龙" href="http://home.meishichina.com/pai-753201.html" target="_blank">初春の粉红 - 樱花马卡龙</a></li>
 						<li><a title="桃花主题美食 - 桃花酥酥" href="http://home.meishichina.com/pai-753256.html" target="_blank">桃花主题美食 - 桃花酥</a></li>
@@ -395,7 +401,7 @@
 				</div>
 				</div>
 				<div class="live on">
-					<a title="秋雨连绵，5种食物帮你防寒！" href="http://www.meishichina.com/mofang/fanghanshiwu/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/magic/2017/10/12/20171012150777234496113.jpg" width="310" height="124" class="imgLoad" /></a>
+					<a title="秋雨连绵，5种食物帮你防寒！" href="http://www.meishichina.com/mofang/fanghanshiwu/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="__PIC__/20171012150777234496113.jpg" width="310" height="124" class="imgLoad" /></a>
 					<ul class="tuijian">
 					<li><a title="爱上素食 一种更健康的生活方式" href="http://www.meishichina.com/mofang/aishangsushi/" target="_blank">爱上素食 一种更健康的生活方式</a></li>
 					<li><a title="划重点！食物降血脂这些更有效" href="http://www.meishichina.com/mofang/shiwujiangxuezhi/" target="_blank">划重点！食物降血脂这些更有效</a></li>
@@ -425,7 +431,7 @@
 				<a title="焖烧南瓜" href="http://home.meishichina.com/recipe-352396.html" target="_blank">
 				<span class="copyright">独家</span>
 				<i>
-				<img alt="焖烧南瓜" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777326335213.jpg@!c640">
+				<img alt="焖烧南瓜" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777326335213.jpg@!c640">
 				</i>
 				<p>焖烧南瓜</p>
 				</a>
@@ -434,7 +440,7 @@
 				<li>
 				<a title="板栗烧鸡" href="http://home.meishichina.com/recipe-352388.html" target="_blank">
 				<i>
-				<img alt="板栗烧鸡" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777240750713.jpg@!c640">
+				<img alt="板栗烧鸡" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777240750713.jpg@!c640">
 				</i>
 				<p>板栗烧鸡</p>
 				</a>
@@ -443,7 +449,7 @@
 				<li>
 				<a title="手工玉米面馒头" href="http://home.meishichina.com/recipe-352378.html" target="_blank">
 				<i>
-				<img alt="手工玉米面馒头" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777217438613.jpg@!c640">
+				<img alt="手工玉米面馒头" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777217438613.jpg@!c640">
 				</i>
 				<p>手工玉米面馒头</p>
 				</a>
@@ -452,7 +458,7 @@
 				<li>
 				<a title="五彩疙瘩面" href="http://home.meishichina.com/recipe-352384.html" target="_blank">
 				<i>
-				<img alt="五彩疙瘩面" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777195435513.jpg@!c640">
+				<img alt="五彩疙瘩面" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777195435513.jpg@!c640">
 				</i>
 				<p>五彩疙瘩面</p>
 				</a>
@@ -461,7 +467,7 @@
 				<li>
 				<a title="梅干菜烧肉" href="http://home.meishichina.com/recipe-352383.html" target="_blank">
 				<i>
-				<img alt="梅干菜烧肉" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777128567213.jpg@!c640">
+				<img alt="梅干菜烧肉" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777128567213.jpg@!c640">
 				</i>
 				<p>梅干菜烧肉</p>
 				</a>
@@ -470,7 +476,7 @@
 				<li>
 				<a title="天然酵种焦洋葱和香草夏巴塔" href="http://home.meishichina.com/recipe-344947.html" target="_blank">
 				<i>
-				<img alt="天然酵种焦洋葱和香草夏巴塔" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777168995313.jpg@!c640">
+				<img alt="天然酵种焦洋葱和香草夏巴塔" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777168995313.jpg@!c640">
 				</i>
 				<p>香草夏巴塔</p>
 				</a>
@@ -523,10 +529,10 @@
 					<div class="c clear">
 					<div class="pp"><a href="http://home.meishichina.com/pai-824872.html" target="_blank"><strong>2人、36元、一顿饭，如何？下雨又降温好冷，吃完了一起回家</strong><br>天气预报还真是准呢；降温、有雨，一下子全都来了，昨日还可穿短......</a></div>
 					<a class="clear" href="http://home.meishichina.com/pai-824872.html" target="_blank">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/2017101115077269613909179877.JPG@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/2017101115077269652219179877.JPG@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/2017101115077269738339179877.JPG@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/2017101115077269736469179877.JPG@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/2017101115077269613909179877.JPG@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/2017101115077269652219179877.JPG@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/2017101115077269738339179877.JPG@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/2017101115077269736469179877.JPG@!c320">
 					<b>6</b></a>
 					<span>18个喜欢，14条评论</span>
 					</div>
@@ -546,10 +552,10 @@
 					麻辣香菇丁
 					😄为什么今天又吃香菇呢，因为昨天觉得吃的太好吃了。😂</a></div>
 					<a class="clear" href="http://home.meishichina.com/pai-824848.html" target="_blank">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/20171011150771887588010244347.jpg@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/20171011150771887594310244347.jpg@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/20171011150771887515010244347.jpg@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/20171011150771887570310244347.jpg@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/20171011150771887588010244347.jpg@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/20171011150771887594310244347.jpg@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/20171011150771887515010244347.jpg@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/20171011150771887570310244347.jpg@!c320">
 					<b>6</b></a>
 					<span>21个喜欢，14条评论</span>
 					</div>
@@ -564,7 +570,7 @@
 				<li>
 				<a title="辣炒南瓜尖" href="http://home.meishichina.com/space-7992337-do-blog-id-1006266.html" target="_blank">
 				<i>
-				<img alt="辣炒南瓜尖" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/blog/2017/10/09/20171009150755408840813.jpg">
+				<img alt="辣炒南瓜尖" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/blog/2017/10/09/20171009150755408840813.jpg">
 				</i>
 				<p>辣炒南瓜尖</p>
 				</a>
@@ -574,7 +580,7 @@
 				<li>
 				<a title="土豆疯狂打Call，让你回家吃饭，风味土豆丝" href="http://home.meishichina.com/space-8819358-do-blog-id-1006026.html" target="_blank">
 				<i>
-				<img alt="土豆疯狂打Call，让你回家吃饭，风味土豆丝" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/blog/2017/09/13/20170913150528704019113.jpg">
+				<img alt="土豆疯狂打Call，让你回家吃饭，风味土豆丝" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/blog/2017/09/13/20170913150528704019113.jpg">
 				</i>
 				<p>风味土豆丝</p>
 				</a>
@@ -783,19 +789,21 @@
 <script type="text/javascript">
 	//登陆注册验证
 	$(':input').blur(function(){
+		var nowInput = $(this);
 		var key1 = $(this).attr('name');
 		//console.log(key1);
 		var value = $(this).val();
-		data = {};
-		data[key1] = value;
-
-		/*var data = {"key" : value};
-		var n = "key";
-		data[n] = key1;*/
+			data = {};
+			data[key1] = value;
+		if (key1 == 'repwd') {
+			data['password'] = $('.reg-data input[name=password]').val();			
+		} 
 		//console.log(data);
-		/*data = JSON.stringify(data);*/
 		$.post($('#regist').attr('action'),data,function(data){
 			console.log(data);
+			console.log(nowInput);
+			console.log(nowInput.next(".error_info").css('color','red').text(data).show());
+
 		},'json');
 	});
 </script>
