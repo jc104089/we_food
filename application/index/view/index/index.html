@@ -3,19 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache" />
-<meta property="qc:admins" content="10660160706551301301616375" />
+
 <title>美食天下_原创菜谱与美食生活社区，我所有的朋友都是吃货！</title>
 <meta name="keywords" content="美食,菜谱,烹饪,家常菜谱大全,美食网,美食天下" />
 <meta name="description" content="美食天下是最大的中文美食网站与厨艺交流社区，拥有海量的优质原创美食菜谱，聚集超千万美食家。我所有的朋友都是吃货，欢迎您加入！" />
-<!-- <meta name="msapplication-tooltip" content="美食天下" />
-<meta name="renderer" content="webkit">
-<meta name="msapplication-task" content="name=美食天下; action-uri=http://www.meishichina.com/; icon-uri=http://static.meishichina.com/a/img/1110/faviconi.ico" />
-<meta http-equiv="mobile-agent" content="format=xhtml; url=http://m.meishichina.com/">
-<link rel="shortcut icon" href="http://static.meishichina.com/v6/img/lib/f.ico"/>
-<link rel="apple-touch-icon" href="http://static.meishichina.com/v6/img/lib/wapico.png" /> -->
+   
+<script type="text/javascript" src="__JS__/jquery-1.8.2.min.js"></script>
+    
+<link rel="stylesheet" type="text/css" href="__CSS__/login.css" />
+
+
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
-<!-- <link rel="apple-touch-icon" href="http://static.meishichina.com/v6/img/lib/wapico.png" /> -->
+
+
+
+
 </head>
 <body>
 <div class="top-bar" id="J_top_bar">
@@ -29,12 +32,168 @@
 	<li> <a title="社区" href="http://home.meishichina.com/" target="_blank">社区</a></li>
 	<li> <a title="话题" href="http://home.meishichina.com/pai.html" target="_blank">话题</a></li>
 
-	<li> <a title="搜索" href="http://home.meishichina.com/search/" target="_blank">搜索</a></li>
+	<li> <a title="搜索" href="" target="_blank">搜索</a></li>
 
 	</ul>
 
-	<div class="right" id="J_top_bar_user"></div>
+	<div class="right" >
+		<ul class="bar-right left" style="padding-right: 50px;">
+			<li><a title="注册" class="jumpReg" style="cursor: pointer">注册</a></li>
+			<li><a class="jumpLogin" title="登陆" style="cursor: pointer">登陆</a></li>
+		</ul>
+	</div>
 </div>
+
+<div class="login_containter loginWindow" style="position: relative;z-index: 99;display: none;">
+        <div class="login_left" style="margin-left: 350px;">
+        	<span style="float: right;position: absolute;top:5px;right:20px;font-size: 20px;cursor:pointer;font-weight: bold;" id="closeLogin">X</span>
+            <a class="logo" style="cursor:pointer;">味蕾</a>
+            <h3><span>登&nbsp;录</span></h3>
+            <h4 class="account_login"><a href="javascript:void(0)">手机动态登录<span></span></a></h4>
+            <h4 class="phone_login" style="display:none;"><a href="javascript:void(0)">返回账号登录</a></h4>
+            <div class="login_validate loginAccunt_validate">
+                <div class="input_item">
+                    <i class="icon_un"></i>
+                    <input type="text" name="username" placeholder="请输入手机/邮箱/用户名"  class="loginName" />
+                    <span class="error_info errorloginName" style="display:none;"></span>
+                </div>
+                <div class="input_item">
+                    <i class="icon_pw"></i>
+                    <input type="password" name="password" class="loginPwd" placeholder="请输入密码" />
+                    <span class="error_info errorloginPwd" style="display:none;"></span>
+                </div>
+                <div class="input_item input_item_yzm">
+                    <div class="icon_yzm_item">
+                        <i class="icon_yzm"></i>
+                        <input type="text" name="captcha" class="loginyzm" maxlength="4" placeholder="验证码"  id="loginyzm"  />
+                    </div>
+                    <div class="yzm_H_item">
+                        <div style="float: right;margin-right: 5px;"><img src="{:captcha_src()}" alt="验证码" onclick="this.src=this.src"/></div>
+                        <span class="errorloginyzm error_info" style="right:-190px;display: none;" ></span>
+                    </div>
+
+                </div>
+                
+                <div class="input_item">
+                    <a href="javascript:;" class="login_wjmm">忘记密码?</a>
+                </div>
+                <div class="input_item">
+                    <input type="button" class="loginBtn"  value="登  录" />
+                    <span class="error_info" style="display:none;"></span>
+                </div>
+                <div class="input_item f-tac f-pb30">
+                    <a href="javascript:void(0)" class="iconQQ" onclick="openQQ();"></a>
+                    <a href="javascript:void(0)" class="iconWX" onclick="openWeiXin();"></a>
+                    <a href="javascript:void(0)" class="iconWB" onclick="openWeiBo();"></a>
+                    <a href="javascript:void(0)" class="iconZFB" onclick="openAliPay();"></a>
+                </div>
+            </div>
+            <div class="login_validate loginPhone_validate" style="display:none;">
+                <div class="input_item">
+                    <i class="icon_un"></i>
+                    <input type="text" name="phone" placeholder="请输入手机号" eg="请输入手机号" class="loginPhone" maxlength="11"  />
+                    <span class="error_info errorloginPhone" style="display:none;"></span>
+                </div>
+                <div class="input_item" >
+                    <div class="icon_yzm_item">
+                        <i class="icon_yzm"></i>
+                        <input type="text" name="captcha" class="loginyzm" maxlength="4" placeholder="验证码" id="loginyzmPhone"   />
+                    </div>
+                    <div class="yzm_H_item">
+                     
+                        <div style="float: right;margin-right: 5px;"><img src="{:captcha_src()}" alt="验证码" onclick="this.src=this.src"/></div>
+                        <span class="errorloginyzm error_info" style="display:none;"></span>
+                    </div>
+
+                </div>
+                <div class="input_item">
+                    <div class="icon_dx_item">
+                        <i class="icon_dx"></i>
+                        <input type="text" name="phoneCode" class="loginCode" placeholder="请输入验证码" eg="请输入验证码" />
+                        <span class="errorPhoneCode" style="display:none;"></span>
+                    </div>
+                    <div class="login_sendCode">
+                        <input type="button" name="getYzm"  value="发送短信验证码" class="jishi"/>
+
+                    </div>
+                    
+                </div>
+                
+                <div class="input_item">
+                   
+                    <input type="button" class="PhoneloginBtn" value="登  录" />
+                     <span class="error_info" style="display:none;"></span>
+                </div>
+                <div class="input_item f-tac f-pb30">
+                    <a href="javascript:void(0)" class="iconQQ"></a><a href="javascript:void(0)" class="iconWX"></a><a href="javascript:void(0)" class="iconWB"></a><a href="javascript:void(0)" class="iconZFB"></a>
+                </div>
+            </div>
+            <div class="login_change">
+                <p>还没有账号？</p>
+                <a class="jumpReg" title="注册" style="cursor: pointer;">注  册</a>
+            </div>
+        </div>
+</div>
+<div style="position: relative;z-index: 99;display: none;" class="login_containter regWindow">
+	<div class="register">
+				<div class="reg-title">立即注册
+					<span style="font-size: 10px;color:#ccc;font-weight: normal;">已有账号？<a class="jumpLogin" title="登陆" style="cursor: pointer">立即登陆</a></span>
+
+					<span style="float: right;position: relative;top:3px;right:20px;font-size: 20px;cursor:pointer;font-weight: bold;" id="closeReg">X</span>
+				</div>
+				<div class="reg-content">
+					<form id="regist" >
+						<div class="reg-data">
+						<span class="rp">*</span><span class="reg-words">用户名：</span>
+							<input type="text" name="username" />
+							<i style="width: 16px;height: 16px;"></i>
+							 <span class="error_info" style="display:none;"></span>
+						</div>
+						<div class="reg-line"></div>
+						<div class="reg-data">
+						<span class="rp">*</span><span class="reg-words">密码：</span>
+							<input type="password" name="password" />
+							<i style="width: 16px;height: 16px;"></i>
+							<span class="error_info" style="display:none;"></span>
+						</div>
+						<div class="reg-line"></div>
+						<div class="reg-data">
+						<span class="rp">*</span><span class="reg-words">确认密码：</span>
+							<input type="password" name="repwd" />
+							<i style="width: 16px;height: 16px;"></i>
+							<span class="error_info" style="display:none;"></span>
+						</div>
+						
+						<div class="reg-line"></div>
+						<div class="reg-data">
+						<span class="rp">*</span><span class="reg-words">手机号：</span>
+							<input type="text" name="phone" />
+							<i style="width: 16px;height: 16px;"></i>
+							<span class="error_info" style="display:none;"></span>
+						</div>
+						<div class="reg-line"></div>
+						<div class="reg-data">
+						<span class="rp">*</span><span class="reg-words">手机验证码：</span>
+							<input type="text" name="phoneCode" />
+
+							<input type="button" style="border-radius: 3px;border:1px solid #E3E3E3;background: #F3F5F7;color:#333;outline: none;width: 80;height:30px;margin-left: 10px;width: 100px;cursor: pointer;" class="jishi" value="发送验证码">
+							
+							<span class="errorPhoneCode" style="display:none;"></span>
+						</div>
+
+						<div class="reg-line"></div>
+						<div class="anniu">
+							<!-- <button class="reg-anniu" name="submit" value="reg">提  &nbsp;交</button> -->
+							<input class="reg-anniu" type="submit" value="提  &nbsp;交" />
+
+							<span  class="tip" style="color:blue;font-size: 18px;font-weight: bold;"></span>
+						</div>		
+					</form>
+				</div>
+			</div>
+</div>
+
+<div style="position: absolute;z-index: 10;width: 100%;top:0;" id="real_body">
 <div class="w logo_wrap2">
 	<div class="logo_inner left">
 	<a href=# title="美食天下">美食天下</a>
@@ -63,22 +222,22 @@
 				<!-- 轮播图 -->
 				<ul>
 					<li>
-					<a title="“素食”甜品，迎接最美秋天" href="http://www.meishichina.com/mofang/qiujisushitianpin/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D1&hmci=4212" target="_blank"><img src="__PIC__/20160909147338481710613.jpg" srcset="http://i3.meishichina.com/attachment/magic/2016/09/09/20160909147338481898713.jpg 2x"></a>
+					<a title="“素食”甜品，迎接最美秋天" href="http://www.meishichina.com/mofang/qiujisushitianpin/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D1&hmci=4212" target="_blank"><img src="__PIC__/20160909147338481710613.jpg" srcset="__PIC__/20160909147338481898713.jpg 2x"></a>
 					</li>
 					<li>
-					<a title="秋季补水护肤，想美趁早" href="http://www.meishichina.com/mofang/qiujibushui/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D2&hmci=6712" target="_blank"><img src="__PIC__/20170927150647848071613.jpg" srcset="http://i3.meishichina.com/attachment/magic/2017/09/27/20170927150647848036813.jpg 2x"></a>
+					<a title="秋季补水护肤，想美趁早" href="http://www.meishichina.com/mofang/qiujibushui/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D2&hmci=6712" target="_blank"><img src="__PIC__/20170927150647848071613.jpg" srcset="__PIC__/20170927150647848036813.jpg 2x"></a>
 					</li>
 					<li>
-					<a title="秋天，总有一份对桂花的执念" href="http://www.meishichina.com/mofang/guihuadezuofa/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D3&hmci=6706" target="_blank"><img src="__PIC__/20170925150630476269613.jpg" srcset="http://i3.meishichina.com/attachment/magic/2017/09/25/20170925150630476378313.jpg 2x"></a>
+					<a title="秋天，总有一份对桂花的执念" href="http://www.meishichina.com/mofang/guihuadezuofa/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D3&hmci=6706" target="_blank"><img src="__PIC__/20170925150630476269613.jpg" srcset="__PIC__/20170925150630476378313.jpg 2x"></a>
 					</li>
 					<li>
-					<a title="秋风响，蟹脚痒" href="http://www.meishichina.com/mofang/dazhaxiezuofadaquan/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D4&hmci=6668" target="_blank"><img src="__PIC__/20170919150578617377913.jpg" srcset="http://i3.meishichina.com/attachment/magic/2017/09/19/20170919150578617373113.jpg 2x"></a>
+					<a title="秋风响，蟹脚痒" href="http://www.meishichina.com/mofang/dazhaxiezuofadaquan/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D4&hmci=6668" target="_blank"><img src="__PIC__/20170919150578617377913.jpg" srcset="__PIC__/20170919150578617373113.jpg 2x"></a>
 					</li>
 					<li>
-					<a title="撒椒" href="http://www.meishichina.com/mofang/sajiao/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D5&hmci=6629" target="_blank"><img src="__PIC__/20170913150527329845913.jpg" srcset="http://i3.meishichina.com/attachment/magic/2017/09/13/20170913150527329821413.jpg 2x"></a>
+					<a title="撒椒" href="http://www.meishichina.com/mofang/sajiao/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D5&hmci=6629" target="_blank"><img src="__PIC__/20170913150527329845913.jpg" srcset="__PIC__/20170913150527329821413.jpg 2x"></a>
 					</li>
 					<li>
-					<a title="地下果：长在地下的精灵们" href="http://www.meishichina.com/mofang/dixiaguo/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D6&hmci=6623" target="_blank"><img src="__PIC__/20170913150529144066413.jpg" srcset="http://i3.meishichina.com/attachment/magic/2017/09/13/20170913150529144022413.jpg 2x"></a>
+					<a title="地下果：长在地下的精灵们" href="http://www.meishichina.com/mofang/dixiaguo/#hmsr=www&hmpl=index&hmcu=magic&hmkw=D6&hmci=6623" target="_blank"><img src="__PIC__/20170913150529144066413.jpg" srcset="__PIC__/20170913150529144022413.jpg 2x"></a>
 					</li>
 				</ul>
 			</div>
@@ -201,7 +360,7 @@
 				</div>
 				</div>
 				<div class="live on">
-					<a title="养好血管病自消，常吃5种食物" href="http://www.meishichina.com/mofang/qinglixueguan/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/magic/2017/09/25/20170925150630483372813.jpg" width="310" height="124" class="imgLoad" /></a>
+					<a title="养好血管病自消，常吃5种食物" href="http://www.meishichina.com/mofang/qinglixueguan/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="__PIC__/20170925150630483372813.jpg" width="310" height="124" class="imgLoad" /></a>
 					<ul class="tuijian">
 					<li><a title="贴完秋膘减秋膘，快速减掉小肚腩" href="http://www.meishichina.com/Health/Pulchritude/201710/217592.html" target="_blank">贴完秋膘减秋膘，快速减掉小肚腩</a></li>
 					<li><a title="秋季养生 记得多吃瓜" href="http://www.meishichina.com/Health/JianKang/201710/217584.html" target="_blank">秋季养生 记得多吃瓜</a></li>
@@ -228,7 +387,7 @@
 				</div>
 				</div>
 				<div class="live on">
-					<a title="面包，我喜欢有嚼劲的！" href="http://www.meishichina.com/mofang/jiaojinmianbao/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/magic/2017/09/15/20170915150544177850013.jpg" width="310" height="124" class="imgLoad" /></a>
+					<a title="面包，我喜欢有嚼劲的！" href="http://www.meishichina.com/mofang/jiaojinmianbao/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="__PIC__/20170915150544177850013.jpg" width="310" height="124" class="imgLoad" /></a>
 					<ul class="tuijian">
 						<li><a title="初春の粉红 - 樱花马卡龙" href="http://home.meishichina.com/pai-753201.html" target="_blank">初春の粉红 - 樱花马卡龙</a></li>
 						<li><a title="桃花主题美食 - 桃花酥酥" href="http://home.meishichina.com/pai-753256.html" target="_blank">桃花主题美食 - 桃花酥</a></li>
@@ -253,7 +412,7 @@
 				</div>
 				</div>
 				<div class="live on">
-					<a title="秋雨连绵，5种食物帮你防寒！" href="http://www.meishichina.com/mofang/fanghanshiwu/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/magic/2017/10/12/20171012150777234496113.jpg" width="310" height="124" class="imgLoad" /></a>
+					<a title="秋雨连绵，5种食物帮你防寒！" href="http://www.meishichina.com/mofang/fanghanshiwu/" class="w3a" target="_blank"><img src="__PIC__/blank.gif" data-src="__PIC__/20171012150777234496113.jpg" width="310" height="124" class="imgLoad" /></a>
 					<ul class="tuijian">
 					<li><a title="爱上素食 一种更健康的生活方式" href="http://www.meishichina.com/mofang/aishangsushi/" target="_blank">爱上素食 一种更健康的生活方式</a></li>
 					<li><a title="划重点！食物降血脂这些更有效" href="http://www.meishichina.com/mofang/shiwujiangxuezhi/" target="_blank">划重点！食物降血脂这些更有效</a></li>
@@ -283,7 +442,7 @@
 				<a title="焖烧南瓜" href="http://home.meishichina.com/recipe-352396.html" target="_blank">
 				<span class="copyright">独家</span>
 				<i>
-				<img alt="焖烧南瓜" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777326335213.jpg@!c640">
+				<img alt="焖烧南瓜" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777326335213.jpg@!c640">
 				</i>
 				<p>焖烧南瓜</p>
 				</a>
@@ -292,7 +451,7 @@
 				<li>
 				<a title="板栗烧鸡" href="http://home.meishichina.com/recipe-352388.html" target="_blank">
 				<i>
-				<img alt="板栗烧鸡" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777240750713.jpg@!c640">
+				<img alt="板栗烧鸡" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777240750713.jpg@!c640">
 				</i>
 				<p>板栗烧鸡</p>
 				</a>
@@ -301,7 +460,7 @@
 				<li>
 				<a title="手工玉米面馒头" href="http://home.meishichina.com/recipe-352378.html" target="_blank">
 				<i>
-				<img alt="手工玉米面馒头" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777217438613.jpg@!c640">
+				<img alt="手工玉米面馒头" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777217438613.jpg@!c640">
 				</i>
 				<p>手工玉米面馒头</p>
 				</a>
@@ -310,7 +469,7 @@
 				<li>
 				<a title="五彩疙瘩面" href="http://home.meishichina.com/recipe-352384.html" target="_blank">
 				<i>
-				<img alt="五彩疙瘩面" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777195435513.jpg@!c640">
+				<img alt="五彩疙瘩面" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777195435513.jpg@!c640">
 				</i>
 				<p>五彩疙瘩面</p>
 				</a>
@@ -319,7 +478,7 @@
 				<li>
 				<a title="梅干菜烧肉" href="http://home.meishichina.com/recipe-352383.html" target="_blank">
 				<i>
-				<img alt="梅干菜烧肉" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777128567213.jpg@!c640">
+				<img alt="梅干菜烧肉" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777128567213.jpg@!c640">
 				</i>
 				<p>梅干菜烧肉</p>
 				</a>
@@ -328,7 +487,7 @@
 				<li>
 				<a title="天然酵种焦洋葱和香草夏巴塔" href="http://home.meishichina.com/recipe-344947.html" target="_blank">
 				<i>
-				<img alt="天然酵种焦洋葱和香草夏巴塔" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/recipe/2017/10/12/20171012150777168995313.jpg@!c640">
+				<img alt="天然酵种焦洋葱和香草夏巴塔" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/recipe/2017/10/12/20171012150777168995313.jpg@!c640">
 				</i>
 				<p>香草夏巴塔</p>
 				</a>
@@ -381,10 +540,10 @@
 					<div class="c clear">
 					<div class="pp"><a href="http://home.meishichina.com/pai-824872.html" target="_blank"><strong>2人、36元、一顿饭，如何？下雨又降温好冷，吃完了一起回家</strong><br>天气预报还真是准呢；降温、有雨，一下子全都来了，昨日还可穿短......</a></div>
 					<a class="clear" href="http://home.meishichina.com/pai-824872.html" target="_blank">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/2017101115077269613909179877.JPG@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/2017101115077269652219179877.JPG@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/2017101115077269738339179877.JPG@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/2017101115077269736469179877.JPG@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/2017101115077269613909179877.JPG@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/2017101115077269652219179877.JPG@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/2017101115077269738339179877.JPG@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/2017101115077269736469179877.JPG@!c320">
 					<b>6</b></a>
 					<span>18个喜欢，14条评论</span>
 					</div>
@@ -404,10 +563,10 @@
 					麻辣香菇丁
 					😄为什么今天又吃香菇呢，因为昨天觉得吃的太好吃了。😂</a></div>
 					<a class="clear" href="http://home.meishichina.com/pai-824848.html" target="_blank">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/20171011150771887588010244347.jpg@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/20171011150771887594310244347.jpg@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/20171011150771887515010244347.jpg@!c320">
-					<img class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/pai/2017/10/11/20171011150771887570310244347.jpg@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/20171011150771887588010244347.jpg@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/20171011150771887594310244347.jpg@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/20171011150771887515010244347.jpg@!c320">
+					<img class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/pai/2017/10/11/20171011150771887570310244347.jpg@!c320">
 					<b>6</b></a>
 					<span>21个喜欢，14条评论</span>
 					</div>
@@ -422,7 +581,7 @@
 				<li>
 				<a title="辣炒南瓜尖" href="http://home.meishichina.com/space-7992337-do-blog-id-1006266.html" target="_blank">
 				<i>
-				<img alt="辣炒南瓜尖" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/blog/2017/10/09/20171009150755408840813.jpg">
+				<img alt="辣炒南瓜尖" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/blog/2017/10/09/20171009150755408840813.jpg">
 				</i>
 				<p>辣炒南瓜尖</p>
 				</a>
@@ -432,7 +591,7 @@
 				<li>
 				<a title="土豆疯狂打Call，让你回家吃饭，风味土豆丝" href="http://home.meishichina.com/space-8819358-do-blog-id-1006026.html" target="_blank">
 				<i>
-				<img alt="土豆疯狂打Call，让你回家吃饭，风味土豆丝" class="imgLoad" src="__PIC__/blank.gif" data-src="http://i3.meishichina.com/attachment/blog/2017/09/13/20170913150528704019113.jpg">
+				<img alt="土豆疯狂打Call，让你回家吃饭，风味土豆丝" class="imgLoad" src="__PIC__/blank.gif" data-src="__PIC__/blog/2017/09/13/20170913150528704019113.jpg">
 				</i>
 				<p>风味土豆丝</p>
 				</a>
@@ -483,86 +642,301 @@
 		</div>
 	</div>
 </div>
+</div>
 <script type="text/javascript" src="__JS__/all.js"></script>
 <script src="__JS__/jquery.sudoslider.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-msc.user.init();
-$("img.imgLoad").imgLoad();
-msc.goTop.init();
-$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});
+	//登陆弹出隐藏
+	function showLogin() {
+		$('.regWindow').hide();
+		$('.loginWindow').css("height",$('#real_body').outerHeight());
+		
+		$('.login_left').css("marginLeft",($('#real_body').width())/3);
+		
+		$('.loginWindow').show();
+	}
+	$(".jumpLogin").click(showLogin);
+	$('#closeLogin').click(function(){
+		$('.loginWindow').hide();
+		
+	});
+	$('.logo').click(function(){
+		$('.loginWindow').hide();
 
-var sudoSlider = $("#home_index_slider").sudoSlider({continuous: true,
-auto: true,
-effect: "fade",
-speed: '700',
-pause: '3000',
-numeric: true,
-resumePause: 2000,prevHtml:'<a class="prevBtn" href="javascript:void(0);"><i>&nbsp;</i></a>',nextHtml:'<a class="nextBtn" href="javascript:void(0);"><i>&nbsp;</i></a>'});
+	});	
+	//切换登陆方式
+	//切换
+	$(document).on("click",".account_login",function(){
+	    $(this).hide();
+	    $(this).parent().find("h3").html("<span>手机登录</span>");
+	    $(this).parent().find(".error_info").hide();
+	    $(".phone_login").show();
+	    $(".loginAccunt_validate").hide();
+	    $(".loginPhone_validate").show();
+	     var myDate = new Date();
+	   /* $(this).parents().find("#vCodImgPhone").attr("src", "/Ajax/GetValidateCode?"+ myDate.toLocaleString()).click();*/
 
-var sudoSlider2 = $("#w2_slider").sudoSlider({speed:600,slideCount:3,movecount:3,prevHtml:'<a class="prevBtn" href="javascript:void(0);"><i>&nbsp;</i></a>',nextHtml:'<a class="nextBtn" href="javascript:void(0);"><i>&nbsp;</i></a>',continuous: true});
+	}); 
+	$(document).on("click",".phone_login",function(){
+	    $(this).hide();
+	    $(this).parent().find("h3").html("<span>登录</span>");
+	    $(this).parent().find(".error_info").hide();
+	    $(".account_login").show();
+	    $(".loginPhone_validate").hide();
+	    $(".loginAccunt_validate").show();
+	});	
+	// 注册
+	//弹出
+	$(".jumpReg").click(function(){
+		//console.log(1);
+		$('.loginWindow').hide();
+		$('.regWindow').css("height",$('#real_body').outerHeight());
+		
+		$('.regWindow').show();
 
-$(".w1_1 >ul >li").hover(function(){
-$(this).addClass("on").find(".sub").show();
-},function(){
-$(this).removeClass("on").find(".sub").hide();
-});
-
-$(".w3live .ui_title_wrap h2 a").click(function(){
-		if($(this).parent().hasClass('on'))
-		return false;
-		else{
-		$(this).closest('.w3live').find("h2").removeClass('on');
-		$(this).parent().addClass('on');
-		$(this).closest('.w3live').find('.live').hide();
-		$(this).closest('.w3live').find(".live:eq("+$(this).parent().index()+")").fadeIn();
+	});
+	$('#closeReg').click(function(){
+		$('.regWindow').hide();
+		
+	});
+	// 手机验证码
+	var pcode = 1234;
+	var flag = 0;
+	$('.jishi').click(function(){
+		var num = 10;
+		var jishi =null;
+		$('.jishi').attr('disabled','disabled');
+		if (jishi == null) {
+			jishi = setInterval(function(){
+				num = num - 1;
+				console.log(num);
+				if (num >= 0) {
+					$('.jishi').attr('value',num + 's后可重发');
+				}
+				if (num == 0) {
+					clearInterval(jishi);
+					$('.jishi').removeAttr('disabled');
+					$('.jishi').attr('value','发送验证码');
+				}			
+			},1000);
 		}
+		/*$.post("{:url('index/user/phoneVer')}",{phone:$('.reg-data input[name=phone]').val()},function(data){
+			pcode = data;
+
+		},'json');	*/	
+	});
+	$('input[name=phoneCode]').blur(function(){
+		console.log(pcode);
+		if ($(this).val() != pcode){
+			$(this).nextAll(".errorPhoneCode").css('color','red').html('手机验证码错误').show();
+			$(this).nextAll("i").css({'display':'inline-block','backgroundImg':'url(__IMG__/cross.png)'}).show();
+			flag = 1;
+		} else {
+			$(this).nextAll(".errorPhoneCode").css('color','green').html('通过').show();
+			$(this).nextAll("i").css({'display':'inline-block','backgroundImg':'url(__IMG__/cross.png)'}).show();
+			flag = 0;
+		}
+	});
+	//登陆注册验证
+	$(':input').blur(function(){
+		var nowInput = $(this);
+		var key1 = $(this).attr('name');
+		//console.log(key1);
+		var value = $(this).val();
+			data = {};
+			data[key1] = value;
+		if (key1 == 'repwd') {
+			data['password'] = $('.reg-data input[name=password]').val();			
+		} 
+		//console.log(data);
+		$.post("{:url('index/user/reg')}",data,function(data){
+			//console.log(data);
+			if(data){
+				nowInput.nextAll(".error_info").css('color','red').text(data).show();
+				nowInput.nextAll("i").css({'display':'inline-block','background':'url(__IMG__/cross.png)'}).show();
+				if (key1 == 'captcha') {
+					$('.errorloginyzm').css('color','red').text(data).show();
+				}
+				flag = 1;
+				if (nowInput.hasClass('loginPhone') && data == "该手机号已注册"){
+					nowInput.nextAll(".error_info").css('color','green').html('通过').show();
+					flag = 0;
+				}
+				if (nowInput.hasClass('loginName') && data == "该用户名已存在"){
+					nowInput.nextAll(".error_info").css('color','green').html('通过').show();
+					flag = 0;
+				}
+			}else {
+				
+				nowInput.nextAll(".error_info").css('color','green').html('通过').show();
+				nowInput.nextAll("i").css({'display':'inline-block','background':'url(__IMG__/tick.png)'}).show();
+				if (key1 == 'captcha') {
+					$('.errorloginyzm').css('color','green').text('通过').show();
+				}
+				flag = 0;
+			}
+			
+
+		},'json');
+	});
+	// 点击注册
+	$('.reg-anniu').click(function(){
+		var data = {};
+
+		$('#regist input').each(function(i){
+			//console.log(i);
+			nowInput = $(this);
+			var key = $(this).attr('name');
+		//console.log(key1);
+			var value = $(this).val();
+			if (value.length == 0){
+				nowInput.nextAll(".error_info").css('color','red').text('不能为空').show();
+				nowInput.nextAll("i").css({'display':'inline-block','background':'url(__IMG__/cross.png)'}).show();
+				flag = 1;
+				return false;
+			}
+			
+			data[key] = value;
+
+		});
+		//console.log(data);
+		if (flag){
+			$('.tip').html('注册失败').show();
+		} else {
+			$.post("{:url('index/user/addUser')}",data,function(data){
+				//console.log(data);
+				$('.tip').html(data).show();
+				if (data == '注册成功'){
+					setTimeout(function(){
+						$('.regWindow').hide();
+						$('.tip').html(' ').hide();
+					},3000);
+				}
+			},'json');
+		}		
+		return false;
+	});
+	// 点击登录
+	//手机登录
+	$('.PhoneloginBtn').click(function(){
+		if(flag){
+			$('.errorloginPhone').css('color','red').html('手机号不能为空').show();
+		}else {
+
+			$.post("{:url('index/user/phoneLogin')}",{phone:$('.loginPhone').val()},function(data){
+				if (data){
+					console.log('登录成功');
+				} else {
+					console.log('shibai');
+					$('.PhoneloginBtn').next('span').css('color','red').html('登录失败').show();
+					setTimeout(function(){
+						$('.PhoneloginBtn').next('span').html(' ').hide();
+					},3000);
+				}
+			},'json');
+		}		
+	});
+	// 用户登录
+	$('.loginBtn').click(function(){
+		console.log($('.loginName').val());
+		console.log($('.loginPwd').val());
+		console.log(flag);
+		if (flag) {
+
+		} else {
+			$.post("{:url('index/user/login')}",{username:$('.loginName').val(),password:$('.loginPwd').val()},function(data){
+				if (data){
+					console.log('登录成功');
+				} else {
+					console.log('shibai');
+					$('.loginBtn').next('span').css('color','red').html('用户名或密码错误').show();
+					setTimeout(function(){
+						$('.loginBtn').next('span').html(' ').hide();
+					},3000);
+				}
+			},'json');
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	msc.user.init();
+	$("img.imgLoad").imgLoad();
+	msc.goTop.init();
+
+	$(".search_Text").click(function(){
+		var f=$(this).attr("data-first");
+		if(f=="on"){
+			$(this).val("");
+			$(this).attr("data-first","off")
+		}
+			$(this).removeClass("gay")
+		});
+	$("#search").click(function(){
+		if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){
+			$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")
+		}
+			$("#form_search").submit()
+		});
+	$("#q").keydown(function(event){
+		if(event.keyCode==13){
+			if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){
+				$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}
+			}
 		});
 
-$(".w5 .ui_title_wrap h3 a").click(function(){
-		if($(this).parent().hasClass('on'))
-		return false;
-		else{
-		$(".w5 .ui_title_wrap h3").removeClass('on');
-		$(this).parent().addClass('on');
-		$(".w5 ul").hide();
-		$(".w5 ul:eq("+$(this).parent().index()+")").fadeIn();
-		}
-		});
+	var sudoSlider = $("#home_index_slider").sudoSlider({continuous: true,
+	auto: true,
+	effect: "fade",
+	speed: '700',
+	pause: '3000',
+	numeric: true,
+	resumePause: 2000,prevHtml:'<a class="prevBtn" href="javascript:void(0);"><i>&nbsp;</i></a>',nextHtml:'<a class="nextBtn" href="javascript:void(0);"><i>&nbsp;</i></a>'});
 
-$(".w6 .ui_title_wrap h3 a").click(function(){
-		if($(this).parent().hasClass('on'))
-		return false;
-		else{
-		$(".w6 .ui_title_wrap h3").removeClass('on');
-		$(this).parent().addClass('on');
-		$(".w6 .live").hide();
-		$(".w6 .live:eq("+$(this).parent().index()+")").fadeIn();
-		}
-		});
-</script>
-<script>
+	var sudoSlider2 = $("#w2_slider").sudoSlider({speed:600,slideCount:3,movecount:3,prevHtml:'<a class="prevBtn" href="javascript:void(0);"><i>&nbsp;</i></a>',nextHtml:'<a class="nextBtn" href="javascript:void(0);"><i>&nbsp;</i></a>',continuous: true});
 
-$("li.top_bar_more").hoverDelay(function(){
-$("li.top_bar_more div").show();
-},function(){
-$("li.top_bar_more div").hide();
-},200,200);
+	$(".w1_1 >ul >li").hover(function(){
+	$(this).addClass("on").find(".sub").show();
+	},function(){
+	$(this).removeClass("on").find(".sub").hide();
+	});
 
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+	$(".w3live .ui_title_wrap h2 a").click(function(){
+			if($(this).parent().hasClass('on'))
+			return false;
+			else{
+			$(this).closest('.w3live').find("h2").removeClass('on');
+			$(this).parent().addClass('on');
+			$(this).closest('.w3live').find('.live').hide();
+			$(this).closest('.w3live').find(".live:eq("+$(this).parent().index()+")").fadeIn();
+			}
+			});
+
+	$(".w5 .ui_title_wrap h3 a").click(function(){
+			if($(this).parent().hasClass('on'))
+			return false;
+			else{
+			$(".w5 .ui_title_wrap h3").removeClass('on');
+			$(this).parent().addClass('on');
+			$(".w5 ul").hide();
+			$(".w5 ul:eq("+$(this).parent().index()+")").fadeIn();
+			}
+			});
+
+	$(".w6 .ui_title_wrap h3 a").click(function(){
+			if($(this).parent().hasClass('on'))
+			return false;
+			else{
+			$(".w6 .ui_title_wrap h3").removeClass('on');
+			$(this).parent().addClass('on');
+			$(".w6 .live").hide();
+			$(".w6 .live:eq("+$(this).parent().index()+")").fadeIn();
+			}
+			});
 </script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    bp.src = '//push.zhanzhang.baidu.com/push.js';
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+<script type="text/javascript">
+	
 </script>
+
 </body>
 </html>
