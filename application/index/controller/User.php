@@ -2,74 +2,107 @@
 namespace app\index\controller;
 
 use think\Controller;
-use \think\Validate;
+use app\index\model\User as UserModel;
+use lib\Phoneyz;
 
 class User extends Controller
 {
-	/*protected $rule = [
-		'name'       => 'require|length:3,25',
-		'password'   => 'require|length:6,16',
-		'repassword' =>'require|confirm:password',
-		'phone'      => 'require|regex:^1[34578]\d{9}$',
-		
-		'email'      => 'email',
-
-	];
-	protected $message = [
-		'name.require'       => '用户名不能为空',
-		'name.length'        => '用户名长度在3-25个字符',
-		'password.require'   => '密码不能为空',
-		'password.length'    => '密码长度在6-16个字符',
-		'repassword.confirm' => '两次密码输入不一致',
-		'phone.require'      => '手机号不能空', 
-		'phone.regex'        => '手机号码格式不正确',
-		
-		'email'              => '邮箱格式错误',
-	];
-	protected $scene = [
-		'username' => ['name'],
-		'password' => ['password'],
-		'repwd'    => ['repassword'],
-		'phone'    => ['phone'],
-		
-		'email'    => ['email'],
-	];*/
+	protected $user;
+	public function _initialize()
+	{
+		$this->user = new UserModel();
+	}
     public function login()
     {
-    	return $this->fetch();
+    	$data = $this->request->param();
+    	//dump($data);
+		$result = $this->user->where('username|phone',$data['username'])->where('password',$data['password'])->find();
+		echo json_encode($result);
+    }
+    public function test()
+    {
+
+		$this->user->data([
+		'username' => 'thinkphp2',
+		'password' => 'thinkphp@qq.com',
+		'phone'	   => '13333333333',
+		]);
+		$this->user->allowField(true)->save();
+		$user = $this->user->uid;
+		dump($user);
+		$result = $this->user->where('uid',1)->find();
+		dump($result->username);
+		/*$newUser = $this->user->find($user);
+		// 如果还没有关联数据 则进行新增
+
+		$newUser->userInfo()->save(['phone' => '13333333333']);*/
     }
     public function reg()
     {
-    	$filed = ['username','password','phone','repwd'];
+    	$filed = ['username','password','phone','repwd','captcha'];
     	$arr = $this->request->param();
     	$key = key($arr);
+    	//dump($arr[$key]);
     	if (is_array($key)){
-    		$key = $key['repwd'];
+    		$key = 'repwd';
     	}
+    	$data = '';
     	if (in_array($key, $filed)){
 	    	$result = $this->validate($arr,"User.$key");
 			if(true !== $result){
 			// 验证失败 输出错误信息
-				echo json_encode($result);
+				$data = $result;
+			} else {
+				$data = '';
 			}
-		}else {
-			echo $key;
 		}
+		if($key == 'username' && !empty($arr[$key])) { // 查看用户名是否重复
+				$result = $this->user->where('username',$arr[$key])->find();
+				if ($result) {
+					$data = '该用户名已存在';
+				}
+		}
+		if($key == 'phone' && !empty($arr[$key])) { // 查看用户名是否重复
+				$result = $this->user->where('phone',$arr[$key])->find();
+				if ($result) {
+					$data = '该手机号已注册';
+				}
+		}
+		echo json_encode($data);
 
-		/*public function phoneVer()
-	{
-		//var_dump($_POST);
-		if (empty($_POST['phoneNum'])) {
-			exit("<script>alert('请输入手机号');window.location.href='index.php?m=index&c=index&a=reg'</script>");
-		} else {
-			$phoneyz = new Phoneyz($_POST['phoneNum']);
-			$phoneyz->getYzm();
-			$_SESSION['pcode'] = $phoneyz->randNum;
-			header('location:index.php?m=index&c=index&a=reg');
-		}
-	
-		
-		//var_dump($pcode);
-	}*/
     }
+    //手机验证码
+    public function phoneVer()
+	{
+		$phoneNum = $this->request->param('phone'); 
+		//var_dump($_POST);
+		if (empty($phoneNum)) {
+			echo json_encode('手机号不能空');
+		} else {
+			$phoneyz = new Phoneyz($phoneNum);
+			$phoneyz->getYzm();
+			$code = $phoneyz->randNum;
+			session('pcode',$code);
+			echo $code;
+		}
+	}
+	//注册用户
+	public function addUser()
+	{
+		$data = $this->request->param();
+		//dump($data);
+		$result = $this->user->allowField(true)->save($data);
+		if ($result) {
+			echo json_encode('注册成功');
+		} else {
+			echo json_encode('注册失败');
+		}
+	}
+	// 手机登录
+	public function phoneLogin()
+	{
+		$data = $this->request->param('phone');
+		$result = $this->user->where('phone',$data)->find();
+		echo json_encode($result);
+	}
 }

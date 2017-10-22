@@ -3,10 +3,11 @@ namespace app\index\model;
 
 use think\Model;
 
-class Arc extends Model
+
+class UserInfo extends Model
 {
 	public function user()
 	{
-		return $this->belongsTo('Data','u_id');
+		return $this->belongsTo('User', 'u_id');
 	}
 }

@@ -69,7 +69,7 @@
                     </div>
                     <div class="yzm_H_item">
                         <div style="float: right;margin-right: 5px;"><img src="{:captcha_src()}" alt="验证码" onclick="this.src=this.src"/></div>
-                        <span class="errorloginyzm error_info" style="display:none;"></span>
+                        <span class="errorloginyzm error_info" style="right:-190px;display: none;" ></span>
                     </div>
 
                 </div>
@@ -79,6 +79,7 @@
                 </div>
                 <div class="input_item">
                     <input type="button" class="loginBtn"  value="登  录" />
+                    <span class="error_info" style="display:none;"></span>
                 </div>
                 <div class="input_item f-tac f-pb30">
                     <a href="javascript:void(0)" class="iconQQ" onclick="openQQ();"></a>
@@ -90,7 +91,7 @@
             <div class="login_validate loginPhone_validate" style="display:none;">
                 <div class="input_item">
                     <i class="icon_un"></i>
-                    <input type="text" name="phone" value="请输入手机号" eg="请输入手机号" class="loginPhone" maxlength="11"  />
+                    <input type="text" name="phone" placeholder="请输入手机号" eg="请输入手机号" class="loginPhone" maxlength="11"  />
                     <span class="error_info errorloginPhone" style="display:none;"></span>
                 </div>
                 <div class="input_item" >
@@ -108,18 +109,20 @@
                 <div class="input_item">
                     <div class="icon_dx_item">
                         <i class="icon_dx"></i>
-                        <input type="text" name="identCode" class="loginCode" value="请输入验证码" eg="请输入验证码" />
+                        <input type="text" name="phoneCode" class="loginCode" placeholder="请输入验证码" eg="请输入验证码" />
+                        <span class="errorPhoneCode" style="display:none;"></span>
                     </div>
                     <div class="login_sendCode">
-                        <input type="button" name="getYzm"  value="发送短信验证码" />
+                        <input type="button" name="getYzm"  value="发送短信验证码" class="jishi"/>
+
                     </div>
-                    <span class="error_info errorloginCode" style="display:none;"></span>
+                    
                 </div>
                 
                 <div class="input_item">
                    
-                    <input type="button" class="PhoneloginBtn" );" value="登  录" />
-                    <input type="button" style="display:none;" class="PhoneRegBtn" class="jumpReg" value="注  册" />
+                    <input type="button" class="PhoneloginBtn" value="登  录" />
+                     <span class="error_info" style="display:none;"></span>
                 </div>
                 <div class="input_item f-tac f-pb30">
                     <a href="javascript:void(0)" class="iconQQ"></a><a href="javascript:void(0)" class="iconWX"></a><a href="javascript:void(0)" class="iconWB"></a><a href="javascript:void(0)" class="iconZFB"></a>
@@ -139,22 +142,25 @@
 					<span style="float: right;position: relative;top:3px;right:20px;font-size: 20px;cursor:pointer;font-weight: bold;" id="closeReg">X</span>
 				</div>
 				<div class="reg-content">
-					<form action="{:url('index/user/reg')}" method="post" enctype="multipart/form-data" id="regist">
+					<form id="regist" >
 						<div class="reg-data">
 						<span class="rp">*</span><span class="reg-words">用户名：</span>
 							<input type="text" name="username" />
-							 <span class="error_info" ></span>
+							<i style="width: 16px;height: 16px;"></i>
+							 <span class="error_info" style="display:none;"></span>
 						</div>
 						<div class="reg-line"></div>
 						<div class="reg-data">
 						<span class="rp">*</span><span class="reg-words">密码：</span>
 							<input type="password" name="password" />
+							<i style="width: 16px;height: 16px;"></i>
 							<span class="error_info" style="display:none;"></span>
 						</div>
 						<div class="reg-line"></div>
 						<div class="reg-data">
 						<span class="rp">*</span><span class="reg-words">确认密码：</span>
 							<input type="password" name="repwd" />
+							<i style="width: 16px;height: 16px;"></i>
 							<span class="error_info" style="display:none;"></span>
 						</div>
 						
@@ -162,6 +168,7 @@
 						<div class="reg-data">
 						<span class="rp">*</span><span class="reg-words">手机号：</span>
 							<input type="text" name="phone" />
+							<i style="width: 16px;height: 16px;"></i>
 							<span class="error_info" style="display:none;"></span>
 						</div>
 						<div class="reg-line"></div>
@@ -169,13 +176,17 @@
 						<span class="rp">*</span><span class="reg-words">手机验证码：</span>
 							<input type="text" name="phoneCode" />
 
-							<input type="button" style="border-radius: 3px;border:1px solid #E3E3E3;background: #F3F5F7;color:#333;outline: none;width: 80;height:30px;margin-left: 10px;width: 100px;cursor: pointer;" id="jishi" value="发送验证码">
+							<input type="button" style="border-radius: 3px;border:1px solid #E3E3E3;background: #F3F5F7;color:#333;outline: none;width: 80;height:30px;margin-left: 10px;width: 100px;cursor: pointer;" class="jishi" value="发送验证码">
+							
 							<span class="errorPhoneCode" style="display:none;"></span>
 						</div>
 
 						<div class="reg-line"></div>
 						<div class="anniu">
-							<button class="reg-anniu" name="submit" value="reg">提  &nbsp;交</button>
+							<!-- <button class="reg-anniu" name="submit" value="reg">提  &nbsp;交</button> -->
+							<input class="reg-anniu" type="submit" value="提  &nbsp;交" />
+
+							<span  class="tip" style="color:blue;font-size: 18px;font-weight: bold;"></span>
 						</div>		
 					</form>
 				</div>
@@ -636,15 +647,15 @@
 <script src="__JS__/jquery.sudoslider.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	//登陆弹出隐藏
-	$(".jumpLogin").click(function(){
+	function showLogin() {
 		$('.regWindow').hide();
 		$('.loginWindow').css("height",$('#real_body').outerHeight());
 		
 		$('.login_left').css("marginLeft",($('#real_body').width())/3);
 		
 		$('.loginWindow').show();
-		
-	});
+	}
+	$(".jumpLogin").click(showLogin);
 	$('#closeLogin').click(function(){
 		$('.loginWindow').hide();
 		
@@ -689,26 +700,163 @@
 		
 	});
 	// 手机验证码
-	$('#jishi').click(function(){
+	var pcode = 1234;
+	var flag = 0;
+	$('.jishi').click(function(){
 		var num = 10;
 		var jishi =null;
-		$('#jishi').attr('disabled','disabled');
+		$('.jishi').attr('disabled','disabled');
 		if (jishi == null) {
 			jishi = setInterval(function(){
 				num = num - 1;
 				console.log(num);
 				if (num >= 0) {
-					$('#jishi').attr('value',num + 's后可重发');
+					$('.jishi').attr('value',num + 's后可重发');
 				}
 				if (num == 0) {
 					clearInterval(jishi);
-					$('#jishi').removeAttr('disabled');
-					$('#jishi').attr('value','发送验证码');
+					$('.jishi').removeAttr('disabled');
+					$('.jishi').attr('value','发送验证码');
 				}			
 			},1000);
+		}
+		/*$.post("{:url('index/user/phoneVer')}",{phone:$('.reg-data input[name=phone]').val()},function(data){
+			pcode = data;
+
+		},'json');	*/	
+	});
+	$('input[name=phoneCode]').blur(function(){
+		console.log(pcode);
+		if ($(this).val() != pcode){
+			$(this).nextAll(".errorPhoneCode").css('color','red').html('手机验证码错误').show();
+			$(this).nextAll("i").css({'display':'inline-block','backgroundImg':'url(__IMG__/cross.png)'}).show();
+			flag = 1;
+		} else {
+			$(this).nextAll(".errorPhoneCode").css('color','green').html('通过').show();
+			$(this).nextAll("i").css({'display':'inline-block','backgroundImg':'url(__IMG__/cross.png)'}).show();
+			flag = 0;
+		}
+	});
+	//登陆注册验证
+	$(':input').blur(function(){
+		var nowInput = $(this);
+		var key1 = $(this).attr('name');
+		//console.log(key1);
+		var value = $(this).val();
+			data = {};
+			data[key1] = value;
+		if (key1 == 'repwd') {
+			data['password'] = $('.reg-data input[name=password]').val();			
+		} 
+		//console.log(data);
+		$.post("{:url('index/user/reg')}",data,function(data){
+			//console.log(data);
+			if(data){
+				nowInput.nextAll(".error_info").css('color','red').text(data).show();
+				nowInput.nextAll("i").css({'display':'inline-block','background':'url(__IMG__/cross.png)'}).show();
+				if (key1 == 'captcha') {
+					$('.errorloginyzm').css('color','red').text(data).show();
+				}
+				flag = 1;
+				if (nowInput.hasClass('loginPhone') && data == "该手机号已注册"){
+					nowInput.nextAll(".error_info").css('color','green').html('通过').show();
+					flag = 0;
+				}
+				if (nowInput.hasClass('loginName') && data == "该用户名已存在"){
+					nowInput.nextAll(".error_info").css('color','green').html('通过').show();
+					flag = 0;
+				}
+			}else {
+				
+				nowInput.nextAll(".error_info").css('color','green').html('通过').show();
+				nowInput.nextAll("i").css({'display':'inline-block','background':'url(__IMG__/tick.png)'}).show();
+				if (key1 == 'captcha') {
+					$('.errorloginyzm').css('color','green').text('通过').show();
+				}
+				flag = 0;
+			}
+			
+
+		},'json');
+	});
+	// 点击注册
+	$('.reg-anniu').click(function(){
+		var data = {};
+
+		$('#regist input').each(function(i){
+			//console.log(i);
+			nowInput = $(this);
+			var key = $(this).attr('name');
+		//console.log(key1);
+			var value = $(this).val();
+			if (value.length == 0){
+				nowInput.nextAll(".error_info").css('color','red').text('不能为空').show();
+				nowInput.nextAll("i").css({'display':'inline-block','background':'url(__IMG__/cross.png)'}).show();
+				flag = 1;
+				return false;
+			}
+			
+			data[key] = value;
+
+		});
+		//console.log(data);
+		if (flag){
+			$('.tip').html('注册失败').show();
+		} else {
+			$.post("{:url('index/user/addUser')}",data,function(data){
+				//console.log(data);
+				$('.tip').html(data).show();
+				if (data == '注册成功'){
+					setTimeout(function(){
+						$('.regWindow').hide();
+						$('.tip').html(' ').hide();
+					},3000);
+				}
+			},'json');
+		}		
+		return false;
+	});
+	// 点击登录
+	//手机登录
+	$('.PhoneloginBtn').click(function(){
+		if(flag){
+			$('.errorloginPhone').css('color','red').html('手机号不能为空').show();
+		}else {
+
+			$.post("{:url('index/user/phoneLogin')}",{phone:$('.loginPhone').val()},function(data){
+				if (data){
+					console.log('登录成功');
+				} else {
+					console.log('shibai');
+					$('.PhoneloginBtn').next('span').css('color','red').html('登录失败').show();
+					setTimeout(function(){
+						$('.PhoneloginBtn').next('span').html(' ').hide();
+					},3000);
+				}
+			},'json');
 		}		
 	});
+	// 用户登录
+	$('.loginBtn').click(function(){
+		console.log($('.loginName').val());
+		console.log($('.loginPwd').val());
+		console.log(flag);
+		if (flag) {
 
+		} else {
+			$.post("{:url('index/user/login')}",{username:$('.loginName').val(),password:$('.loginPwd').val()},function(data){
+				if (data){
+					console.log('登录成功');
+				} else {
+					console.log('shibai');
+					$('.loginBtn').next('span').css('color','red').html('用户名或密码错误').show();
+					setTimeout(function(){
+						$('.loginBtn').next('span').html(' ').hide();
+					},3000);
+				}
+			},'json');
+		}
+	});
 </script>
 
 <script type="text/javascript">
@@ -787,49 +935,8 @@
 			});
 </script>
 <script type="text/javascript">
-	//登陆注册验证
-	$(':input').blur(function(){
-		var nowInput = $(this);
-		var key1 = $(this).attr('name');
-		//console.log(key1);
-		var value = $(this).val();
-			data = {};
-			data[key1] = value;
-		if (key1 == 'repwd') {
-			data['password'] = $('.reg-data input[name=password]').val();			
-		} 
-		//console.log(data);
-		$.post($('#regist').attr('action'),data,function(data){
-			console.log(data);
-			console.log(nowInput);
-			console.log(nowInput.next(".error_info").css('color','red').text(data).show());
-
-		},'json');
-	});
+	
 </script>
-<script>
 
-	/*$("li.top_bar_more").hoverDelay(function(){
-	$("li.top_bar_more div").show();
-	},function(){
-	$("li.top_bar_more div").hide();
-	},200,200);
-
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();*/
-</script>
-<script>
-/*(function(){
-    var bp = document.createElement('script');
-    bp.src = '//push.zhanzhang.baidu.com/push.js';
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();*/
-</script>
 </body>
 </html>
