@@ -16,6 +16,7 @@ class User extends Controller
     {
     	$data = $this->request->param();
     	//dump($data);
+    	$data['password'] = md5($data['password']);
 		$result = $this->user->where('username|phone',$data['username'])->where('password',$data['password'])->find();
 		echo json_encode($result);
     }
@@ -90,6 +91,7 @@ class User extends Controller
 	public function addUser()
 	{
 		$data = $this->request->param();
+		$data['password'] = md5($data['password']);
 		//dump($data);
 		$result = $this->user->allowField(true)->save($data);
 		if ($result) {
