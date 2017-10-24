@@ -22,6 +22,7 @@ class User extends Validate
 		'password.require'   => '密码不能为空',
 		'password.length'    => '密码长度在6-16个字符',
 		'repwd.require'      => '请确认密码',
+		'repwd.confirm'      => '与密码输入不一致',
 		'phone.require'      => '手机号不能空', 
 		'phone.regex'        => '手机号码格式不正确',
 		'captcha.require'    => '验证码不能为空',

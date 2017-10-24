@@ -1,0 +1,245 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<meta charset="utf-8" />
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+	<title>登录</title>    
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css" />
+    <!-- <script type="text/javascript" src="__js__/jquery-1.8.2.min.js"></script> -->
+    <!-- 新增登录 -->
+    <link rel="stylesheet" type="text/css" href="__CSS__/login.css" />
+    <!-- <script type="text/javascript" src="__js__/login.js"></script> -->
+
+</head>
+
+<body>
+     <div class="UnauthHomePage">
+        <div class="register_shadow">
+            <div class="register_shadow_txt"></div>
+        </div>
+    </div>
+    <div class="login_containter">
+        <div class="login_left">
+            <a class="logo" href="/">味蕾</a>
+            <h3><span>登&nbsp;录</span></h3>
+            <h4 class="account_login"><a href="javascript:void(0)">手机动态登录<span></span></a></h4>
+            <h4 class="phone_login" style="display:none;"><a href="javascript:void(0)">返回账号登录</a></h4>
+            <div class="login_validate loginAccunt_validate">
+                <form action="{:url('index/user/login')}" method="post" onsubmit="return demo();" class="login">
+                <div class="input_item">
+                    <i class="icon_un"></i>
+                    <input type="text" name="username" placeholder="请输入手机/邮箱/用户名" eg="请输入手机/邮箱/用户名" class="loginName" />
+                    <span class="error_info errorloginName" style="display:none;"></span>
+                </div>
+                <div class="input_item">
+                    <i class="icon_pw"></i>
+                    <input type="password" name="password" class="loginPwd" placeholder="请输入密码" />
+                    <span class="error_info errorloginPwd" style="display:none;"></span>
+                </div>
+
+                <div class="input_item">
+                    <input type="submit" class="loginBtn" onclick="LoginFormSubmit($(this));" value="登  录" />
+                </div>
+                </form>
+                <div class="input_item f-tac f-pb30">
+                    <a href="javascript:void(0)" class="iconQQ" onclick="openQQ();"></a>
+                    <a href="javascript:void(0)" class="iconWX" onclick="openWeiXin();"></a>
+                    <a href="javascript:void(0)" class="iconWB" onclick="openWeiBo();"></a>
+                    <a href="javascript:void(0)" class="iconZFB" onclick="openAliPay();"></a>
+                </div>
+            </div>
+            <div class="login_validate loginPhone_validate" style="display:none;">
+                <form action="{:url('index/user/phoneLogin')}" method="post" onsubmit="return demo();" class="phoneLogin">
+                <div class="input_item">
+                    <i class="icon_un"></i>
+                    <input type="text" name="phone" placeholder="请输入手机号" eg="请输入手机号" class="loginPhone" maxlength="11" />
+                    <span class="error_info errorloginPhone" style="display:none;"></span>
+                </div>
+                <div class="input_item" >
+                    <div class="icon_yzm_item">
+                        <i class="icon_yzm"></i>
+                        <input type="text" name="captcha" class="loginyzm" maxlength="4" placeholder="验证码" eg="验证码" id="loginyzmPhone"   />
+                    </div>
+                    <div class="yzm_H_item">
+                         <div style="float: right;margin-right: 5px;"><img src="{:captcha_src()}" alt="验证码" onclick="this.src=this.src"/></div>
+                        <span class="errorloginyzm error_info" style="display:none;"></span>
+                    </div>
+
+                </div>
+                <div class="input_item">
+                    <div class="icon_dx_item">
+                        <i class="icon_dx"></i>
+                        <input type="text" name="phoneCode" class="loginCode" placeholder="请输入验证码" eg="请输入验证码" />
+                        <span class="error_info errorloginCode"></span>
+                    </div>
+                    <div class="login_sendCode">
+                        <input type="button" name="getYzm"  value="发送短信验证码" class="jishi" />
+                    </div>
+                    
+                </div>
+                <div class="input_item">
+                   
+                   <input type="submit" class="PhoneloginBtn" value="登  录" onclick="LoginFormSubmit($(this));"/>
+                   
+                </div>
+                </form>
+                <div class="input_item f-tac f-pb30">
+                    <a href="javascript:void(0)" class="iconQQ"></a><a href="javascript:void(0)" class="iconWX"></a><a href="javascript:void(0)" class="iconWB"></a><a href="javascript:void(0)" class="iconZFB"></a>
+                </div>
+            </div>
+            <div class="login_change">
+                <p>还没有账号？</p>
+                <a href="javascript:void(0)">注  册</a>
+            </div>
+        </div>
+        <div class="login_right">
+            
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
+<script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+    //切换
+$(document).on("click",".account_login",function(){
+    $(this).hide();
+    $(this).parent().find("h3").html("<span>手机登录</span>");
+    $(this).parent().find(".error_info").hide();
+    $(".phone_login").show();
+    $(".loginAccunt_validate").hide();
+    $(".loginPhone_validate").show();
+     var myDate = new Date();
+    $(this).parents().find("#vCodImgPhone").attr("src", "/Ajax/GetValidateCode?"+ myDate.toLocaleString()).click();
+
+}); 
+$(document).on("click",".phone_login",function(){
+    $(this).hide();
+    $(this).parent().find("h3").html("<span>登录</span>");
+    $(this).parent().find(".error_info").hide();
+    $(".account_login").show();
+    $(".loginPhone_validate").hide();
+    $(".loginAccunt_validate").show();
+}); 
+//手机验证码
+var pcode = 0;
+    var flag = 0;
+    $('.jishi').click(function(){
+        var num = 10;
+        var jishi =null;
+        $('.jishi').attr('disabled','disabled');
+        if (jishi == null) {
+            jishi = setInterval(function(){
+                num = num - 1;
+                console.log(num);
+                if (num >= 0) {
+                    $('.jishi').attr('value',num + 's后可重发');
+                }
+                if (num == 0) {
+                    clearInterval(jishi);
+                    $('.jishi').removeAttr('disabled');
+                    $('.jishi').attr('value','发送验证码');
+                }           
+            },1000);
+        }
+       // console.log(1);
+        $.post("{:url('index/user/phoneVer')}",{phone:$('.loginPhone').val()},function(data){
+            pcode = data;
+            //console.log(1);
+           //console.log(data);
+        },'json');    
+    });
+    $('input[name=phoneCode]').blur(function(){
+        console.log(pcode);
+        //console.log( $(this).nextAll(".errorloginCode"));
+        if (pcode == 0){
+             $(this).nextAll(".errorloginCode").css('color','red').html('请获取验证码').show();
+            flag = 1;
+        }else {
+            if ($(this).val() != pcode){
+                 $(this).nextAll(".errorloginCode").css('color','red').html('手机验证码错误').show();
+                flag = 1;
+            } else {
+                 $(this).nextAll(".errorloginCode").css('color','green').html('通过').show();
+                flag = 0;
+            }
+        }      
+    });
+    $('input').blur(function(){
+        var nowInput = $(this);
+       var key1 = $(this).attr('name');
+        console.log(key1);
+        var value = $(this).val();
+            data = {};
+        
+         data[key1] = value;
+        if (typeof(key1) == 'undefined'){
+            key1 = 'submit';
+        }
+        console.log(data);
+        $.post("{:url('index/user/reg')}",data,function(data){
+            console.log(data);
+
+            if(data){
+                nowInput.nextAll(".error_info").css('color','red').text(data).show();
+                if (key1 == 'captcha') {
+                    $('.errorloginyzm').css('color','red').text(data).show();
+                }
+                flag = 1;
+                if (nowInput.hasClass('loginPhone') && data == "该手机号已注册"){
+                    nowInput.nextAll(".error_info").css('color','green').html('通过').show();
+                    flag = 0;
+                }
+                if (nowInput.hasClass('loginName') && data == "该用户名已存在"){
+                    nowInput.nextAll(".error_info").css('color','green').html('通过').show();
+                    flag = 0;
+                }
+            }else {
+                if(key1 != 'phoneCode'){
+                    nowInput.nextAll(".error_info").css('color','green').html('通过').show();
+                    flag = 0;
+                }              
+                if (key1 == 'captcha') {
+                    $('.errorloginyzm').css('color','green').text('通过').show();
+                    flag = 0
+                }
+               
+            }
+        },'json');
+    });
+    //点击登录
+    function LoginFormSubmit($data){
+        if ($data.hasClass('loginBtn')) {
+            var $select = $('.login input');
+        } else {
+            var $select = $('.phoneLogin input'); 
+        }
+        $select.each(function(i){
+            //console.log(i);
+            nowInput = $(this);
+            var key = $(this).attr('name');
+        console.log(key);
+            var value = $(this).val();
+            if (value.length == 0){
+                nowInput.nextAll(".error_info").css('color','red').text('不能为空').show();
+                flag = 1;
+                return false;
+            } 
+        });
+    };
+    function demo()
+    {
+        if (flag){
+            return false;
+        } else {
+            return true;
+        }
+        /*console.log(flag);
+        return false;*/
+       
+    }
+</script>

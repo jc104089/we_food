@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人资料 - 美食天下</title>
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="">
+<meta name="description" content="" />
+<link rel="shortcut icon" href="http://static.meishichina.com/v6/img/lib/f.ico"/>
+<link rel="apple-touch-icon" href="http://static.meishichina.com/v6/img/lib/wapico.png" />
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="http://static.meishichina.com/v6/css/app/center/all.css?v=2017-08-17">
+</head>
+<body>
+{include file="public/header"}
+
+	<!-- 主框架 -->
+<div class="w_main clear">
+
+<div class="mod_left">
+<div class="menu_wrap">
+<ul>
+<li>
+<a  href="http://member.meishichina.com/center/">会员<br>中心</a>
+</li>
+<li>
+<a  href="http://member.meishichina.com/center/my_recipe_me/">菜谱</a>
+</li>
+<li>
+<a  href="http://member.meishichina.com/center/my_pai_list/">话题</a>
+</li>
+<li>
+<a   href="http://member.meishichina.com/center/my_blog_list/">日志</a>
+</li>
+<li>
+<a  href="http://member.meishichina.com/center/my_collect_me/">菜单</a>
+</li>
+<li>
+<a  href="http://member.meishichina.com/center/my_fav_recipe/">收藏</a>
+</li>
+<li>
+<a class=on href="http://member.meishichina.com/center/my_settings_profile/">账户<br>设置</a>
+</li>
+</ul>
+</div>
+</div>
+
+
+ <!-- 右侧 -->
+<div class="mod_right">
+
+<div id="mod_location">
+<div class="mod_location clear">
+
+<div class="left">
+<a href="{:url('index/user/info')}" class=on>个人资料</a>
+<a href="http://member.meishichina.com/center/my_settings_password/" >修改密码</a>
+</div>
+
+</div>
+</div>
+
+<form action="/center/my_settings_profile/" id="J_form"  enctype="multipart/form-data" method="post">
+
+<div class="mr_edit mr_edit_center clear">
+<ul>
+
+<li>
+<label>头像</label><br>
+<img class="imgLoad" src="http://static.meishichina.com/v6/img/blank.gif" data-src="http://i3.meishichina.com/data/avatar/010/55/76/63_avatar_big.jpg@!c120?v=1508720567" width=120 height=120 /><br><input name="avatarpic" class="inputS" type="file">
+
+</li>
+
+
+<li>
+<label>性别</label><br>
+<input type="hidden" id="things_type1" name="sex" value="0">
+<div class="things_type1 clear">
+<span data-value="1" >&nbsp;&nbsp;男&nbsp;&nbsp;</span>
+<span data-value="2" >&nbsp;&nbsp;女&nbsp;&nbsp;</span>
+<span data-value="" class="on">&nbsp;保密&nbsp;</span>
+</div>
+</li>
+
+<li>
+<label>家乡</label><br>
+<select name="birthprovince" id="J_birthprovince" data-width="100" style="display:none">
+<option value=""></option>
+</select>
+
+<select name="birthcity" id="J_birthcity" data-width="100" style="display:none">
+<option value=""></option>
+</select>
+</li>
+
+<li>
+<label>电子邮箱</label><br>
+<input name="email" class="inputM" type="text" id="J_email" value="">
+</li>
+
+<li><label>个人签名</label><br>
+<input name="sign" class="inputL" type="text" id="J_sign" value="">
+</li>
+<input name="dob" type="hidden" class="" value="6311582620">
+<input name="uiue" type="hidden" class="" value="10557663">
+
+</ul>
+<input name="save_submit" value="保存修改" class="btn1" type="submit">
+</div>
+
+<div class="mr_edit mr_edit_fixed clear">
+<ul>
+
+ 
+
+</ul>
+</div>
+
+</form>
+
+
+		</div><!-- 右侧结束 -->
+</div>
+<script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/all.js?v=20170218"></script>
+<script type="text/javascript">
+msc.user.init();
+$("img.imgLoad").imgLoad();
+</script>
+
+
+
+<script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/msc-tools-region.js"></script>
+<script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/msc-tools-region-data.js"></script>
+<script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/msc-ui-select.js"></script>
+<script type="text/javascript">
+new msc.tools.region({
+        province: "#J_birthprovince",
+        city: "#J_birthcity",
+        auto: true
+    });
+msc.ui.select({
+        id: "#J_form select",
+        width: function() {
+            return this.getAttribute("data-width") || 120;
+        },
+        defaultValue: true
+    });
+
+$(".things_type1 span").click(function(){
+var id=$(this).attr("data-value");
+$(".things_type1 span").removeClass("on");
+$(this).addClass("on");
+$("#things_type1").val(id);
+}
+);
+
+
+$("#J_form").submit(function(){
+if($("#J_birthprovince").val() && $("#J_birthcity").val() === '请选择市'){
+msc.ui.dialog.error('家乡地址不完整');
+}
+else if($("#J_email").val() && !/^[0-9a-z_][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}\.){1,4}[a-z]{2,4}$/.test($("#J_email").val())){
+msc.ui.dialog.error('电子邮箱格式不正确');
+$("#J_email").focus();
+}
+else if($("#J_sign").val().length>30){
+msc.ui.dialog.error('个人签名最多输入30字符');
+$("#J_email").focus();
+}
+else{
+msc.ui.dialog.loading();
+return true;
+}
+
+return false;
+});
+</script>
+<script>
+
+$("li.top_bar_more").hoverDelay(function(){
+$("li.top_bar_more div").show();
+},function(){
+$("li.top_bar_more div").hide();
+},200,200);
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script> </body>
+</html>
+

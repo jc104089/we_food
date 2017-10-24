@@ -9,10 +9,6 @@
 <meta name="description" content="美食天下是最大的中文美食网站与厨艺交流社区，拥有海量的优质原创美食菜谱，聚集超千万美食家。我所有的朋友都是吃货，欢迎您加入！" />
    
 <script type="text/javascript" src="__JS__/jquery-1.8.2.min.js"></script>
-    
-<link rel="stylesheet" type="text/css" href="__CSS__/login.css" />
-
-
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
 
@@ -21,178 +17,7 @@
 
 </head>
 <body>
-<div class="top-bar" id="J_top_bar">
-	<ul class="bar-left left">
-	<li><a title="美食天下" href=# target="_blank" class="top_bar_logo"><i>美食天下</i>首页</a></li>
-	<li> <a title="菜谱" href="caipu.html" target="_blank">菜谱</a></li>
-	<li> <a title="食材" href=food_fenlei.html target="_blank">食材</a></li>
-
-	<li> <a title="健康" href="http://www.meishichina.com/Health/" target="_blank">健康</a></li>
-	<li> <a title="vip专区" href="http://www.meishichina.com/mofang/" target="_blank">vip专区</a></li>
-	<li> <a title="社区" href="http://home.meishichina.com/" target="_blank">社区</a></li>
-	<li> <a title="话题" href="http://home.meishichina.com/pai.html" target="_blank">话题</a></li>
-
-	<li> <a title="搜索" href="" target="_blank">搜索</a></li>
-
-	</ul>
-
-	<div class="right" >
-		<ul class="bar-right left" style="padding-right: 50px;">
-			<li><a title="注册" class="jumpReg" style="cursor: pointer">注册</a></li>
-			<li><a class="jumpLogin" title="登陆" style="cursor: pointer">登陆</a></li>
-		</ul>
-	</div>
-</div>
-
-<div class="login_containter loginWindow" style="position: relative;z-index: 99;display: none;">
-        <div class="login_left" style="margin-left: 350px;">
-        	<span style="float: right;position: absolute;top:5px;right:20px;font-size: 20px;cursor:pointer;font-weight: bold;" id="closeLogin">X</span>
-            <a class="logo" style="cursor:pointer;">味蕾</a>
-            <h3><span>登&nbsp;录</span></h3>
-            <h4 class="account_login"><a href="javascript:void(0)">手机动态登录<span></span></a></h4>
-            <h4 class="phone_login" style="display:none;"><a href="javascript:void(0)">返回账号登录</a></h4>
-            <div class="login_validate loginAccunt_validate">
-                <div class="input_item">
-                    <i class="icon_un"></i>
-                    <input type="text" name="username" placeholder="请输入手机/邮箱/用户名"  class="loginName" />
-                    <span class="error_info errorloginName errorLogin" style="display:none;"></span>
-                </div>
-                <div class="input_item">
-                    <i class="icon_pw"></i>
-                    <input type="password" name="password" class="loginPwd" placeholder="请输入密码" />
-                    <span class="error_info errorloginPwd errorLogin" style="display:none;"></span>
-                </div>
-                <div class="input_item input_item_yzm">
-                    <div class="icon_yzm_item">
-                        <i class="icon_yzm"></i>
-                        <input type="text" name="captcha" class="loginyzm" maxlength="4" placeholder="验证码"  id="loginyzm"  />
-                    </div>
-                    <div class="yzm_H_item">
-                        <div style="float: right;margin-right: 5px;"><img src="{:captcha_src()}" alt="验证码" onclick="this.src=this.src"/></div>
-                        <span class="errorloginyzm error_info errorLogin" style="right:-190px;display: none;" ></span>
-                    </div>
-
-                </div>
-                
-                <div class="input_item">
-                    <a href="javascript:;" class="login_wjmm">忘记密码?</a>
-                </div>
-                <div class="input_item">
-                    <input type="button" class="loginBtn"  value="登  录" />
-                    <span class="error_info errorLogin" style="display:none;"></span>
-                </div>
-                <div class="input_item f-tac f-pb30">
-                    <a href="javascript:void(0)" class="iconQQ" onclick="openQQ();"></a>
-                    <a href="javascript:void(0)" class="iconWX" onclick="openWeiXin();"></a>
-                    <a href="javascript:void(0)" class="iconWB" onclick="openWeiBo();"></a>
-                    <a href="javascript:void(0)" class="iconZFB" onclick="openAliPay();"></a>
-                </div>
-            </div>
-            <div class="login_validate loginPhone_validate" style="display:none;">
-                <div class="input_item">
-                    <i class="icon_un"></i>
-                    <input type="text" name="phone" placeholder="请输入手机号" eg="请输入手机号" class="loginPhone" maxlength="11"  />
-                    <span class="error_info errorloginPhone errorLogin" style="display:none;"></span>
-                </div>
-                <div class="input_item" >
-                    <div class="icon_yzm_item">
-                        <i class="icon_yzm"></i>
-                        <input type="text" name="captcha" class="loginyzm" maxlength="4" placeholder="验证码" id="loginyzmPhone"   />
-                    </div>
-                    <div class="yzm_H_item">
-                     
-                        <div style="float: right;margin-right: 5px;"><img src="{:captcha_src()}" alt="验证码" onclick="this.src=this.src"/></div>
-                        <span class="errorloginyzm error_info errorLogin" style="display:none;"></span>
-                    </div>
-
-                </div>
-                <div class="input_item">
-                    <div class="icon_dx_item">
-                        <i class="icon_dx"></i>
-                        <input type="text" name="phoneCode" class="loginCode" placeholder="请输入验证码" eg="请输入验证码" />
-                        <span class="errorPhoneCode errorLogin" style="display:none;"></span>
-                    </div>
-                    <div class="login_sendCode">
-                        <input type="button" name="getYzm"  value="发送短信验证码" class="jishi"/>
-
-                    </div>
-                    
-                </div>
-                
-                <div class="input_item">
-                   
-                    <input type="button" class="PhoneloginBtn" value="登  录" />
-                     <span class="error_info errorLogin" style="display:none;"></span>
-                </div>
-                <div class="input_item f-tac f-pb30">
-                    <a href="javascript:void(0)" class="iconQQ"></a><a href="javascript:void(0)" class="iconWX"></a><a href="javascript:void(0)" class="iconWB"></a><a href="javascript:void(0)" class="iconZFB"></a>
-                </div>
-            </div>
-            <div class="login_change">
-                <p>还没有账号？</p>
-                <a class="jumpReg" title="注册" style="cursor: pointer;">注  册</a>
-            </div>
-        </div>
-</div>
-<div style="position: relative;z-index: 99;display: none;" class="login_containter regWindow">
-	<div class="register">
-				<div class="reg-title">立即注册
-					<span style="font-size: 10px;color:#ccc;font-weight: normal;">已有账号？<a class="jumpLogin" title="登陆" style="cursor: pointer">立即登陆</a></span>
-
-					<span style="float: right;position: relative;top:3px;right:20px;font-size: 20px;cursor:pointer;font-weight: bold;" id="closeReg">X</span>
-				</div>
-				<div class="reg-content">
-					<form id="regist" >
-						<div class="reg-data">
-						<span class="rp">*</span><span class="reg-words">用户名：</span>
-							<input type="text" name="username" />
-							<i style="width: 16px;height: 16px;" class="error"></i>
-							 <span class="error_info error" style="display:none;"></span>
-						</div>
-						<div class="reg-line"></div>
-						<div class="reg-data">
-						<span class="rp">*</span><span class="reg-words">密码：</span>
-							<input type="password" name="password" />
-							<i style="width: 16px;height: 16px;" class="error"></i>
-							<span class="error_info error" style="display:none;"></span>
-						</div>
-						<div class="reg-line"></div>
-						<div class="reg-data">
-						<span class="rp">*</span><span class="reg-words">确认密码：</span>
-							<input type="password" name="repwd" />
-							<i style="width: 16px;height: 16px;" class="error"></i>
-							<span class="error_info error" style="display:none;"></span>
-						</div>
-						
-						<div class="reg-line"></div>
-						<div class="reg-data">
-						<span class="rp">*</span><span class="reg-words">手机号：</span>
-							<input type="text" name="phone" />
-							<i style="width: 16px;height: 16px;" class="error"></i>
-							<span class="error_info error" style="display:none;"></span>
-						</div>
-						<div class="reg-line"></div>
-						<div class="reg-data">
-						<span class="rp">*</span><span class="reg-words">手机验证码：</span>
-							<input type="text" name="phoneCode" />
-
-							<input type="button" style="border-radius: 3px;border:1px solid #E3E3E3;background: #F3F5F7;color:#333;outline: none;width: 80;height:30px;margin-left: 10px;width: 100px;cursor: pointer;" class="jishi" value="发送验证码">
-							
-							<span class="errorPhoneCode error" style="display:none;"></span>
-						</div>
-
-						<div class="reg-line"></div>
-						<div class="anniu">
-							<!-- <button class="reg-anniu" name="submit" value="reg">提  &nbsp;交</button> -->
-							<input class="reg-anniu" type="submit" value="提  &nbsp;交" />
-
-							<span  class="tip" style="color:blue;font-size: 18px;font-weight: bold;"></span>
-						</div>		
-					</form>
-				</div>
-			</div>
-</div>
-
+{include file="public/header"}
 <div style="position: absolute;z-index: 10;width: 100%;top:0;" id="real_body">
 <div class="w logo_wrap2">
 	<div class="logo_inner left">
@@ -646,11 +471,6 @@
 <script type="text/javascript" src="__JS__/all.js"></script>
 <script src="__JS__/jquery.sudoslider.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-	if($('.loginWindow').is(':hidden')){
-		$('.errorLogin').each(function(){
-			$(this).html(' ').hide();
-		});
-	}
 	//登陆弹出隐藏
 	function showLogin() {
 		$('.regWindow').hide();
@@ -665,9 +485,7 @@
 		$('.loginWindow').hide();
 		
 	});
-	// 关闭登录
 	$('.logo').click(function(){
-		console.log($('.errorLogin'));
 		$('.loginWindow').hide();
 
 	});	
@@ -695,9 +513,6 @@
 	// 注册
 	//弹出
 	$(".jumpReg").click(function(){
-		$('#regist input').nextAll(".error").each(function(i){
-			$(this).html(' ').hide();
-		});
 		//console.log(1);
 		$('.loginWindow').hide();
 		$('.regWindow').css("height",$('#real_body').outerHeight());
@@ -705,12 +520,9 @@
 		$('.regWindow').show();
 
 	});
-	// 关闭注册
 	$('#closeReg').click(function(){
-		$('#regist input').nextAll(".error").each(function(i){
-			$(this).html(' ').hide();
-		});
-		$('.regWindow').hide();		
+		$('.regWindow').hide();
+		
 	});
 	// 手机验证码
 	var pcode = 1234;
