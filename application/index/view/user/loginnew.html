@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body onpagehide="myFunction()">
      <div class="UnauthHomePage">
         <div class="register_shadow">
             <div class="register_shadow_txt"></div>
@@ -21,6 +21,7 @@
     <div class="login_containter">
         <div class="login_left">
             <a class="logo" href="/">味蕾</a>
+            <div style="width: 80px;height: 30px;position: absolute;right: 10px;top: 20px;font-size: 14px;"><a href="{:url('index/index/index')}">回到首页</a></div>
             <h3><span>登&nbsp;录</span></h3>
             <h4 class="account_login"><a href="javascript:void(0)">手机动态登录<span></span></a></h4>
             <h4 class="phone_login" style="display:none;"><a href="javascript:void(0)">返回账号登录</a></h4>
@@ -28,19 +29,20 @@
                 <form action="{:url('index/user/login')}" method="post" onsubmit="return demo();" class="login">
                 <div class="input_item">
                     <i class="icon_un"></i>
-                    <input type="text" name="username" placeholder="请输入手机/邮箱/用户名" eg="请输入手机/邮箱/用户名" class="loginName" />
-                    <span class="error_info errorloginName" style="display:none;"></span>
+                    <input type="text" name="username" placeholder="请输入手机/邮箱/用户名" eg="请输入手机/邮箱/用户名" class="loginName clearVal" />
+                    <span class="error_info errorloginName clearVal" style="display:none;"></span>
                 </div>
                 <div class="input_item">
                     <i class="icon_pw"></i>
                     <input type="password" name="password" class="loginPwd" placeholder="请输入密码" />
-                    <span class="error_info errorloginPwd" style="display:none;"></span>
+                    <span class="error_info errorloginPwd clearVal" style="display:none;"></span>
                 </div>
 
                 <div class="input_item">
                     <input type="submit" class="loginBtn" onclick="LoginFormSubmit($(this));" value="登  录" />
                 </div>
                 </form>
+               
                 <div class="input_item f-tac f-pb30">
                     <a href="javascript:void(0)" class="iconQQ" onclick="openQQ();"></a>
                     <a href="javascript:void(0)" class="iconWX" onclick="openWeiXin();"></a>
@@ -52,25 +54,25 @@
                 <form action="{:url('index/user/phoneLogin')}" method="post" onsubmit="return demo();" class="phoneLogin">
                 <div class="input_item">
                     <i class="icon_un"></i>
-                    <input type="text" name="phone" placeholder="请输入手机号" eg="请输入手机号" class="loginPhone" maxlength="11" />
-                    <span class="error_info errorloginPhone" style="display:none;"></span>
+                    <input type="text" name="phone" placeholder="请输入手机号" eg="请输入手机号" class="loginPhone clearVal" maxlength="11" />
+                    <span class="error_info errorloginPhone clearVal" style="display:none;"></span>
                 </div>
                 <div class="input_item" >
                     <div class="icon_yzm_item">
                         <i class="icon_yzm"></i>
-                        <input type="text" name="captcha" class="loginyzm" maxlength="4" placeholder="验证码" eg="验证码" id="loginyzmPhone"   />
+                        <input type="text" name="captcha" class="loginyzm clearVal" maxlength="4" placeholder="验证码" eg="验证码" id="loginyzmPhone"   />
                     </div>
                     <div class="yzm_H_item">
                          <div style="float: right;margin-right: 5px;"><img src="{:captcha_src()}" alt="验证码" onclick="this.src=this.src"/></div>
-                        <span class="errorloginyzm error_info" style="display:none;"></span>
+                        <span class="errorloginyzm error_info clearVal" style="display:none;"></span>
                     </div>
 
                 </div>
                 <div class="input_item">
                     <div class="icon_dx_item">
                         <i class="icon_dx"></i>
-                        <input type="text" name="phoneCode" class="loginCode" placeholder="请输入验证码" eg="请输入验证码" />
-                        <span class="error_info errorloginCode"></span>
+                        <input type="text" name="phoneCode" class="loginCode clearVal" placeholder="请输入验证码" eg="请输入验证码" />
+                        <span class="error_info errorloginCode clearVal"></span>
                     </div>
                     <div class="login_sendCode">
                         <input type="button" name="getYzm"  value="发送短信验证码" class="jishi" />
@@ -87,7 +89,57 @@
                     <a href="javascript:void(0)" class="iconQQ"></a><a href="javascript:void(0)" class="iconWX"></a><a href="javascript:void(0)" class="iconWB"></a><a href="javascript:void(0)" class="iconZFB"></a>
                 </div>
             </div>
+             <div class="login_validate find_pwd" style="display:none;">
+                <form action="{:url('index/user/findPwd')}" method="post" onsubmit="return demo();" class="setPwd">
+                <div class="input_item">
+                    <i class="icon_un"></i>
+                    <input type="text" name="phone" placeholder="请输入手机号" eg="请输入手机号" class="loginPhone clearVal" maxlength="11" />
+                    <span class="error_info errorloginPhone clearVal" style="display:none;"></span>
+                </div>
+                 <div class="input_item">
+                    <i class="icon_pw"></i>
+                    <input type="password" name="password" class="loginPwd" placeholder="请输入密码" />
+                    <span class="error_info errorloginPwd clearVal" style="display:none;"></span>
+                </div>
+                 <div class="input_item">
+                    <i class="icon_pw"></i>
+                    <input type="password" name="repwd" class="loginPwd" placeholder="请再次输入密码" />
+                    <span class="error_info errorloginPwd clearVal" style="display:none;"></span>
+                </div>
+                <div class="input_item" >
+                    <div class="icon_yzm_item">
+                        <i class="icon_yzm"></i>
+                        <input type="text" name="captcha" class="loginyzm clearVal" maxlength="4" placeholder="验证码" eg="验证码" id="loginyzmPhone"   />
+                    </div>
+                    <div class="yzm_H_item">
+                         <div style="float: right;margin-right: 5px;"><img src="{:captcha_src()}" alt="验证码" onclick="this.src=this.src"/></div>
+                        <span class="errorloginyzm error_info clearVal" style="display:none;"></span>
+                    </div>
+
+                </div>
+                <div class="input_item">
+                    <div class="icon_dx_item">
+                        <i class="icon_dx"></i>
+                        <input type="text" name="phoneCode" class="loginCode clearVal" placeholder="请输入验证码" eg="请输入验证码" />
+                        <span class="error_info errorloginCode clearVal"></span>
+                    </div>
+                    <div class="login_sendCode">
+                        <input type="button" name="getYzm"  value="发送短信验证码" class="jishi" />
+                    </div>
+                    
+                </div>
+                <div class="input_item">
+                   
+                   <input type="submit" class="FindBtn" value="提  交" onclick="LoginFormSubmit($(this));" style="width:300px;height:42px;background:#57Af57;display:inline-block;text-align:center;font:20px/42px 'Microsoft Yahei';color:#fff;border:0;border-radius:6px;transition:background-color .5s ease;outline:0" />
+                   
+                </div>
+                </form>
+                <div class="input_item f-tac f-pb30">
+                    <a href="javascript:void(0)" class="iconQQ"></a><a href="javascript:void(0)" class="iconWX"></a><a href="javascript:void(0)" class="iconWB"></a><a href="javascript:void(0)" class="iconZFB"></a>
+                </div>
+            </div>
             <div class="login_change">
+                 <div style="float: right;width: 100px;height: 25px;cursor: pointer;line-height: 25px;" class="go_find">忘记密码？</div>
                 <p>还没有账号？</p>
                 <a href="javascript:void(0)">注  册</a>
             </div>
@@ -112,9 +164,10 @@ $(document).on("click",".account_login",function(){
     $(this).parent().find(".error_info").hide();
     $(".phone_login").show();
     $(".loginAccunt_validate").hide();
+    $(".find_pwd").hide();
     $(".loginPhone_validate").show();
-     var myDate = new Date();
-    $(this).parents().find("#vCodImgPhone").attr("src", "/Ajax/GetValidateCode?"+ myDate.toLocaleString()).click();
+    /* var myDate = new Date();
+    $(this).parents().find("#vCodImgPhone").attr("src", "/Ajax/GetValidateCode?"+ myDate.toLocaleString()).click();*/
 
 }); 
 $(document).on("click",".phone_login",function(){
@@ -123,10 +176,20 @@ $(document).on("click",".phone_login",function(){
     $(this).parent().find(".error_info").hide();
     $(".account_login").show();
     $(".loginPhone_validate").hide();
+    $(".find_pwd").hide();
     $(".loginAccunt_validate").show();
+});
+$('.go_find').click(function(){
+    $('.account_login').hide();
+    $('.account_login').parent().find("h3").html("<span>找回密码</span>");
+    $('.account_login').parent().find(".error_info").hide();
+    $(".phone_login").show();
+    $(".loginAccunt_validate").hide();
+    $(".loginPhone_validate").hide();
+    $(".find_pwd").show();
 }); 
 //手机验证码
-var pcode = 0;
+    var pcode = 0;
     var flag = 0;
     $('.jishi').click(function(){
         var num = 10;
@@ -154,6 +217,7 @@ var pcode = 0;
         },'json');    
     });
     $('input[name=phoneCode]').blur(function(){
+        pcode = 1234;
         console.log(pcode);
         //console.log( $(this).nextAll(".errorloginCode"));
         if (pcode == 0){
@@ -172,7 +236,7 @@ var pcode = 0;
     $('input').blur(function(){
         var nowInput = $(this);
        var key1 = $(this).attr('name');
-        console.log(key1);
+      //  console.log(key1);
         var value = $(this).val();
             data = {};
         
@@ -180,9 +244,12 @@ var pcode = 0;
         if (typeof(key1) == 'undefined'){
             key1 = 'submit';
         }
-        console.log(data);
+         if (key1 == 'repwd') {
+            data['password'] = $('.setPwd input[name=password]').val();           
+        } 
+       // console.log(data);
         $.post("{:url('index/user/reg')}",data,function(data){
-            console.log(data);
+            //console.log(data);
 
             if(data){
                 nowInput.nextAll(".error_info").css('color','red').text(data).show();
@@ -215,14 +282,16 @@ var pcode = 0;
     function LoginFormSubmit($data){
         if ($data.hasClass('loginBtn')) {
             var $select = $('.login input');
-        } else {
+        } else if($data.hasClass('PhoneloginBtn')) {
             var $select = $('.phoneLogin input'); 
+        } else {
+            var $select = $('.find_pwd input'); 
         }
         $select.each(function(i){
             //console.log(i);
             nowInput = $(this);
             var key = $(this).attr('name');
-        console.log(key);
+        //console.log(key);
             var value = $(this).val();
             if (value.length == 0){
                 nowInput.nextAll(".error_info").css('color','red').text('不能为空').show();
@@ -239,7 +308,16 @@ var pcode = 0;
             return true;
         }
         /*console.log(flag);
-        return false;*/
-       
+        return false;*/       
+    }
+    function myFunction()
+    {
+        $('.clearVal').each(function(i){
+            if($(this).is('input')){
+                $(this).val('');
+            }else{
+                $(this).html('');
+            }
+        });
     }
 </script>

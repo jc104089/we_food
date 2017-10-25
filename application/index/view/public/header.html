@@ -14,11 +14,11 @@
 	</ul>
 
 	<div class="right" >
-		{if $Think.session.id}
+		{if $Think.session.uid}
 		<ul class="bar-right left bar-after" style="padding-right: 50px;">
 			<li><a title="欢迎您" class="">欢迎您：</a></li>
-			<li><a class="" title="前往个人中心" style="cursor: pointer" href="{:url('index/user/info')}">username</a></li>
-			<li><a class="" title="个人中心" style="cursor: pointer" href="{:url('index/user/info')}">个人中心</a></li>
+			<li><a class="" title="前往个人中心" style="cursor: pointer" href="{:url('index/center/info')}">{$Think.session.username}</a></li>
+			<li><a class="" title="个人中心" style="cursor: pointer" href="{:url('index/center/info')}">个人中心</a></li>
 			<li><a class="quitLogin" title="退出" style="cursor: pointer" href="{:url('index/user/quit')}">退出</a></li>
 		</ul>
 		{else /}

@@ -9,7 +9,6 @@ use lib\Phoneyz;
 class User extends Controller
 {
 	protected $user;
-	protected $userInfo;
 	public function _initialize()
 	{
 		$this->user = new UserModel();
@@ -28,8 +27,8 @@ class User extends Controller
 	// 退出
 	public function quit()
 	{
-		if(Session::has('id')){
-			Session::delete('id');
+		if(Session::has('uid')){
+			Session::delete('uid');
 			session::delete('username');
 			$this->success('退出成功',url('index/index/index'));
 		}else {
@@ -137,8 +136,8 @@ class User extends Controller
 		$result = $this->user->where('phone',$data)->find();
 		$id = $result->uid;
 		if($id){
-			session('id',$id);
-			$this->error('登陆成功',url('index/index/index'));
+			session('uid',$id);
+			$this->error('登陆成功',url('index/center/info'));
 			//echo json_encode($id);
 		} else{
 			$this->error('登陆失败');		}
@@ -158,19 +157,58 @@ class User extends Controller
 			$id = $result->uid;
 			$username = $result->username;
 			session('username',$username);
-			session('id',$id);
-			$this->success('登陆成功',url('index/user/info'));
+			session('uid',$id);
+			$this->success('登陆成功',url('index/center/info'));
 		} else {
 			$this->error('登录失败');
 		}
     }
-	// 个人中心
-	public function info()
+	// 找回密码
+	public function findPwd()
 	{
-		dump(session('id'));
-		$id = Session::get('id');
-		$result = $this->user->find($id)->toArray();
-		dump($result);
-		//return $this->fetch();
+		$data = $this->request->param('password');
+		$phone = $this->request->param('phone');
+		$data = md5($data);
+		//dump($data);
+		$result = $this->user->save(['password'=>$data],['phone'=>$phone]);
+		//dump($result);
+		if($result){
+			$this->success('修改成功',url('index/user/logininfo'));
+		}else{
+			$this->error('手机号错误或未注册');
+		}
+
+	}
+	public function changeMoreData($user)
+	{
+		$data = [];
+		if(empty($user)){
+			return false;
+		} else {
+			foreach ($user as $key => $value) {
+				$value->userInfo;
+				$value = $value->toArray();
+				//dump($value);
+				$childInfo = array_pop($value);
+				$all = array_merge($value,$childInfo);
+				$data[$all['uid']] = $all;
+			}
+			return $data;
+		}
+		
+	}
+	public function changeOneData($user)
+	{
+		if(empty($user)){
+			return false;
+		} else {
+			$user->userInfo;
+			$user = $user->toArray();
+			//dump($user);
+			$childInfo = array_pop($user);
+			$all = array_merge($user,$childInfo);
+			return $all;
+		}
+		
 	}
 }

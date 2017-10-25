@@ -10,5 +10,9 @@ class User extends Model
 	{
 		return $this->hasOne('UserInfo' , 'u_id');
 	}
-
+	public function allData($where)
+	{
+		$user = $this->where($where)->find();
+		$result = $user->userInfo->toArray();
+	}
 }

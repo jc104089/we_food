@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人资料 - 美食天下</title>
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="">
+<meta name="description" content="" />
+
+
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/center_all.css">
+</head>
+<body>
+{include file="public/header"}
+
+	<!-- 主框架 -->
+<div class="w_main clear">
+
+<div class="mod_left">
+<div class="menu_wrap">
+<ul>
+  <li>
+    <a  href="http://member.meishichina.com/center/">会员<br>中心</a>
+  </li>
+  <li>
+   <a  href="http://member.meishichina.com/center/my_recipe_me/">菜谱</a>
+  </li>
+  <li>
+    <a  href="http://member.meishichina.com/center/my_pai_list/">话题</a>
+  </li>
+  <li>
+    <a   href="http://member.meishichina.com/center/my_blog_list/">日志</a>
+  </li>
+  <li>
+    <a  href="http://member.meishichina.com/center/my_collect_me/">菜单</a>
+  </li>
+  <li>
+    <a  href="http://member.meishichina.com/center/my_fav_recipe/">收藏</a>
+  </li>
+  <li>
+    <a class=on href="http://member.meishichina.com/center/my_settings_profile/">账户<br>设置</a>
+  </li>
+</ul>
+</div>
+</div>
+
+
+ <!-- 右侧 -->
+<div class="mod_right">
+
+  <div id="mod_location">
+    <div class="mod_location clear">
+
+      <div class="left">
+        <a href="{:url('index/center/info')}" class="on data" onclick="changePwd();">个人资料</a>
+        <a href="{:url('index/center/changePwd')}" onclick="changePwd();" class="data">修改密码</a>
+      </div>
+
+    </div>
+  </div>
+
+
+    <div class="mr_edit mr_edit_center clear center_left">
+      <ul>
+        <form  id="J_form"  enctype="multipart/form-data" method="post" action="{:url('index/center/changePic')}">
+
+          <li>
+            <label>头像</label><br>
+            <img class="imgLoad" src="{$data['photo']}" width=120 height=120 /><br>
+            <input name="photo" class="inputS" type="file" >
+            <input name="" value="保存头像" class="btn1" type="submit" />
+          </li>
+        </form>
+        <li>
+          <label>性别</label><br>
+          <div class="sexline">
+            <input type="hidden" name="sex" value="{$data['sex']}"  class="sex">
+            <span class="sextype" value="0" style="float:left;border: 1px solid #999;width: 40px;height: 20px;border-radius: 5px;text-align: center;cursor: pointer;">保密</span>
+            <span class="sextype" value="1" style="float:left;border: 1px solid #999;width: 40px;height: 20px;border-radius: 5px;text-align: center;cursor: pointer;">男</span>
+            <span class="sextype" value="2" style="float:left;border: 1px solid #999;width: 40px;height: 20px;border-radius: 5px;text-align: center;cursor: pointer;">女</span>
+            
+          </div>
+        </li>
+
+        <li>
+          <label>家乡</label><br>
+          
+          <input name="address" class="inputM" type="text" value="{$data['address']}" >
+        </li>
+
+        <li>
+          <label>电子邮箱</label><br>
+          <input name="email" class="inputM" type="text" id="J_email" value="{$data['email']}" >
+          <span class="error_info" style="display: none;"></span>
+        </li>
+
+        <li><label>个人签名</label><br>
+         <input name="sign" class="inputL" type="text" id="J_sign" value="{$data['sign']}" >
+        </li>
+      </ul>
+      <input name="" value="保存修改" class="btn1 btn2" type="submit" >
+    </div>
+    <div class="showPwd" style="display: none;">
+          
+    <form  id="J_form"  enctype="multipart/form-data" method="post">
+
+      <div class="mr_edit mr_edit_center clear">
+        <ul>
+          <li>
+            <label>新密码</label><br>
+            <input class="inputS" id="J_password_new" name="password" type="password" autocomplete="off">&nbsp;&nbsp;<span class="tip">密码为7-14个字符</span>
+          </li>
+
+           <li>
+            <label>确认密码</label><br>
+            <input class="inputS" id="J_password_new_2" name="repwd" type="password" autocomplete="off">
+          </li>
+        </ul>
+      <input name="" value="保存修改" class="btn1 postPwd" type="submit">
+
+      </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
+
+
+
+
+ 
+</body>
+</html>
+<script type="text/javascript">
+  var flag = 0;
+  //验证邮箱
+  $('#J_email').blur(function(){
+    /*console.log($(this));
+    console.log($(this).length);
+    console.log($(this).val().length);*/
+   if($(this).val().length != 0) {
+      $.post("{:url('index/center/check')}",{email:$(this).val()},function(data){
+        console.log(data);
+        if (data) {
+          $('.error_info').css('color','red').html(data).show();
+          flag = 1;
+        }else{
+          $('.error_info').html('').hide();
+          flag = 0;
+        }
+      },'json');
+   }else {
+       $('.error_info').html('').hide();
+       flag = 0;
+   }
+  });
+  //修改信息
+  $('.btn2').click(function(){
+   data = {};  
+    $(':input').each(function(i){
+        var nowInput = $(this);
+        var key1 = $(this).attr('name');                 
+        if (typeof(key1) == 'undefined'){
+          key1 = 'submit';
+        }
+       
+        var value = $(this).val();
+
+        if(typeof(value) == 'undefined'){
+          value = '';
+        }
+        data[key1] = value;
+    });
+    // console.log(data);
+    $.post("{:url('index/center/saveInfo')}",data,function(data){
+      //window.confirm(); 
+      alert(data);
+    //  window.location.reload();
+    },'json')
+    //return false;
+  });
+  
+  (function(){
+    $('.sextype').each(function(i){
+      if($('.sex').val() == i){
+        $(this).css('background','#FF6767');
+      }
+    })
+  })();
+  // 选择性别
+  $('.sextype').click(function(){
+    //console.log($(this).attr('value'));
+    $('.sex').val($(this).attr('value'));
+    $(this).css('background','#FF6767');
+    //console.log($(this).siblings('span'));
+    $(this).siblings('span').css('background','white');
+  });
+  //修改密码
+  function changeData()
+  {
+     $('.data').toggleClass('on');
+    $('.showPwd').hide();
+    $('.center_left').show();
+  }
+  function changePwd()
+  {
+    $('.data').toggleClass('on');
+  }
+  /*$('.postPwd').click(function(){
+    $.post("{:url('index/center/changePassword')}",{password:$('input[name=password]').val(),repwd:$('input[name=repwd]')},function(data){
+        console.log(data);
+    },'json');
+  });*/
+</script>
+

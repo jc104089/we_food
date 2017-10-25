@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>修改密码 - 美食天下</title>
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="">
+<meta name="description" content="" />
+
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css?a=8">
+<link rel="stylesheet" type="text/css" href="__CSS__/center_all.css">
+</head>
+<body>
+{include file="public/header"}
+
+	<!-- 主框架 -->
+<div class="w_main clear">
+
+<div class="mod_left">
+<div class="menu_wrap">
+<ul>
+<li>
+<a  href="http://member.meishichina.com/center/">会员<br>中心</a>
+</li>
+<li>
+<a  href="http://member.meishichina.com/center/my_recipe_me/">菜谱</a>
+</li>
+<li>
+<a  href="http://member.meishichina.com/center/my_pai_list/">话题</a>
+</li>
+<li>
+<a   href="http://member.meishichina.com/center/my_blog_list/">日志</a>
+</li>
+<li>
+<a  href="http://member.meishichina.com/center/my_collect_me/">菜单</a>
+</li>
+<li>
+<a  href="http://member.meishichina.com/center/my_fav_recipe/">收藏</a>
+</li>
+<li>
+<a class=on href="http://member.meishichina.com/center/my_settings_profile/">账户<br>设置</a>
+</li>
+</ul>
+</div>
+</div>
+
+
+ <!-- 右侧 -->
+<div class="mod_right">
+
+	<div id="mod_location">
+		<div class="mod_location clear">
+
+			<div class="left">
+		 		<a href="{:url('index/center/info')}" class=" data" onclick="changePwd();">个人资料</a>
+		        <a href="{:url('index/center/changePwd')}" onclick="changePwd();" class="on data">修改密码</a>
+			</div>
+
+		</div>
+	</div>
+
+<form action="{:url('index/center/xiugai')}" id="J_form"  enctype="multipart/form-data" method="post">
+
+<div class="mr_edit mr_edit_center clear">
+<ul>
+		<li>
+	<label>新密码</label><br>
+	<input class="inputS" id="J_password_new" name="password" type="password" autocomplete="off">&nbsp;&nbsp;<span class="tip">密码为7-14个字符</span>
+	</li>
+
+	<li>
+	<label>确认密码</label><br>
+	<input class="inputS" id="J_password_new_2" name="repwd" type="password" autocomplete="off">
+	</li>
+
+</ul>
+<input name="" value="保存修改" class="btn1" type="submit">
+
+</div>
+
+<div class="mr_edit mr_edit_fixed clear">
+<ul>
+
+ 
+
+</ul>
+</div>
+
+</form>
+
+
+		</div><!-- 右侧结束 -->
+</div>
+<script type="text/javascript">
+	 function changePwd()
+  {
+    $('.data').toggleClass('on');
+  }
+</script>
+<script type="text/javascript" src="__JS__/all.js?v=20170218"></script>
+
+<script type="text/javascript">
+msc.user.init();
+$("img.imgLoad").imgLoad();
+</script>
+
+
+
+<script type="text/javascript">
+$("#J_form").submit(function(){
+
+if($('#J_password').length>0 && $('#J_password').val()==''){
+msc.ui.dialog.error('请输入当前密码');
+$("#J_password").focus();
+}
+
+else if($('#J_password_new').val()==''){
+msc.ui.dialog.error('请输入新密码');
+$('#J_password_new').focus();
+}
+
+else if($('#J_password_new').val().length < 6 || $('#J_password_new').val().length > 16){
+msc.ui.dialog.error('密码为6-16个字符');
+$('#J_password_new').val('').focus();
+}
+
+else if($('#J_password_new_2').val()==''){
+msc.ui.dialog.error('请确认密码');
+$('#J_password_new_2').focus();
+}
+
+else if($('#J_password_new').val()!=$('#J_password_new_2').val()){
+msc.ui.dialog.error('确认密码不一样');
+}
+
+else{
+msc.ui.dialog.loading();
+return true;
+}
+
+return false;
+});
+</script>
+<script>
+
+$("li.top_bar_more").hoverDelay(function(){
+$("li.top_bar_more div").show();
+},function(){
+$("li.top_bar_more div").hide();
+},200,200);
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script> </body>
+</html>
+
