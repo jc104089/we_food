@@ -1,0 +1,31 @@
+<div class="top-bar" id="J_top_bar">
+	<ul class="bar-left left">
+	<li><a title="美食天下" href="/" target="_blank" class="top_bar_logo"><i>美食天下</i>首页</a></li>
+	<li> <a title="菜谱" href="caipu.html" target="_blank">菜谱</a></li>
+	<li> <a title="食材" href=food_fenlei.html target="_blank">食材</a></li>
+
+	<li> <a title="健康" href="http://www.meishichina.com/Health/" target="_blank">健康</a></li>
+	<li> <a title="vip专区" href="http://www.meishichina.com/mofang/" target="_blank">vip专区</a></li>
+	<li> <a title="社区" href="http://home.meishichina.com/" target="_blank">社区</a></li>
+	<li> <a title="话题" href="http://home.meishichina.com/pai.html" target="_blank">话题</a></li>
+
+	<li> <a title="搜索" href="" target="_blank">搜索</a></li>
+
+	</ul>
+
+	<div class="right" >
+		{if $Think.session.uid}
+		<ul class="bar-right left bar-after" style="padding-right: 50px;">
+			<li><a title="欢迎您" class="">欢迎您：</a></li>
+			<li><a class="" title="前往个人中心" style="cursor: pointer" href="{:url('index/center/info')}">{$Think.session.username}</a></li>
+			<li><a class="" title="个人中心" style="cursor: pointer" href="{:url('index/center/info')}">个人中心</a></li>
+			<li><a class="quitLogin" title="退出" style="cursor: pointer" href="{:url('index/user/quit')}">退出</a></li>
+		</ul>
+		{else /}
+		<ul class="bar-right left bar-before" style="padding-right: 50px;">
+			<li><a title="注册" class="jumpReg" href="{:url('index/user/whiteInfo')}" style="cursor: pointer">注册</a></li>
+			<li><a class="jumpLogin" title="登陆" style="cursor: pointer" href="{:url('index/user/loginInfo')}">登陆</a></li>
+		</ul>
+		{/if}
+	</div>
+</div>
