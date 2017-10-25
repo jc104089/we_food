@@ -3,14 +3,16 @@ namespace app\admin\controller;
 
 use think\Controller;
 use app\admin\model\Admin;
+use app\admin\model\Admin_login;
 
-class Index extends Controller
+class Index extends Auth
 {
-
+	protected $is_login = ['*'];
 	public function index()
 	{
-		$admin = new Admin();
-		$count = $admin->count('aid');
+		
+		//$admin = new Admin();
+		$count = $this->admin->count('aid');
 		$this->assign('count',$count);
 		return $this->fetch();
 	}
@@ -49,6 +51,16 @@ class Index extends Controller
 	}
 	public function loginlog()
 	{
+		//$adminlogin = new Admin_login();
+		$count = $this->adminlogin->count('id');
+		$list = $this->adminlogin->order('id','desc')->paginate(4);
+		// 获取分页显示
+		$page = $list->render();
+		$this->assign('count',$count);
+		$this->assign('list', $list);
+		$this->assign('page', $page);
+		//return $this->fetch('index/loginlog');
+		//$this->assign('dd',$dd);
 		return $this->fetch();
 	}
 	public function manage_user()

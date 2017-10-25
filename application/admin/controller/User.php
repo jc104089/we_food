@@ -1,46 +1,172 @@
 <?php
 namespace app\admin\controller;
 use think\Controller;
+use think\Db;
+use think\Session;
+use think\Requset;
 use app\admin\model\Admin;
-
-class User extends Controller
+use app\admin\model\Admin_login;
+class User extends Auth
 {
-	//登录页面
-	public function login()
-	{
-		//dump($this->request->param());
-		return $this->fetch();
-	}
-	//登录数据处理
-	public function dologin()
-	{
-		//dump($this->request->param());
-		$username = $this->request->param('username');
-		$userpwd = $this->request->param('userpwd');
-		$userpwd = md5($userpwd);
-		$name = Admin::where('username',$username)->find();
-		$pwd = Admin::where('password',$userpwd)->find();
-		//dump($name);
-		if($name && $pwd){
-			session('id',$name->aid);
-			$this->success('登录成功',url('admin/index/index'));
-		}else{
-			$this->error('登陆失败',url('admin/user/login'));
-		}
-	}
-	//管理员信息修改（个人修改）
+	protected $is_login = ['*'];
+	//管理员信息修改（个人修改，还没判断）
 	public function update_admin()
 	{
-		dump($this->request->param());
-		//获取上传文件（图片）时用file;
-		dump($this->request->file());
-
+		// 获取表单上传文件 例如上传了001.jpg
+		$file = request()->file('photo');
+		// 移动到框架应用根目录/public/uploads/ 目录下
+		$info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+		if($info){
+		// 成功上传后 获取上传信息
+		// 输出 jpg
+		$id = session('id');
+		//dump($id);
+		$info =  $info->getSaveName();
+		//dump($info);die;
+		// 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
+		$infopath = '\\uploads\\' . $info;		
+		//dump($this->request->param());
+		$data = $this->request->param();
+		$data['photo'] = $infopath;
+		$pwd = $data['password'];
+		$password = md5($pwd);
+		$data['password'] = $password;
+		//dump($pwd);
+		//$admin = new Admin();
+		$res = $this->admin->allowField(true)->save($data,['aid'=>$id]);
+		//dump($res);
+		//dump($data);die;
+		if($res){
+			$this->success('修改成功',url('admin/index/index'));
+		}else{
+			$this->success('修改失败',url('admin/index/index'));
+		}
+		}else{
+		// 上传失败获取错误信息
+		echo $file->getError();
+		}
+		
 	}
-	//管理员列表（boos专有权限  管理管理员  增删改查）
+	//管理员列表（boos专有权限  管理管理员  增删查  改（在个人信息里修改））
 	public function manage_admin()
 	{
-
-
-		//return $this->fetch();
+		$count = $this->admin->count('aid');
+		 $list = $this->admin->paginate(2);
+		 //dump($list);die;
+		// // //dump(getLastSql());
+		 $page = $list->render();
+		// dump($page);die;
+		$this->assign('admin_count',$count);
+		$this->assign('manage_list',$list);
+		$this->assign('manage_page',$page);
+		return $this->fetch();
 	}
+	//角色权限详情
+	public function role_power()
+	{
+		$data = $this->request->param();
+		//dump($data['aid']);die;
+		//用户和角色多对多查询
+		$aid = $data['aid'];
+		$info = $this->admin->get($aid);
+		$role = [];
+		$rid = [];
+		foreach ($info->role as $k => $v){
+			$role[] = $v->role;
+			$rid[] = $v->id;
+		}
+		//角色和权限多对多查询
+		$power = [];
+		foreach ($rid as $key => $value){
+			$infoo = $this->role->get($value);
+				foreach ($infoo->power as $ke => $va){
+					$power[] = $va->power;
+				}
+		}
+		//dump($power);
+		$power = array_unique($power);
+		//dump($power);
+		$this->assign('aid',$aid);		
+		$this->assign('role',$role);
+		$this->assign('power',$power);
+		return $this->fetch();
+	}
+	//增加管理员（还没加判断）
+	public function add_admin()
+	{
+		$data = $this->request->param();
+		//dump($data);
+		$username = $data['username'];
+		$password = md5($data['password']);
+		$role = $data['role'];
+		//dump($role);
+		/*$this->admin->data(['username'=>$username,'password'=>$password])->save();*/
+		$info = $this->admin->where(['username'=>$username,'password'=>$password])->find();
+		$aid = $info['aid'];
+		//dump($aid);
+		$infoo = $this->admin->get($aid);
+		$res = $infoo->role()->saveAll($role);
+		if($res){
+				$this->success('添加成功',url('user/manage_admin'));
+		}else{
+				$this->error('添加失败');
+		}
+	}
+	//修改管理员权限（还没加判断）
+	public function change_role()
+	{
+		$data = $this->request->param();
+		//dump($data);
+		$role = $data['role'];
+		//dump($role);
+		$aid = $data['aid'];
+		$info = $this->admin->get($aid);
+
+		//$adminRole = $info->role;
+		$info = $this->changeOneData($info);
+		//dump($info);
+		$rid = [];
+		foreach ($info as $key => $value){
+			if(is_array($value)){
+				$rid[] = $value['id'];
+				}
+			}
+		//dump($rid);
+		// 删除中间表数据
+		$infoo = $this->admin->get($aid);
+		$infoo->role()->detach($rid);
+		$res = $infoo->role()->saveAll($role);
+		if($res){
+				$this->success('修改成功',url('user/manage_admin'));
+		}else{
+				$this->error('修改失败');
+		}
+		
+	}
+	public function do_out()
+	{
+		Session::clear();
+		$this->success('退出成功',url('admin/auth/login'));
+	}
+	//分页
+	public function paging()
+	{
+		
+	}
+
+	public function changeOneData($user)
+	{
+		if(empty($user)){
+			return false;
+		} else {
+			$user->role;
+			$user = $user->toArray();
+			//dump($user);
+			$childInfo = array_pop($user);
+			$all = array_merge($user,$childInfo);
+			return $all;
+		}
+		
+	}
+
 }

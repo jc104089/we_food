@@ -26,7 +26,7 @@
 <body class="user-select" style="background:url(__IMG__/login.jpg) ;background-size:cover;">
 <div class="container">
   <div class="siteIcon"><img src="__IMG__/boss.jpg" alt="" data-toggle="tooltip" data-placement="top" title="欢迎来到--味蕾--" draggable="false" /></div>
-  <form action="{:url('user/dologin')}" method="post" autocomplete="off" class="form-signin">
+  <form action="{:url('auth/dologin')}" method="post" autocomplete="off" class="form-signin">
     <h2 class="form-signin-heading">管理员登录</h2>
     <label for="userName" class="sr-only">用户名</label>
     <input type="text" id="userName" name="username" class="form-control" placeholder="请输入用户名" required autofocus autocomplete="off" maxlength="10">
@@ -55,7 +55,7 @@ $('#signinSubmit').click(function(){
     $(this).text('密码不能为空');
   }else{
     $(this).text('请稍后...');
-    $.post("{:url('user/dologin')}",{name:$('input[name=username]').val(),pwd:$('input[name=userpwd]').val()}, function(data){
+    $.post("{:url('auth/dologin')}",{name:$('input[name=username]').val(),pwd:$('input[name=userpwd]').val()}, function(data){
               console.log(data);
     },'json');
     return false;

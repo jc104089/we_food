@@ -15,7 +15,11 @@
             <tbody>
               <tr>
                 <td wdith="20%">用户名:</td>
-                <td width="80%"><input type="text" value="admin" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
+                <td width="80%"><input type="text" value="{$data['name']}" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
+              </tr>
+               <tr>
+                <td wdith="20%">手机号码:</td>
+                <td width="80%"><input type="text" value="{$data['phone']}" class="form-control" name="phone" maxlength="11" autocomplete="off" /></td>
               </tr>
   
               <tr>
@@ -63,30 +67,16 @@
               <tr>
                 <th>登录IP</th>
                 <th>登录时间</th>
-                <th>状态</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>::1:55570</td>
-                <td>2016-01-08 15:50:28</td>
-                <td>成功</td>
+              {foreach $list as $v}              
+              <tr>  
+                <td>{$v.ip}</td>
+                <td>{$v.create_time}</td>
               </tr>
-              <tr>
-                <td>::1:64377</td>
-                <td>2016-01-08 10:27:44</td>
-                <td>成功</td>
-              </tr>
-              <tr>
-                <td>::1:64027</td>
-                <td>2016-01-08 10:19:25</td>
-                <td>成功</td>
-              </tr>
-              <tr>
-                <td>::1:57081</td>
-                <td>2016-01-06 10:35:12</td>
-                <td>成功</td>
-              </tr>
+              {/foreach}
+              <tr><td>{$page}</td><tr>
             </tbody>
           </table>
       </div>
