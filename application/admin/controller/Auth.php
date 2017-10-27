@@ -8,17 +8,20 @@ use think\Request;
 use app\admin\model\Admin;
 use app\admin\model\Admin_login;
 use app\admin\model\Role;
+use app\admin\model\Image;
 
 class Auth extends Controller
 {
 	protected $admin;
 	protected $adminlogin;
+	protected $image;
 	protected $is_login = [''];
 
 	public function _initialize()
 	{
 		$this->admin = new Admin();
 		$this->adminlogin = new Admin_login();
+		$this->image = new Image();
 		$this->role = new Role();
 		if(!$this->checklogin() && in_array('*',$this->is_login)){
 			$this->error('没有登录请登录',url('admin/auth/login'));
@@ -56,12 +59,13 @@ class Auth extends Controller
 		$username = $this->request->param('username');
 		$userpwd = $this->request->param('userpwd');
 		$userpwd = md5($userpwd);
-		$name = $this->admin->where('username',$username)->find();
-		$pwd = $this->admin->where('password',$userpwd)->find();
-		//dump($name->aid);die;
-		if($name && $pwd){
-			$aid = $name->aid;
-			$name = $name->username;
+		$res = $this->admin->where(['username'=>$username,
+									 'password'=>$userpwd,
+									 'islock' =>0,
+									])->find();
+		if($res){
+			$aid = $res->aid;
+			$name = $res->username;
 			//登录记录
 			//$admin = new Admin_login;
 			$this->adminlogin->data([
@@ -72,7 +76,7 @@ class Auth extends Controller
 			session('username',$name);
 			$this->success('登录成功',url('admin/index/index'));
 		}else{
-			$this->error('登陆失败',url('admin/user/login'));
+			$this->error('登陆失败');
 		}
 	}
 }

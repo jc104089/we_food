@@ -49,7 +49,7 @@
 <!--修改管理员权限模态框-->
 <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
   <div class="modal-dialog" role="document" style="max-width:450px;">
-    <form action="{:url('user/change_role',['aid'=>$aid])}" method="post" autocomplete="off" draggable="false">
+    <form action="{:url('user/change_role',['aid'=>$aid])}" method="post" autocomplete="off" draggable="false" onsubmit="return test();">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -77,7 +77,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <button type="submit" class="btn btn-primary">提交</button>
+          <button type="submit" class="btn btn-primary" id="roleSubmit">提交</button>
         </div>
       </div>
     </form>
@@ -86,40 +86,26 @@
 
 {include file="public/footer" /} 
 <script>
-$(function () {
-    $("#main table tbody tr td a").click(function () {
-        var name = $(this);
-        var id = name.attr("rel"); //对应id   
-        if (name.attr("name") === "see") {
-            $.ajax({
-                type: "POST",
-                url: "/User/see",
-                data: "id=" + id,
-                cache: false, //不缓存此页面   
-                success: function (data) {
-                    var data = JSON.parse(data);
-					$('#truename').val(data.truename);
-					$('#username').val(data.username);
-					$('#usertel').val(data.usertel);
-					$('#userid').val(data.userid);
-                    $('#seeUser').modal('show');
-                }
-            });
-        } else if (name.attr("name") === "delete") {
-            if (window.confirm("此操作不可逆，是否确认？")) {
-                $.ajax({
-                    type: "POST",
-                    url: "/User/delete",
-                    data: "id=" + id,
-                    cache: false, //不缓存此页面   
-                    success: function (data) {
-                        window.location.reload();
-                    }
-                });
-            };
-        };
-    });
-});
+
+  var flag = 0;
+  $('#roleSubmit').click(function(){
+    if($('input:checked').length == 0){
+      alert('请选择一个角色');
+      flag = 1;return false;
+    }else{
+      $(this).text('请稍后...');
+      flag = 0; 
+    }
+  });
+  function test()
+  {
+    if(flag){
+      return false;
+    }else{
+      return true;
+    }
+  }
+  
 </script>
 </body>
 </html>

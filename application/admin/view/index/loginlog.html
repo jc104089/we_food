@@ -17,8 +17,8 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
         <h1 class="page-header">操作</h1>
         <ol class="breadcrumb">
-          <li><a href="/Loginlog/delete/action/all">清除所有登录记录</a></li>
-          <li><a href="/Loginlog/delete/action/current">清除本人登录记录</a></li>
+          <li><a href="{:url('loginlog/all_delete')}">清除所有登录记录</a></li>
+          <li><a href="{:url('Loginlog/self_delete',['aid'=>$aid])}">清除本人登录记录</a></li>
         </ol>
         <h1 class="page-header">管理 <span class="badge">{$count}</span></h1>
         <div class="table-responsive">
@@ -39,7 +39,7 @@
                 <td class="article-title">{$v.name}</td>
                 <td>{$v.create_time}</td>
                 <td>{$v.ip}</td>
-                <td><a rel="1">删除</a></td>
+                <td><a href="{:url('loginlog/one_delete',['id'=>$v.id])}">删除</a></td>
               </tr>
               {/foreach}
             </tbody>

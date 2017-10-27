@@ -17,7 +17,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
     <h1 class="page-header">操作</h1>
         <ol class="breadcrumb">
-          <li><a data-toggle="modal" data-target="#addUser">增加用户</a></li>
+          <li><a data-toggle="modal" data-target="#addUser">增加管理员</a></li>
         </ol>
         <h1 class="page-header">管理 <span class="badge">{$admin_count}</span></h1>
         <div class="table-responsive">
@@ -35,12 +35,12 @@
             <tbody>
               {foreach $manage_list as $vo}
               <tr>
-                <td>{$vo.aid}</td>
+                <td class="getId">{$vo.aid}</td>
                 <td>{$vo.username}</td>
                 <td>{$vo.phone}</td>  
                 <td><a href="{:url('user/role_power',['aid'=>$vo.aid])}">查看角色与权限详情</a></td>
                 <td>{$vo.update_time}</td>
-                <td><a rel="1" name="delete">删除</a> <a href="">禁用</a></td>
+                <td><a href="{:url('user/delete_admin',['aid'=>$vo.aid])}">删除</a> <a href="javascript:void(0);" class="lockadmin">{$vo.islock}</a><span style="display: none;">{$vo.aid}</span></td>
               </tr>
               {/foreach}
               
@@ -51,14 +51,25 @@
     </div>
   </div>
 </section>
+<script type="text/javascript">
+  var aid;
+  $('.lockadmin').click(function(){
+    aid = $(this).next().text();
+    //console.log(aid);
+    $.post("{:url('admin/user/lockAdmin')}",{adminid:aid},function(data){
+      //console.log(data);
+     window.location.reload();
+    },'json');
+  });
+</script>
 <!--增加用户模态框-->
 <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
   <div class="modal-dialog" role="document" style="max-width:450px;">
-    <form action="{:url('user/add_admin')}" method="post" autocomplete="off" draggable="false">
+    <form action="{:url('user/add_admin')}" method="post" autocomplete="off" draggable="false" onsubmit="return demo();">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" >增加用户</h4>
+          <h4 class="modal-title" >增加管理员</h4>
         </div>
         <div class="modal-body">
           <table class="table" style="margin-bottom:0px;">
@@ -68,12 +79,12 @@
             <tbody>
               <tr>
                 <td wdith="20%">用户名:</td>
-                <td width="80%"><input type="text" value="" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
+                <td width="80%"><input type="text" id="adminName" class="form-control" name="username"  autocomplete="off" /></td>
               </tr>
              
               <tr>
                 <td wdith="20%">密码:</td>
-                <td width="80%"><input type="password" class="form-control" name="password" maxlength="18" autocomplete="off" /></td>
+                <td width="80%"><input type="password" id="userPwd" class="form-control" name="password" autocomplete="off" /></td>
               </tr>
                <tr>
                 <td wdith="20%">角色:</td>
@@ -91,7 +102,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <button type="submit" class="btn btn-primary">提交</button>
+          <button type="submit" class="btn btn-primary" id="addSubmit">提交</button>
         </div>
       </div>
     </form>
@@ -157,27 +168,13 @@ $(function () {
     $("#main table tbody tr td a").click(function () {
         var name = $(this);
         var id = name.attr("rel"); //对应id   
-        if (name.attr("name") === "see") {
-            $.ajax({
-                type: "POST",
-                url: "/User/see",
-                data: "id=" + id,
-                cache: false, //不缓存此页面   
-                success: function (data) {
-                    var data = JSON.parse(data);
-					$('#truename').val(data.truename);
-					$('#username').val(data.username);
-					$('#usertel').val(data.usertel);
-					$('#userid').val(data.userid);
-                    $('#seeUser').modal('show');
-                }
-            });
-        } else if (name.attr("name") === "delete") {
+         if (name.attr("name") === "delete") {
             if (window.confirm("此操作不可逆，是否确认？")) {
+              var aid = $(this).parent().siblings('.getId').text();
                 $.ajax({
                     type: "POST",
-                    url: "/User/delete",
-                    data: "id=" + id,
+                    url: "user/deleteAdmin",
+                    data: "aid=" + aid,
                     cache: false, //不缓存此页面   
                     success: function (data) {
                         window.location.reload();
@@ -187,6 +184,33 @@ $(function () {
         };
     });
 });
+</script>
+<script type="text/javascript">
+  var flag = 0;
+  $('#addSubmit').click(function(){
+  if($('#adminName').val() == ''){
+    alert('用户名不能为空');
+    flag = 1; return false;
+  }else if($('#userPwd').val() == ''){
+    alert('密码不能为空');
+     flag = 1; return false;
+  }else if($('input:checked').length == 0){
+    alert('至少选择一个角色');
+    flag = 1; return false;
+  }else{
+    $(this).text('请稍后...');
+     flag = 0; 
+  }
+
+});
+  function demo()
+  {
+    if(flag){
+      return false;
+    }else{
+      return true;
+    }
+  }
 </script>
 </body>
 </html>

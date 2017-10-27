@@ -51,11 +51,13 @@ class Index extends Auth
 	}
 	public function loginlog()
 	{
+		$aid = session('id');
 		//$adminlogin = new Admin_login();
 		$count = $this->adminlogin->count('id');
 		$list = $this->adminlogin->order('id','desc')->paginate(4);
 		// 获取分页显示
 		$page = $list->render();
+		$this->assign('aid',$aid);
 		$this->assign('count',$count);
 		$this->assign('list', $list);
 		$this->assign('page', $page);

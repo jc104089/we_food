@@ -32,13 +32,20 @@
         </li>
       </ul>
       <ul class="nav nav-sidebar">
+        <li><a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">管理员</a>
+          <ul class="dropdown-menu" aria-labelledby="userMenu">
+            <li><a href="{:url('user/manage_admin')}">管理员列表</a></li>
+            <li><a href="{:url('index/loginlog')}">管理登录日志</a></li>
+          </ul>
+      </ul>
+      <ul class="nav nav-sidebar">
         <li><a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">用户</a>
           <ul class="dropdown-menu" aria-labelledby="userMenu">
             <li><a data-toggle="modal" data-target="#areDeveloping">管理用户组</a></li>
-            <li><a href="{:url('user/manage_admin')}">管理员列表</a></li>
-            <li><a href="{:url('index/manage_user')}">管理用户</a></li>
+            <li><a href="{:url('index/manage_user')}">管理普通用户</a></li>
+            <li><a href="{:url('index/manage_user')}">会员管理</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="{:url('index/loginlog')}">管理登录日志</a></li>
+            
           </ul>
         </li>
         <li><a class="dropdown-toggle" id="settingMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">设置</a>
