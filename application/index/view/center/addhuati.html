@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>发布新话题 - 美食天下</title>
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="">
+<meta name="description" content="" />
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/center_all.css">
+<script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<!-- 主框架 -->
+<div class="w_main clear">
+
+{include file="public/center_left"}
+
+
+ <!-- 右侧 -->
+<div class="mod_right">
+	<div id="mod_location">
+		<div class="mod_location clear">
+			<div class="left">
+				<a href="javascript:void(0);" class="on data" onclick="changeData();">我的</a>
+				<a href="javascript:void(0);" title="发布新话题" onclick="showData();" class="data"> 发布</a>
+				
+			</div>
+		</div>
+	</div>
+	<div class="showhua" style="margin-top: 70px;position: relative;">
+		
+		<div style="margin-top:20px;">
+			<div style="font-size: 20px;font-weight: bold;">我的日志</div>
+			<ul>
+				{if $data}
+				{foreach $data as $key => $value}
+			<li data-id="" style="margin-top: 20px;background: #F8F8F8;">
+				<div class="cpai">
+					<div class="pp">
+						
+					 		<div class="data-title" style="height:30px;width:100px;line-height: 30px;overflow: hidden;text-overflow: ellipsis;font-weight: bold;font-size: 16px;">
+					 			<a href="" target="_blank">{$value['title']}</a>
+								<span class="right"><input type="button" name="delete" value="删除" style="border-radius: 5px;background: #FF6767;cursor: pointer;width: 40px;height: 25px;line-height: 25px;">
+									<span style="display: none;">{$value['lid']}</span>
+								</span>
+					 		</div>
+					 		{if array_key_exists('content',$value)}
+					 		<span style="display: none;" class="old-data">{$value['content']}</span>
+						 	<div class="data-content" style="height:30px;width:500px;line-height: 30px;overflow: hidden;text-overflow: ellipsis;text-indent: 2em;"><a href="" target="_blank">{$value['content']}</a></div>
+						 	{/if}
+						
+
+					</div>
+					<div>
+						{if !empty($value['img_url'])}
+						<a class="clear" href="http://home.meishichina.com/pai-828159.html" target="_blank">
+						<img  class="imgLoad" src="{$value['img_url']}" width="100" height="100" /></a>
+						{/if}
+					</div>
+					<div class="substatus clear">
+					{$value['create_time']}&nbsp;&nbsp;<span class="get_nums">{$value['goodnum']}人喜欢&nbsp;&nbsp;
+					{$value['talknum']}人评论</span>
+					</div>
+				</div>
+			</li>
+			{/foreach}
+			{else /}
+			<div class="ui_newlist_1 get_num mt60 clear" id="J_list">
+				<div class="ui_no_data">
+					<p>您还没有发布新日志噢，快点击这里<a href="javascript:void(0);" onclick="showData();">发布新日志</a>吧！
+					</p>
+				</div>
+			</div>
+			{/if}
+			</ul>
+		</div>
+	</div>
+	<div class="posthua" style="display: none;">
+		<form action="{:url('index/center/postHuati')}" id="J_form" enctype="multipart/form-data" method="post">
+			<div class="mr_edit mr_edit_center clear">
+				<label>加个标题（非必填）</label><br>
+				<input id="com_title" name="title" class="inputM" type="text">
+				<div class="form-group">
+			        <label for="article-content" class="sr-only">内容</label>
+			        <script id="editor" type="text/plain" style="width:800px;height:500px;" name="content"></script>
+		     	</div>
+			</div>
+			<div class="mr_edit mr_edit_fixed clear">
+			<input class="btn1" name="submit" type="submit" value="发布">
+			</div>
+		</form>
+	</div>
+</div><!-- 右侧结束 -->
+</div>
+<script type="text/javascript" src="__JS__/all.js"></script>
+
+<!--  <script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/jquery.dragsort.js"></script>
+<script type="text/javascript" src="http://static.meishichina.com/v6/js/app/center/center_pai2.js?v=2017-10-12"></script>
+-->
+
+</body>
+</html>
+<script src="__LIB__/ueditor/ueditor.config.js"></script> 
+<script src="__LIB__/ueditor/ueditor.all.min.js"> </script> 
+<script src="__LIB__/ueditor/lang/zh-cn/zh-cn.js"></script>  
+<script id="uploadEditor" type="text/plain" style="display:none;"></script>	
+<script type="text/javascript">
+	var editor = UE.getEditor('editor');
+	window.onresize=function(){
+	    window.location.reload();
+	}
+	var _uploadEditor;
+	$(function () {
+	    //重新实例化一个编辑器，防止在上面的editor编辑器中显示上传的图片或者文件
+	    _uploadEditor = UE.getEditor('uploadEditor');
+	    _uploadEditor.ready(function () {
+	        //设置编辑器不可用
+	        //_uploadEditor.setDisabled();
+	        //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+	        _uploadEditor.hide();
+	        //侦听图片上传
+	        _uploadEditor.addListener('beforeInsertImage', function (t, arg) {
+	            //将地址赋值给相应的input,只去第一张图片的路径
+	            $("#pictureUpload").attr("value", arg[0].src);
+	            //图片预览
+	            //$("#imgPreview").attr("src", arg[0].src);
+	        })
+	        //侦听文件上传，取上传文件列表中第一个上传的文件的路径
+	        _uploadEditor.addListener('afterUpfile', function (t, arg) {
+	            $("#fileUpload").attr("value", _uploadEditor.options.filePath + arg[0].url);
+	        })
+	    });
+	});
+	//弹出图片上传的对话框
+	$('#upImage').click(function () {
+	    var myImage = _uploadEditor.getDialog("insertimage");
+	    myImage.open();
+	});
+	//弹出文件上传的对话框
+	function upFiles() {
+	    var myFiles = _uploadEditor.getDialog("attachment");
+	    myFiles.open();
+	}
+</script>
+<script type="text/javascript">
+	function changeData()
+  {
+     $('.data').toggleClass('on');
+    $('.showhua').show();
+    $('.posthua').hide();
+  }
+  function showData()
+  {
+  	 $('.data').toggleClass('on');
+    $('.posthua').show();
+    $('.showhua').hide();
+
+  }
+  $('.data-content').text($('.old-data').text()); 
+  $('input[name=delete]').click(function(){
+  	//console.log($(this).next('span').text());
+  	$.post("{:url('index/center/deHuati')}",{lid:$(this).next('span').text()},function(data){
+  		if(data){
+  			alert('删除成功');
+  			window.location.reload();
+  		}else{
+  			alert('删除失败');
+  		}
+  	},'json');
+  });
+</script>

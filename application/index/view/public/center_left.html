@@ -1,0 +1,25 @@
+<div class="mod_left">
+<div class="menu_wrap">
+<ul>
+<li class="bg-radow">
+<a  href="http://member.meishichina.com/center/">会员<br>中心</a>
+</li>
+<li class="bg-radow">
+<a  href="{:url('index/center/caipu')}">菜谱</a>
+</li>
+<li class="bg-radow">
+<a class=on href="{:url('index/center/addhuati')}">日志</a>
+</li>
+<li class="bg-radow">
+<a  href="http://member.meishichina.com/center/my_fav_recipe/">收藏</a>
+</li>
+<li class="bg-radow">
+<a  href="{:url('index/center/info')}">账户<br>设置</a>
+</li>
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+	  $('.bg-radow').eq({$aeq}).children('a').addClass('on');
+  $('.bg-radow').eq({$aeq}).siblings('li').children('a').removeClass('on');
+</script>
