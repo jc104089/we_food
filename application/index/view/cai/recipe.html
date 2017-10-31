@@ -1,0 +1,467 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$cai_data['bookname']}的做法_菜谱_美食天下</title>
+<link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/all3.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/recipe_one.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/comment.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/cssreset-min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/common.css">
+<script type="text/javascript" src="__JS__/jquery.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.emoticons.js"></script>
+<!-- <script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/dfp-content-5.js"></script> -->
+<style type="text/css">
+	.emoticons{
+				width: 525px;
+				margin-bottom:20px;
+			}
+			.emoticons .publisher{
+				padding-bottom: 10px;
+				margin-bottom: 10px;
+				border-bottom: 1px dotted #dbdbdb;
+			}
+			.emoticons .publisher textarea{
+				width: 500px;
+				height: 140px;
+				padding: 5px 10px;
+				border: 1px solid #dbdbdb;
+				resize: none;
+			}
+			.emoticons .publisher .trigger{
+				font-size: 24px;
+				font-weight: bold;
+				color: #666;
+			}
+			.emoticons .publisher .trigger-active{
+				color: #eb7350;
+			}
+			.emoticons .result{
+				padding: 10px 15px;
+				border: 1px dotted #dbdbdb;
+				margin-top: 10px;
+				height: 150px;
+				line-height: 24px;
+			}
+			.emoticons .result img{
+				vertical-align: middle;
+			}
+			.widget-layer{
+				position: relative;
+				width: 410px;
+				margin-top: 8px;
+				background: #fff;
+				border: 1px solid #dbdbdb;
+				border-radius: 2px;
+			}
+			.widget-layer:before{
+				position: absolute;
+				top: -16px;
+				left: 2px;
+				display: block;
+				content: '';
+				width: 0;
+				height: 0;
+				border: 8px solid transparent;
+				border-bottom-color: #dbdbdb;
+			}
+			.widget-layer:after{
+				position: absolute;
+				top: -15px;
+				left: 2px;
+				display: block;
+				content: '';
+				width: 0;
+				height: 0;
+				border: 8px solid transparent;
+				border-bottom-color: #f0f0f0;
+			}
+			.widget-layer .widget-tool{
+				height: 28px;
+				background: #f0f0f0;
+			}
+			.widget-layer .widget-close{
+				float: right;
+				width: 28px;
+				height: 28px;
+				line-height: 28px;
+				text-align: center;
+				font-family: Arial;
+			}
+			.widget-layer ul{
+				width: 372px;
+				margin: 0 auto;
+				padding: 15px 5px 20px;
+				overflow: hidden;
+			}
+			.widget-layer li{
+				position: relative;
+				z-index: 8;
+				float: left;
+				width: 22px;
+				height: 22px;
+				padding: 4px;
+				margin-left: -1px;
+				margin-top: -1px;
+				border: 1px solid #e8e8e8;
+				cursor: pointer;
+			}
+			.widget-layer li:hover{
+				z-index: 9;
+				border-color: #eb7350;
+			}
+			.recipeStep img{
+				width: 220px;
+				height: 294px;
+			}
+</style>
+</head>
+<body>
+	<span style="display: none;" id="now_uid">{$Think.session.uid}</span>
+{include file="public/header"}
+<div>
+{include file="public/cai_header"}	
+<div class="w mt10 clear">
+
+<div id="path" class="clear">
+您的位置：<a title="美食天下" href="/">美食天下</a> > <a title="菜谱" href="{:url('cai/caipu')}">菜谱</a>
+&nbsp;>&nbsp;
+{if $cai_type}
+{foreach $cai_type as $value}
+<a title="{$value['name']}" href="{:url('cai/caipu',['status'=>$v['id']])}" target="_blank">{$value['name']}</a>&nbsp;&nbsp;
+{/foreach}
+{/if}
+</div>
+</div>
+<div class="wrap">
+<div class="w clear">
+	<div class="all-classify classify" style="display:none;">
+			{if $all_classify}
+			{foreach $all_classify as $key => $value}
+			<ul class="all-classify-one classify">
+				<li><strong>{$value['name']}</strong></li>
+				{if !empty($value['child_classify'])}
+				{foreach $value['child_classify'] as $k => $v}
+				<li><a href="{:url('cai/caipu',['status'=>$v['id']])}">{$v['name']}</a></li>
+				{/foreach}
+				{/if}
+			</ul>
+			{/foreach}
+			{/if}
+		</div>
+<div>
+	<div class="space_left">
+		<div class="userTop clear">
+			<h1 class="recipe_De_title"><a href="{:url('cai/recipe',['cid'=>$cai_data['cid']])}" id="recipe_title" title="{$cai_data['bookname']}">{$cai_data['bookname']}</a>
+			</h1>
+			<span id="now_id" style="display: none;">{$cai_data['cid']}</span>
+			<a title="{$cai_data['username']}" href="http://home.meishichina.com/space-8330558.html" target="_blank" class="uright">
+			<span class="userName" id="recipe_username">{$cai_data['username']}</span>
+			</a>
+		</div>
+		<div class="space_box_home">
+			<div class="recipDetail">
+				<div class="recipe_De_imgBox" id="recipe_De_imgBox">
+				<a class="J_photo" title="{$cai_data['bookname']}的做法"><span></span><img src="{$cai_data['photo']}" alt="{$cai_data['bookname']}的做法" style="max-width: 640px;"> </a>
+				</div>
+				<blockquote class="block_txt" id="block_txt">
+				<div id="block_txt1"><span class="txt_tart">“</span>{$cai_data['message']}<span class="txt_end">” </span>
+				</div>
+				</blockquote>
+				<div class="mo mt20">
+				<h3>食材明细</h3>
+				</div>
+				<div class="recipeCategory_sub_R clear">
+					<textarea style="width: 640px;min-height: 100px;" disabled="disabled;">{$cai_data['material']}</textarea>
+				</div>
+				<div class="mo mt20">
+				<h3>蒸春饼的做法步骤</h3>
+				</div>
+				<div class="recipeStep">
+					<div style="width: 640px;min-height: 300px;">
+						{$cai_data['content']}
+					</div>
+				</div>
+				<div class="mo">
+				<h3>小窍门</h3>
+				</div>
+				<div class="recipeTip">
+				{$cai_data['tips']}
+				</div>
+				<div class="recipeTip mt16">
+				所属分类：
+				{if $cai_type}
+				{foreach $cai_type as $value}
+				<a title="{$value['name']}" href="{:url('cai/caipu',['status'=>$v['id']])}" target="_blank">{$value['name']}</a>&nbsp;&nbsp;
+				{/foreach}
+				{/if}
+				</div>
+				<div class="recipeArction mt10 clear">
+					<span style="display: none;" class="praise_flag">{$praise_flag}</span>
+					<span style="display: none;" class="save_flag">{$save_flag}</span>
+				<ul class="collect_da">
+				<li class="lik go_login"><a title="喜欢" href="javascript:void(0);" class="J_lik" data=""><i></i><span class="words">喜欢</span>(<span class="num">{$cai_data['goodnum']}</span>)</a></li>
+				<li class="fav go_login"><a title="收藏" href="javascript:void(0);" class="J_fav" data=""><i></i><span class="words">收藏</span>(<span class="num">{$cai_data['savenum']}</span>)</a></li>
+				<li style="width:1px;border-right: 1px solid #ddd; height: 30px; margin: 2px 10px; overflow: hidden;"></li>
+				</ul>
+				<div>
+					<div class="jiathis_style_32x32">
+							<a class="jiathis_button_qzone"></a>
+							<a class="jiathis_button_tsina"></a>
+							<a class="jiathis_button_tqq"></a>
+							<a class="jiathis_button_weixin"></a>
+							<a class="jiathis_button_renren"></a>
+							<a href=" " class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+							<a class="jiathis_counter_style"></a>
+					</div><br>
+						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8">
+						</script>
+				</div>
+				</div>
+				
+				<div class="recipeComment mt30 emoticon" id="comment">
+					<div data-dom="wrap" class="comment-wrap publisher">
+						<form method="post" onsubmit="return false;">
+						<div class="comment-post comment-add " data-dom="add">
+							{if !$Think.session.uid}
+							<div class="comment-login" title="请先登录"></div>
+							<div class="comment-login-text" title="请先登录">
+								<a href="{:url('user/loginInfo')}" class="J_event" data-type="login">登录</a>后参与讨论，发表评论
+							</div> 
+							{/if}
+							<div class="comment-post-loading"></div>
+							<i class="arrow"></i>
+							<div class="comment-post-text s">
+								<div class="comment-post-text-inner ">
+									<p><textarea class="text ui-webkit-scrollbar" name="content" title="Ctrl+Enter 也可提交哦"></textarea></p>
+									<p><a class="trigger" href="javascript:;">☺</a></p>
+								</div>	
+								
+							</div>
+							<div class="comment-post-tools clear">
+								<div class="right">
+										<a href="javascript:void(0);" class="comment-btn J_event" data-type="add_submit" style="height: 33px;border: 0;">发表评论</a>
+								</div>
+							</div>
+						</div>
+						</form>
+						<div class="comment-nav mt20" data-dom="nav">
+							<div class="left">最新评论 <strong>（<span data-dom="recordCount">{$reply_num}</span>）</strong></div>
+						</div>
+						<div class="comment-cid mt10" data-dom="lookReply">
+							<a href="#">您正在查看回复评论, 点击查看全部评论</a>
+						</div>
+						<div class="comment-list mt10">
+							{if condition="empty($reply_data)"}
+
+							<div class="data-error" data-dom="error" style="display: none;"></div>
+							<div class="comment-loading" data-dom="loading">还没有人评论，抢占第一条吧~</div>
+							<script type="text/javascript">
+								$.emoticons({
+											'activeCls':'trigger-active',
+											'path':'__IMG__' + '/image/'
+										},function(api){
+										});
+							</script>
+							{else /}
+							<div data-dom="list">
+								<ul style="">
+									{foreach $reply_data as $key => $value}
+									<li id="J_comment_item_14550369" data-id="14550369">
+										<div class="pic">
+											<a href="http://home.meishichina.com/space-9993160.html" target="_blank" title="点击进入 {$value['username']} 的主页">
+												<img class="imgLoad" src="{$value['photo']}" width="48" height="48" style="display: block;">
+											</a>
+										</div>
+										<div class="detail">
+											<div class="tools">
+												<div class="left">
+													<a title="点击进入 {$value['username']} 的主页" href="http://home.meishichina.com/space-9993160.html" target="_blank">{$value['username']}
+													</a>
+													<span class="subtime" data-time="1509334157">{$value['create_time']}</span>
+												</div>
+												<!-- <div class="right">
+													<a href="#" class="J_event" data-type="reply">回复</a>
+												</div> -->
+											</div>
+											<div class="content">
+												
+												<div class="reply">
+												</div><span style="display: none;">{$value['content']}</span>
+											</div>
+										</div>
+									</li>
+									<script>
+										$.emoticons({
+											'activeCls':'trigger-active',
+											'path':'__IMG__' + '/image/'
+										},function(api){
+											var $result = $('.reply');
+												$result.eq({$key}).html(api.format($('.reply').eq({$key}).next('span').html()));
+										});
+									</script>
+									{/foreach}
+
+								</ul>
+								<div>
+									<link rel="stylesheet" type="text/css" href="__CSS__/fenye.css">
+								{$page}
+								</div>
+							</div>
+							{/if}
+						</div>
+						<div class="ui-page mt20" data-dom="page">
+								<div class="ui-page-inner" data-dom="pageInner"></div>
+						</div>
+					</div>
+					
+				</div> 
+			</div>
+		</div>
+	</div>
+	<div class="space_right"> 
+		<div id="getRecipeDetailPaiandHealth" ingredient="ZhongJinMianFen">
+		</div>
+		<div class="ui_title mt20 clear">
+			<div class="ui_title_wrap">
+			<h3 class="on">最受欢迎的菜谱</h3>
+			<a title="家常菜谱大全" href="http://home.meishichina.com/recipe-menu.html" class="right" target="_blank">更多</a>
+			</div>
+		</div>
+		<div class="gongxiao_r mt10">
+		<div>
+			{if $scroll_data}
+			{foreach $scroll_data as $v}
+			<a title="{$v['bookname']}" href="{:url('cai/recipe',['cid'=>$v['cid']])}" target="_blank">{$v['bookname']}</a>
+			{/foreach}
+			{/if}
+		</div>
+		</div>
+		<div class="mt20" id="smnbk"></div>
+	</div>
+</div>
+</div>
+{include file="public/footer"}
+</div>
+</div>
+
+<script type="text/javascript" src="__JS__/all.js?v=2017-10-23"></script>
+
+<!----> <script type="text/javascript" src="__JS__/get_num.js"></script> 
+
+<script type="text/javascript" src="__JS__/recipe_navlist.js?v=1"></script>
+ <script type="text/javascript">	
+msc.goTop.init();
+msc.user.init();
+$("img.imgLoad").imgLoad();
+</script>
+
+<script type="text/javascript" src="__JS__/msc-tools-date.js"></script>
+<!-- <script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/msc-ui-lookImg.js?v=2016-10-25"></script> -->
+<script type="text/javascript" src="__JS__/msc-ui-smilies.js"></script>
+<script type="text/javascript" src="__JS__/msc-tools-comment.js?v=20170329"></script>
+<!-- <script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/msc-ui-select.js"></script> -->
+ <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=11097"></script>
+<script type="text/javascript" id="bdshell_js"></script> 
+<!--<script type="text/javascript" src="http://static.meishichina.com/v6/js/app/newrecipe/recipe_action_one.js?v=2017-10-20"></script>-->
+<script>
+/*
+$("li.top_bar_more").hoverDelay(function(){
+$("li.top_bar_more div").show();
+},function(){
+$("li.top_bar_more div").hide();
+},200,200);
+*/
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script> </body>
+</html>
+<script type="text/javascript">
+$(function(){
+	var cid = $('#now_id').html();
+	$('.comment-btn').click(function(){
+		console.log($('.text').val());
+		console.log($('#now_id').html());
+		var content = $('.text').val();
+		
+		if($('#now_uid').length != 0){
+			var uid = $('#now_uid').text();
+		}
+		$.post("{:url('cai/saveComment')}",{data_id:cid,content:content,uid:uid,type_id:0},function(data){
+			console.log(data);
+			if(data){
+				alert('回复成功');
+				window.location.reload();
+			}else{
+				alert('回复失败');
+			}
+		},'json');
+	});
+	var goodclick = 0;
+	if($('.recipeArction .praise_flag').text() === '1'){
+				$('.lik .words').text('已喜欢');
+				//console.log('kl');
+	}
+	if($('.recipeArction .save_flag').text() === '1'){
+				$('.fav .words').text('已收藏');
+				//console.log('kl');
+	}
+	$('.go_login').click(function(){
+		if($('#now_uid').length == 0){
+			$(this).children('a').attr('href',"{:url('user/loginInfo')}");
+		}else{
+			//console.log($('.recipeArction .praise_flag').text());
+			//console.log($('.lik span').text());
+			if($(this).hasClass('lik')){
+				if($('.lik .words').text() == '已喜欢'){
+
+				}else{
+					$.post("{:url('cai/clickgood')}",{uid:$('#now_uid').text(),data_id:cid,type_id:0},function(data){
+						console.log(data);
+						if(data){
+							//window.location.reload();
+							$('.lik .words').text('已喜欢');
+							var newnum = parseInt($('.lik .num').text()) + 1;
+							$('.lik .num').text(newnum);
+						}else{
+							alert('点赞失败');
+						}
+					},'json');
+				}
+			}else if($(this).hasClass('fav')){
+				if($('.fav .words').text() == '已收藏'){
+
+				}else{
+					$.post("{:url('cai/clicksave')}",{u_id:$('#now_uid').text(),data_id:cid},function(data){
+						console.log(data);
+						if(data){
+							//window.location.reload();
+							$('.fav .words').text('已收藏');
+							var newnum = parseInt($('.fav .num').text()) + 1;
+							$('.fav .num').text(newnum);
+						}else{
+							alert('点赞失败');
+						}
+					},'json');
+				}
+			}	
+		}	
+	});
+})
+
+</script>

@@ -7,6 +7,8 @@ use traits\model\SoftDelete;
 class LogInfo extends Model
 {
 	//protected $insert = ['ip'];
+	use SoftDelete;
+	protected $deleteTime = 'delete_time';
 	public function log()
 	{
 		return $this->belongsTo('Log', 'l_id');

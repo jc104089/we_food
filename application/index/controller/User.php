@@ -3,6 +3,7 @@ namespace app\index\controller;
 
 use think\Controller;
 use app\index\model\User as UserModel;
+use app\index\model\Webset;
 use  think\Session;
 use lib\Phoneyz;
 
@@ -135,8 +136,11 @@ class User extends Controller
 		$data = $this->request->param('phone');
 		$result = $this->user->where('phone',$data)->find();
 		$id = $result->uid;
+		$username = $result->username;
 		if($id){
 			session('uid',$id);
+			session('username',$username);
+			Webset::where('id',1)->setInc('visitnum',5);
 			$this->error('登陆成功',url('index/center/info'));
 			//echo json_encode($id);
 		} else{
@@ -158,6 +162,7 @@ class User extends Controller
 			$username = $result->username;
 			session('username',$username);
 			session('uid',$id);
+			Webset::where('id',1)->setInc('visitnum',5);
 			$this->success('登陆成功',url('index/center/info'));
 		} else {
 			$this->error('登录失败');

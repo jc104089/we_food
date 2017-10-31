@@ -261,4 +261,8 @@ return [
         // 验证成功后是否重置
         'reset' => true
     ],
+    'http_exception_template' => [
+        // 定义404错误的重定向页面地址
+        404 => APP_PATH.'index/view/404.html',
+    ]
 ];

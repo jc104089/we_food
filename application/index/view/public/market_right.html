@@ -1,0 +1,18 @@
+<div class="space_right">
+
+<div class="ui_title mt20 clear">
+<div class="ui_title_wrap">
+<h3 class="on" style="margin:0">菜谱大全</h3>
+<a href="{:url('cai/caipu')}" class="right" target="_blank">菜谱分类</a>
+</div>
+</div>
+<div class="sPic2 clear">
+<ul>
+	{if $cai_data}
+	{foreach $cai_data as $key => $value}
+<li><a href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}" target="_blank"><img width="140" height="105" border="0" src="{$value['photo']}"></a></li>
+	{/foreach}
+	{/if}
+</div>
+<div id="smnbk" class="mt20"></div>
+</div>

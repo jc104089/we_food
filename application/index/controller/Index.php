@@ -6,6 +6,7 @@ use app\index\model\Book;
 use app\index\model\User;
 use app\index\model\BookInfo;
 use app\index\model\Board;
+use think\Db;
 
 class Index extends Controller
 {
@@ -17,23 +18,12 @@ class Index extends Controller
 		$this->book = new Book();
 		$this->user = new User();
 		$this->board = new Board();
-		$list = $this->board->where('parent_id',0)->select();
-		$this->assign('board',$list);
 	}
     public function index()
     {
     	return $this->fetch();
     }
-    public function caipu()
-    {
-    	$board = $this->board->where('parent_id',4);
-    	dump($this->request->param());
-    	//$data = $this->book->where($where)->field('cid,uid,bookname,photo')->select();
-    	//$data = $this->selectName($data);
-    	//dump($data);
-    	//$this->assign('data',$data);
-    	//return $this->fetch();
-    }
+    
    	public function changeMoreData($user,$ar,$id)
 	{
 		$data = [];
@@ -69,5 +59,21 @@ class Index extends Controller
 			}
 			return $newdata;
 		}
+	}
+	public function food_fenlei()
+	{
+		return $this->fetch();
+	}
+	public function huati()
+	{
+		return $this->fetch();
+	}
+	public function rizhi()
+	{
+		return $this->fetch();
+	}
+	public function rizhixiang()
+	{
+		return $this->fetch();
 	}
 }

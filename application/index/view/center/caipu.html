@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="__CSS__/center_all.css">
 <!-- <link rel="stylesheet" href="http://static.meishichina.com/v6/css/app/center/center_recipe2.css?v=2017-10-13"> -->
 <link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/fenye.css">
 <script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
 <style type="text/css">
   .mr_edit_fixed{
@@ -62,14 +63,14 @@
         {if $data}
         {foreach $data as $key => $value}
       <li data-id="" style="margin-top: 20px;background: #F8F8F8;">
-        <div class="cpai">
+        <div class="cpai" style="display: inline-block;width: 900px; ">
           <div class="pp">
             
               <div class="data-title" style="height:30px;line-height: 30px;overflow: hidden;text-overflow: ellipsis;font-weight: bold;font-size: 16px;">
               <a href="" target="_blank" style="float: left;"> 菜名：{$value['bookname']} </a>
-              <span class="left" style="margin-left: 20px;"><input type="button" name="delete" value="删除" style="border-radius: 5px;background: #FF6767;cursor: pointer;width: 40px;height: 25px;font-weight: normal;line-height: 25px;">
-                  <span style="display: none;">{$value['cid']}</span>
-                </span>
+             <!--  <span class="left" style="margin-left: 20px;"><input type="button" name="delete" value="删除" style="border-radius: 5px;background: #FF6767;cursor: pointer;width: 40px;height: 25px;font-weight: normal;line-height: 25px;border: 0;">
+                 <span style="display: none;">{$value['cid']}</span>
+               </span> -->
             </div>
               <div class="data-content" style="height:30px;width:500px;line-height: 30px;overflow: hidden;text-overflow: ellipsis;text-indent: 2em;">描述：{$value['message']}</div>
 
@@ -82,9 +83,12 @@
             {/if}
           </div>
           <div class="substatus clear">
-          {$value['create_time']}&nbsp;&nbsp;<span class="get_nums">{$value['goodnum']}人喜欢&nbsp;&nbsp;
-          {$value['talknum']}人评论</span>
+          {$value['create_time']}&nbsp;&nbsp;&nbsp;&nbsp;{$value['goodnum']}人喜欢&nbsp;&nbsp;&nbsp;&nbsp;
+          {$value['talknum']}人评论
           </div>
+        </div>
+        <div class="right delDiv" style="width: 180px;text-align: center; display: table-cell; vertical-align: middle;">
+        <a class="del" href="javascript:void(0);"  data-id="{$value['cid']}" style="border: 1px solid #999;border-radius: 5px;color: #999;display: block;font-size: 14px;height: 30px;line-height: 30px;margin: 15px auto;text-decoration: none;vertical-align: middle;width: 90px;">移除</a>
         </div>
       </li>
       {/foreach}
@@ -98,11 +102,12 @@
       </div>
       {/if}
       </ul>
+      <div>{$page}</div>
     </div>
   </div>
 
 <div style="display: none;" class="editCai">
-  <form action="{:url('index/center/postCai')}" method="post" enctype="multipart/form-data" onsubmit="return upCai();" />
+  <form action="{:url('index/center/postCai')}" method="post" enctype="multipart/form-data" onsubmit="return upCai();" id="cai-data"/>
       <div class="mr_edit mr_edit_center clear">
         <ul>
           <li class="caipu form-group">
@@ -121,16 +126,22 @@
             </div>
           </li>
           <li class="form-group">
-            <label class="must title-font">菜品分类</label><br>             
-              {if $cai_board}
-              <select name="board_id">  
+            <label class="must title-font">菜品分类</label><br>  
+            {if $allClass}
+            {foreach $allClass as $key => $value}           
+              {$value['name']}&nbsp;
+              {if !empty($value['child_classify'])}
+              <select name="board_id[]" class="board_style">  
               <option value="请选择">请选择</option>
-              {foreach $cai_board as $v}
+              {foreach $value['child_classify'] as $v}
               <option value="{$v['id']}">{$v['name']}</option>
               {/foreach}
                </select>
+               &nbsp;&nbsp;&nbsp;&nbsp;
               {/if}
-           
+             {/foreach}
+             {/if} 
+             
           </li>
           <li class="caipu form-group">
             <label class="must title-font">描述</label><br>
@@ -143,7 +154,7 @@
           </li>
           <li class="caipu">
             <div class="form-group">
-                    <label for="article-content" class="sr-only title-font must">步骤</label>
+                    <label for="article-content" class="title-font must">步骤</label><br />
                     <script id="editor" type="text/plain" style="width:800px;height:500px;" name="content"></script>
                 </div>
           </li>
@@ -193,13 +204,26 @@ $("img.imgLoad").imgLoad();
     $('.returnMy').show();
     $('.editCai').show();
   });
+  $('.showCai li').each(function(){
+    //console.log();
+    $('.delDiv').css('marginTop',($(this).height())/3);
+  });
+  $('.data-content').text($('.old-data').text()); 
+  $('.del').mouseover(function(){
+    $(this).css({'background':'#FF6767','color':'white'});
+  });
+  $('.del').mouseout(function(){
+    $(this).css({'background':'white','color':'#999999'});
+  });
   var flag = 1;
   $('.post-anniu').click(function(){
-    $(':input').each(function(i){
-      if($(this).attr('name') === 'board'){
+   // console.log($('#cai-data :input'));
+    $('#cai-data :input').each(function(i){
+     // console.log($(this).attr('name'));
+      if($(this).hasClass('board_type') || $(this).hasClass('board_style')){
        if($(this).val() === '请选择'){
           flag = 1;
-         // console.log(2);
+          //console.log(2);
           return false;
         }else{
           flag = 0;
@@ -215,7 +239,7 @@ $("img.imgLoad").imgLoad();
       } else if($(this).hasClass('J_input')){
         //console.log($(this).val());
           if($(this).val().length == 0){
-           // console.log(4);
+            //console.log(4);
             flag = 1;
             return false;
           }else {
@@ -223,36 +247,37 @@ $("img.imgLoad").imgLoad();
           }
       }
     });
-    if(editor.getContent().length == 0){
+    if(editor.getContent().length == 0 && flag == 0){
       flag = 1;
-      //console.log(flag);
-    }else {
-      flag = 0;
+     // console.log(flag);
     }
   });
 
   function upCai()
   {
-    /*return false;*/
+    //console.log(flag);
+    //return false;
     if(flag){
       alert('请完善信息');
-      window.location.reload();
+      //window.location.reload();
       return false;
     }else{
       return true;
     }
     
   }
-  $('input[name=delete]').click(function(){
+  $('.del').click(function(){
     //console.log($(this).next('span').text());
-    $.post("{:url('index/center/deCaipu')}",{cid:$(this).next('span').text()},function(data){
-      if(data){
-        alert('删除成功');
-        window.location.reload();
-      }else{
-        alert('删除失败');
-      }
-    },'json');
+    if(confirm('此操作不可逆，确定删除吗？')){
+      $.post("{:url('index/center/deCaipu')}",{cid:$(this).attr('data-id')},function(data){
+        if(data){
+          alert('删除成功');
+          window.location.reload();
+        }else{
+          alert('删除失败');
+        }
+      },'json');
+    }      
   });
 </script>
 

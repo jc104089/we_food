@@ -1,0 +1,32 @@
+<div class="w logo_wrap2">
+	<div class="logo_inner left">
+	<a href="/" title="美食天下">美食天下</a>
+	</div>
+	<div class="logo_current left">
+	<h1><a href="{:url('cai/caipu')}" title="菜谱">菜谱</a></h1>
+	</div>
+	<div class="logo_search right">
+	<form id="form_search" action="http://home.meishichina.com/search/" method="post" target="_blank">
+	<div class="searchBox J_search"><a href="javascript:;" title="搜索" class="search_Btn J_searchBTN right" id="search">搜索</a><input type="text" id="q" class="search_Text J_searchTxt right gay" data-first="on">
+	</div>
+	</form>
+	</div>
+	<div class="logo_nav">
+	<a class=on href="{:url('cai/caipu')}">菜谱首页<i></i><b></b></a>
+	<a href="{:url('cai/hotcai')}">排行<i></i><b></b></a>
+	<span style="float: left; height:18px; margin:23px 4px 0; border-right: 1px solid #ddd;"></span>
+	</div>
+</div>
+<div class="nav_wrap2">
+	<ul>
+		<li><a href="{:url('cai/caipu',['status'=>0])}" status="0" class="on">首页</a></li>
+		{if $board}
+		{foreach $board as $v}
+		<li><a title="{$v['name']}" href="{:url('cai/caipu',['status'=>$v['id']])}" status="{$v['id']}">{$v['name']}</a></li>
+		{/foreach}
+		{/if}
+		<li><a title="最新菜谱" href="{:url('cai/caipu',['status'=>1])}"  status="1">最新菜谱</a></li>
+		<li id="navlist" class="right"><a class="navlist_a classify" href="javascript:void(0);">浏览全部菜谱<i></i><b></b></a></li>
+	</ul>
+</div>
+

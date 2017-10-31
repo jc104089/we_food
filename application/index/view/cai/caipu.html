@@ -1,0 +1,176 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>菜谱大全_美食天下</title>
+<meta name="keywords" content="菜谱,菜谱大全,家常菜谱大全,菜谱家常菜做法,家常菜图片做法大全" />
+<meta name="description" content="" />
+<meta name="renderer" content="webkit">
+<link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/recipe2.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/cai_fen.css">
+<script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
+<style type="text/css">
+	.all-classify{
+		min-height: 270px;
+		width: 990px; 
+		border: 1px solid #CCC;
+		border-top: none;
+		position: absolute;
+		z-index: 10;
+		top:2px;
+		background: white;
+	}
+	.all-classify-one{
+		float: left;
+		width: 165px;
+
+	}
+	.all-classify-one li{
+		text-align: center;
+		line-height: 30px;
+		height:30px;
+	}
+	.all-classify-one li:first-child{
+		font-size: 16px;
+	}
+	.home_index_slider{
+		position: relative;
+		z-index: 1;
+	}
+</style>
+</head>
+<body>
+{include file="public/header"}
+<div>
+{include file="public/cai_header"}
+
+<div class="wrap">
+	<div class="w clear">
+		<!--无限分类 -->
+		<div class="all-classify classify" style="display:none;">
+			{if $all_classify}
+			{foreach $all_classify as $key => $value}
+			<ul class="all-classify-one classify">
+				<li><strong>{$value['name']}</strong></li>
+				{if !empty($value['child_classify'])}
+				{foreach $value['child_classify'] as $k => $v}
+				<li><a href="{:url('cai/caipu',['status'=>$v['id']])}">{$v['name']}</a></li>
+				{/foreach}
+				{/if}
+			</ul>
+			{/foreach}
+			{/if}
+		</div>
+		<div class="home_index_slider mt10">
+			<div id="home_index_slider">
+				<div style="width: 1035px;" class="slider">
+				<ul style="overflow: hidden;height: 225px;">
+				{if $scroll_data}
+				{foreach $scroll_data as $key => $value}
+				<li class="{$value['cid']}" style="width: 345px;">
+				<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
+					<i><img class="imgLoad" src="{$value['photo']}" alt="{$value['bookname']}"></i>
+					<div class="os"></div>
+					<p class="line2">{$value['bookname']}<br><span></span></p>
+				</a>
+				</li>
+				{/foreach}
+				{/if}
+				</ul>
+				</div>
+			</div>
+			<!-- <span>
+				<a href="javascript:void(0);" class="prevBtn"><i>&nbsp;</i></a>
+				<a href="javascript:void(0);" class="nextBtn"><i>&nbsp;</i></a>
+			</span> -->
+		</div>
+		<div id="recipeindex_info">
+			<div id="recipeindex_info_wrap">
+				<div class="ui_title">
+					<div class="ui_title_wrap clear">
+						<h3 class="on"><a href="{:url('cai/caipu',['status'=>0])}" status="0" title="最新推荐">最新推荐</a></h3>
+						<h3><a href="{:url('cai/caipu',['status'=>1])}" status="1" title="最新发布">最新发布</a></h3>
+						{if $board}
+						{foreach $board as $v}
+						<h3><a href="{:url('cai/caipu',['status'=>$v['id']])}" status="{$v['id']}" title="{$v['name']}">{$v['name']}</a></h3>
+						{/foreach}
+						{/if}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="big4_list clear mt10" id="recipeindex_living">
+				<ul class="on">
+					{if $data}
+					{foreach $data as $value}
+						<li style="display: none;">
+							<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
+							<i>
+							<img alt="{$value['bookname']}" class="imgLoad" src="{$value['photo']}">
+							</i>
+							<p>{$value['bookname']}</p>
+							</a>
+							<a title="{$value['username']}" href="http://home.meishichina.com/space-8419178.html" target="_blank" class="u">{$value['username']}</a>
+						</li>
+					{/foreach}
+					{/if}
+				</ul>
+
+		</div>
+		<div class="ui-loading mt10" id="recipeindex_living_loading"> <a href="javascript:void(0);" class="">查看更多</a> </div>
+	</div>
+</div>
+{include file="public/footer"}
+</div>
+<script type="text/javascript" src="__JS__/all.js"></script>
+<!-- <script type="text/javascript" src="__JS__/get_num.js"></script> -->
+<!-- <script type="text/javascript" src="__JS__/recipe_navlist.js"></script> -->
+<script src="__JS__/jquery.sudoslider.min.js" type="text/javascript"></script>
+ </body>
+</html>
+<script type="text/javascript">
+	$('.ui_title_wrap h3 a').each(function(){
+		//console.log($(this).attr('status'));
+		if($(this).attr('status') == {$status}){
+			$(this).parent().addClass('on');
+		}else{
+			$(this).parent().removeClass('on');
+		}
+		
+	});
+	$('.nav_wrap2 li a').each(function(){
+		if($(this).attr('status') == {$status}){
+			$(this).addClass('on');
+		}else{
+			$(this).removeClass('on');
+		}
+	});
+	// 分类显示关闭
+	var timer;
+	$('.classify').mouseover(function(){
+		clearTimeout(timer);
+		$('.all-classify').slideDown();
+	});
+	$('.classify').mouseout(function(){
+		timer = setTimeout(function(){
+			$('.all-classify').slideUp();
+		},2000);
+		
+	});
+	// 查看更多
+	var objLi = $('#recipeindex_living li');
+	var num = 0;
+	showLi();
+	function showLi() {
+		for (var i = 0; i < 8; i++) {
+			objLi.eq(num).show();
+			num++;
+		}
+	}
+	$('#recipeindex_living_loading a').click(function(){
+		showLi();
+	});
+	var sudoSlider2 = $(".slider").sudoSlider({speed:600,slideCount:3,movecount:3,prevHtml:'<a class="prevBtn" href="javascript:void(0);"><i>&nbsp;</i></a>',nextHtml:'<a class="nextBtn" href="javascript:void(0);"><i>&nbsp;</i></a>',continuous: true});
+</script>

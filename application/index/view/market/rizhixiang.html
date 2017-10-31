@@ -1,0 +1,447 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>【食·色蛋糕】——黄桃酸奶蛋糕_黄桃酸奶蛋糕_食·色的日志_美食天下</title>
+<link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/all2.css">
+<script type="text/javascript" src="__JS__/dfp-list-5.js"></script>
+<link rel="stylesheet" type="text/css" href="__CSS__/comment.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/cssreset-min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/common.css">
+<script type="text/javascript" src="__JS__/jquery.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.emoticons.js"></script>
+<style type="text/css">
+	.emoticons{
+				width: 525px;
+				margin-bottom:20px;
+			}
+			.emoticons .publisher{
+				padding-bottom: 10px;
+				margin-bottom: 10px;
+				border-bottom: 1px dotted #dbdbdb;
+			}
+			.emoticons .publisher textarea{
+				width: 500px;
+				height: 140px;
+				padding: 5px 10px;
+				border: 1px solid #dbdbdb;
+				resize: none;
+			}
+			.emoticons .publisher .trigger{
+				font-size: 24px;
+				font-weight: bold;
+				color: #666;
+			}
+			.emoticons .publisher .trigger-active{
+				color: #eb7350;
+			}
+			.emoticons .result{
+				padding: 10px 15px;
+				border: 1px dotted #dbdbdb;
+				margin-top: 10px;
+				height: 150px;
+				line-height: 24px;
+			}
+			.emoticons .result img{
+				vertical-align: middle;
+			}
+			.widget-layer{
+				position: relative;
+				width: 410px;
+				margin-top: 8px;
+				background: #fff;
+				border: 1px solid #dbdbdb;
+				border-radius: 2px;
+			}
+			.widget-layer:before{
+				position: absolute;
+				top: -16px;
+				left: 2px;
+				display: block;
+				content: '';
+				width: 0;
+				height: 0;
+				border: 8px solid transparent;
+				border-bottom-color: #dbdbdb;
+			}
+			.widget-layer:after{
+				position: absolute;
+				top: -15px;
+				left: 2px;
+				display: block;
+				content: '';
+				width: 0;
+				height: 0;
+				border: 8px solid transparent;
+				border-bottom-color: #f0f0f0;
+			}
+			.widget-layer .widget-tool{
+				height: 28px;
+				background: #f0f0f0;
+			}
+			.widget-layer .widget-close{
+				float: right;
+				width: 28px;
+				height: 28px;
+				line-height: 28px;
+				text-align: center;
+				font-family: Arial;
+			}
+			.widget-layer ul{
+				width: 372px;
+				margin: 0 auto;
+				padding: 15px 5px 20px;
+				overflow: hidden;
+			}
+			.widget-layer li{
+				position: relative;
+				z-index: 8;
+				float: left;
+				width: 22px;
+				height: 22px;
+				padding: 4px;
+				margin-left: -1px;
+				margin-top: -1px;
+				border: 1px solid #e8e8e8;
+				cursor: pointer;
+			}
+			.widget-layer li:hover{
+				z-index: 9;
+				border-color: #eb7350;
+			}
+			.recipeStep img{
+				width: 220px;
+				height: 294px;
+			}
+</style>
+</head>
+<body>
+	<span style="display: none;" id="now_uid">{$Think.session.uid}</span>
+{include file="public/header"}
+<div>
+	<div class="w logo_wrap2">
+		<div class="logo_inner left">
+		<a href="/" title="美食天下">美食天下</a>
+		</div>
+		<div class="logo_current left">
+		<h1><a href="{:url('market/rizhi')}" title="社区">社区</a></h1>
+		</div>
+		<div class="logo_search right">
+			<form id="form_search" action="http://home.meishichina.com/search/" method="post" target="_blank">
+			<div class="searchBox J_search"><a href="javascript:;" title="搜索" class="search_Btn J_searchBTN right" id="search">搜索</a><input type="text" id="q" class="search_Text J_searchTxt right gay" data-first="on">
+			</div>
+			</form>
+		</div>
+		<div class="logo_nav">
+		<a class="on" href="{:url('market/rizhi')}" title="日志">日志<i></i><b></b></a>
+		</div>
+	</div>
+	<div class="w nav_wrap2">
+		<ul>
+		<li><a href="{:url('market/rizhi','status=2')}">精华日志</a></li>
+		<li><a href="{:url('market/rizhi','status=1')}">最新日志</a></li>
+		</ul>
+	</div>
+	<div class="w mt10 clear">
+	<iframe width="100%" height="90" frameborder="0" scrolling="no" src="http://static.meishichina.com/v3/t1_1.html"></iframe>
+	</div>
+<div class="wrap">
+<div class="w clear">
+	<div class="space_left">
+		<div class="userTop clear">
+			<h1><a title="{$l_data['title']}" id="blog_title" href="{:url('market/rizhixiang',['lid'=>$l_data['lid']])}">{$l_data['title']}</a></h1>
+			<span id="now_id" style="display: none;">{$l_data['lid']}</span>
+			<a class="uright" target="_blank" href="http://home.meishichina.com/space-34360.html" title="{$l_data['username']}">
+			<img src="{$l_data['photo']}">
+			<span id="blog_username" class="userName">{$l_data['username']}</span>
+			</a>
+			<span class="rtime">
+				{if condition="$l_data['status'] == 2")}
+				<span class="jinghua">精华</span> 
+				{/if}
+			发表于{$l_data['create_time']}</span>
+		</div>
+			<div>{$l_data['content']}</div>
+		<div class="recipeArction mt10 clear">
+				<span style="display: none;" class="praise_flag">{$praise_flag}</span>
+				<ul class="collect_da">
+				<li class="lik go_login"><a title="喜欢" href="javascript:void(0);" class="J_lik" data=""><i></i><span class="words">喜欢</span>(<span class="num">{$l_data['goodnum']}</span>)</a></li>
+				<li style="width:1px;border-right: 1px solid #ddd; height: 30px; margin: 2px 10px; overflow: hidden;"></li>
+				</ul>
+<div>
+	<div class="jiathis_style_32x32">
+			<a class="jiathis_button_qzone"></a>
+			<a class="jiathis_button_tsina"></a>
+			<a class="jiathis_button_tqq"></a>
+			<a class="jiathis_button_weixin"></a>
+			<a class="jiathis_button_renren"></a>
+			<a href=" " class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			<a class="jiathis_counter_style"></a>
+	</div><br>
+		<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8">
+		</script>
+</div>
+</div>
+<div class="ui_title mt20">
+</div>
+<div class="mt20">
+<iframe src="http://static.meishichina.com/v3/t2_2.html?id=468627" width="640" height="90" scrolling="no" frameborder="0"></iframe>
+</div>
+<div class="recipeComment mt30 emoticon" id="comment">
+					<div data-dom="wrap" class="comment-wrap publisher">
+						<form action="{:url('cai/saveComment')}" method="post" onsubmit="return false;">
+						<div class="comment-post comment-add " data-dom="add">
+							{if !$Think.session.uid}
+							<div class="comment-login" title="请先登录"></div>
+							<div class="comment-login-text" title="请先登录">
+								<a href="{:url('user/loginInfo')}" class="J_event" data-type="login">登录</a>后参与讨论，发表评论
+							</div> 
+							{/if}
+							<div class="comment-post-loading"></div>
+							<i class="arrow"></i>
+							<div class="comment-post-text s">
+								<div class="comment-post-text-inner ">
+									<p><textarea class="text ui-webkit-scrollbar post-comment" name="content" title="Ctrl+Enter 也可提交哦"></textarea></p>
+									<p><a class="trigger" href="javascript:;">☺</a></p>
+								</div>	
+								
+							</div>
+							<div class="comment-post-tools clear">
+								<div class="right">
+										<a href="javascript:void(0);" class="comment-btn J_event comment-btn-post" data-type="add_submit" style="height: 33px;border: 0;">发表评论</a>
+								</div>
+							</div>
+						</div>
+						</form>
+						<div class="comment-nav mt20" data-dom="nav">
+							<div class="left">最新评论 <strong>（<span data-dom="recordCount">{$reply_num}</span>）</strong></div>
+						</div>
+						<div class="comment-cid mt10" data-dom="lookReply">
+							<a href="#">您正在查看回复评论, 点击查看全部评论</a>
+						</div>
+						<div class="comment-list mt10">
+							{if condition="empty($reply_data)"}
+
+							<div class="data-error" data-dom="error" style="display: none;"></div>
+							<div class="comment-loading" data-dom="loading">还没有人评论，抢占第一条吧~</div>
+							<script type="text/javascript">
+								$.emoticons({
+											'activeCls':'trigger-active',
+											'path':'__IMG__' + '/image/'
+										},function(api){
+										});
+							</script>
+							{else /}
+							<div data-dom="list">
+								<ul style="">
+									{foreach $reply_data as $key => $value}
+									<li id="J_comment_item_14550369" data-id="14550369">
+										<div class="pic">
+											<a href="http://home.meishichina.com/space-9993160.html" target="_blank" title="点击进入 {$value['username']} 的主页">
+												<img class="imgLoad" src="{$value['photo']}" width="48" height="48" style="display: block;">
+											</a>
+										</div>
+										<div class="detail">
+											<div class="tools">
+												<div class="left">
+													<a title="点击进入 {$value['username']} 的主页" href="http://home.meishichina.com/space-9993160.html" target="_blank">{$value['username']}
+													</a>
+													<span class="subtime" data-time="1509334157">{$value['create_time']}</span>
+												</div>
+												<div class="right">
+													<a href="javascript:void(0);" class="J_event showReply" data-type="reply">回复</a>
+												</div>
+											</div>
+											<div class="content">
+												{if condition="isset($value['replyToName'])"}
+												<div class="quote">
+													<span class="q">
+													回复：<b>{$value['replyToName']}:</b>&nbsp;&nbsp;{$value['oldContent']}</span>
+												</div>
+												{/if}
+												<div class="reply">
+												</div><span style="display: none;">{$value['content']}</span>
+											</div>
+											<div class="comment-post comment-reply " data-dom="reply" style="display:none;">
+												<div class="comment-post-loading"></div>
+												<i class="arrow"></i>
+												<div class="comment-post-text">
+													<div class="comment-post-text-inner">
+														<p><textarea class="text ui-webkit-scrollbar reply-comment" name="content" title="Ctrl+Enter 也可提交哦"></textarea></p>
+													</div>
+												</div>
+												<div class="comment-post-tools clear">
+													
+													<div class="right">
+														<a href="javascript:void(0);" class="tips J_event cancle" data-type="reply_cancel">取消</a>
+														<a href="#" class="comment-btn-reply J_event comment-btn" data-type="reply_submit" data-to="{$value['uid']}" data-tid="{$value['tid']}">回复</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<script>
+										$.emoticons({
+											'activeCls':'trigger-active',
+											'path':'__IMG__' + '/image/'
+										},function(api){
+											var $result = $('.reply');
+												$result.eq({$key}).html(api.format($('.reply').eq({$key}).next('span').html()));
+										});
+									</script>
+									{/foreach}
+
+								</ul>
+								<div>
+									<link rel="stylesheet" type="text/css" href="__CSS__/fenye.css">
+								{$page}
+								</div>
+							</div>
+							{/if}
+						</div>
+						<div class="ui-page mt20" data-dom="page">
+								<div class="ui-page-inner" data-dom="pageInner"></div>
+						</div>
+					</div>
+					
+				</div> 
+	</div>
+
+{include file="public/market_right"}
+</div>
+{include file="public/footer"}
+</div>
+</div>
+
+
+<script type="text/javascript" src="__JS__/all.js"></script>
+<script type="text/javascript" src="__JS__/msc-tools-date.js"></script>
+<!-- <script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/msc-ui-lookImg.js?v=2016-10-25"></script> -->
+<script type="text/javascript" src="__JS__/msc-ui-smilies.js"></script>
+<script type="text/javascript" src="__JS__/msc-tools-comment.js?v=20170329"></script>
+<script type="text/javascript">	
+msc.goTop.init();
+msc.user.init();
+$("img.imgLoad").imgLoad();
+//搜索
+$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});
+/*
+	$(window).scroll(function() {
+		var omng = $(".keyshow").eq(0).offset();
+		var jtl = $("#smnbk").offset();
+		if (omng.top < $(document).scrollTop() + 40) {
+			$(".keyshow").css({
+				position: "fixed",
+				top: 40,
+				margin: 0,
+				left: omng.left
+			});
+		} else if (omng.top < jtl.top + 10) {
+			$(".keyshow").css({
+				position: "static",
+				margin: "20px 0 0 0"
+			});
+		}
+	});*/
+</script>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=11097"></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<!-- <script type="text/javascript" src="__JS__/blog_action2.js"></script> -->
+<script>
+/*
+$("li.top_bar_more").hoverDelay(function(){
+$("li.top_bar_more div").show();
+},function(){
+$("li.top_bar_more div").hide();
+},200,200);*/
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script> </body>
+</html>
+<script type="text/javascript">
+	$(function(){
+	var lid = $('#now_id').html();
+	$('.comment-btn').click(function(){
+		//console.log($('.text').val());
+		//console.log($('#now_id').html());
+		if($('#now_uid').length != 0){
+			var uid = $('#now_uid').text();
+		}
+		var content = $('.post-comment').val();
+		
+		var post_data;
+		if($(this).hasClass('comment-btn-post')){ 
+			content = $('.post-comment').val();
+			post_data = {data_id:lid,content:content,uid:uid,type_id:1}
+		}else{
+			content = $('.reply-comment').val();
+			replyto = $(this).attr('data-to');
+			totid = $(this).attr('data-tid');
+			post_data = {data_id:lid,content:content,uid:uid,type_id:1,replyto:replyto,totid:totid}
+		}
+		$.post("{:url('market/saveComment')}",post_data,function(data){
+			//console.log(data);
+			if(data){
+				alert('回复成功');
+				window.location.reload();
+			}else{
+				alert('回复失败');
+			}
+		},'json');
+	});
+	$('.showReply').click(function(){
+		console.log($(this).parents('.detail').find('.comment-reply'));
+		$(this).parents('.detail').find('.comment-reply').show();
+	});
+	$('.cancle').click(function(){
+		//console.log($(this).parents('.comment-reply'));
+		$(this).parents('.comment-reply').hide();
+	});
+	var goodclick = 0;
+	if($('.recipeArction .praise_flag').text() === '1'){
+				$('.lik .words').text('已喜欢');
+				//console.log('kl');
+	}
+	$('.go_login').click(function(){
+		if($('#now_uid').length == 0){
+			$(this).children('a').attr('href',"{:url('user/loginInfo')}");
+		}else{
+			//console.log($('.recipeArction .praise_flag').text());
+			//console.log($('.lik span').text());
+			if($(this).hasClass('lik')){
+				if($('.lik .words').text() == '已喜欢'){
+
+				}else{
+					$.post("{:url('market/clickgood')}",{uid:$('#now_uid').text(),data_id:lid,type_id:1},function(data){
+						console.log(data);
+						if(data){
+							//window.location.reload();
+							$('.lik .words').text('已喜欢');
+							var newnum = parseInt($('.lik .num').text()) + 1;
+							$('.lik .num').text(newnum);
+						}else{
+							alert('点赞失败');
+						}
+					},'json');
+				}
+			}
+		}		
+	});
+})
+</script>

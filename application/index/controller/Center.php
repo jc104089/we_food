@@ -8,6 +8,7 @@ use app\index\model\LogInfo;
 use app\index\model\Board;
 use app\index\model\Book;
 use app\index\model\BookInfo;
+use app\index\model\Save;
 use  \think\Session;
 use  \think\Validate;
 use lib\Phoneyz;
@@ -18,12 +19,14 @@ class Center extends Controller
 	protected $log;
 	protected $board;
 	protected $book;
+	protected $saveCai;
 	public function _initialize()
 	{
 		$this->user = new UserModel();
 		$this->log  = new Log();
 		$this->board = new Board();
 		$this->book = new Book();
+		$this->saveCai = new Save();
 		if(!Session::has('uid')){
 			Session::delete('uid');
 			Session::delete('username');
@@ -186,10 +189,12 @@ class Center extends Controller
 	//日志页
 	public function addhuati()
 	{
-		$data = $this->log->select();
+		$data = $this->log->where('status',1)->paginate(1);
+		$page = $data->render();
 		//dump($data);		
 		$data = $this->changeMoreData($data,'loginfo','lid');
 		//dump($data);
+		$this->assign('page',$page);
 		$this->assign('aeq',2);
 		$this->assign('data',$data);
 		return $this->fetch();
@@ -210,7 +215,6 @@ class Center extends Controller
 			$logInfo = new LogInfo;
 			$logInfo->content = $content;
 			$logInfo->img_url = $img_url;
-			$logInfo->type = 0;
 			$this->log->logInfo = $logInfo;
 			$this->log->together('logInfo')->save();
 			$lid = $this->log->lid;
@@ -228,8 +232,9 @@ class Center extends Controller
 	{
 		$lid = $this->request->param('lid');
 		if($lid){
-			$result = $this->log->together('logInfo')->destroy($lid);
-			if($result){
+			$result1 = $this->log->destroy($lid);
+			$result = LogInfo::destroy(['l_id'=>$lid]);
+			if($result&&$result1){
 				echo 1;
 			}else{
 				echo 0;
@@ -276,12 +281,19 @@ class Center extends Controller
 	//菜谱页
 	public function caipu()
 	{
-		$cai_board = $this->board->where('parent_id',4)->select();
-		$data = $this->book->where('uid',Session::get('uid'))->select();
+		/*$board_style = $this->board->where('parent_id',12)->select();
+		$board_tyle = $this->board->where('parent_id',13)->select();*/	
+		$allClass = $this->board->allClass();
+		//dump($allClass);die;	
+		$data = $this->book->where('uid',Session::get('uid'))->paginate(1);
+		$page = $data->render();
 		$data = $this->changeMoreData($data,'bookInfo','cid');
-		//dump($data);
+		//dump($data);die;
 		$this->assign('aeq',1);
-		$this->assign('cai_board',$cai_board);
+		/*$this->assign('board_style',$board_style);
+		$this->assign('board_tyle',$board_tyle);*/
+		$this->assign('page',$page);
+		$this->assign('allClass',$allClass);
 		$this->assign('data',$data);
 		return $this->fetch();
 	}
@@ -289,9 +301,10 @@ class Center extends Controller
 	public function postCai()
 	{
 		$data = $this->request->param();
+		$data['board_id'] = join(',',$data['board_id']);
 		$tips = $data['tips'];
 		$content = $data['content'];
-		//dump($data);
+		//dump($data);die;
 		$path = $this->getUpload('photo');
 		//dump($path);
 		if($path){
@@ -320,8 +333,43 @@ class Center extends Controller
 	{
 		$cid = $this->request->param('cid');
 		if($cid){
-			$result = $this->book->together('bookInfo')->destroy($cid);
-			if($result){
+			$result1 = $this->book->destroy($cid);
+			$result = BookInfo::destroy(['c_id'=>$cid]);
+			if($result&&$result1){
+				echo 1;
+			}else{
+				echo 0;
+			}
+		}else{
+			echo 0;
+		}
+	}
+	//收藏页
+	public function mySave()
+	{
+		$data = $this->saveCai->where('u_id',Session::get('uid'))->paginate(2);
+		$page = $data->render();
+		$all_data = [];
+		foreach ($data as $key => $value) {
+			$cai_data = $this->book->where('cid',$value['data_id'])->find();
+			$cai_data = $this->changeOneData($cai_data,'bookInfo');
+			$cai_data['username'] = $this->user->where('uid',$cai_data['uid'])->value('username');
+			$cai_data['save_id'] = $value['id'];		
+			$all_data[$key] = $cai_data;
+		}
+		//dump($all_data);
+		$this->assign('page',$page);
+		$this->assign('all_data',$all_data);
+		$this->assign('aeq',3);
+		return $this->fetch();
+	}
+	//删除收藏
+	public function delSave()
+	{
+		$id = $this->request->param('id');
+		if($id){
+			$result = $this->saveCai->destroy($id);
+			if ($result) {
 				echo 1;
 			}else{
 				echo 0;

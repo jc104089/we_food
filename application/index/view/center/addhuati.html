@@ -6,8 +6,10 @@
 <meta name="renderer" content="webkit">
 <meta name="keywords" content="">
 <meta name="description" content="" />
+<link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/center_all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/fenye.css">
 <script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
 </head>
 <body>
@@ -37,14 +39,14 @@
 				{if $data}
 				{foreach $data as $key => $value}
 			<li data-id="" style="margin-top: 20px;background: #F8F8F8;">
-				<div class="cpai">
+				<div class="cpai" style="display: inline-block;width: 900px; ">
 					<div class="pp">
 						
 					 		<div class="data-title" style="height:30px;width:100px;line-height: 30px;overflow: hidden;text-overflow: ellipsis;font-weight: bold;font-size: 16px;">
 					 			<a href="" target="_blank">{$value['title']}</a>
-								<span class="right"><input type="button" name="delete" value="删除" style="border-radius: 5px;background: #FF6767;cursor: pointer;width: 40px;height: 25px;line-height: 25px;">
+								<!-- <span class="right"><input type="button" name="delete" value="删除" style="border-radius: 5px;background: #FF6767;cursor: pointer;width: 40px;height: 25px;line-height: 25px;">
 									<span style="display: none;">{$value['lid']}</span>
-								</span>
+								</span> -->
 					 		</div>
 					 		{if array_key_exists('content',$value)}
 					 		<span style="display: none;" class="old-data">{$value['content']}</span>
@@ -60,9 +62,13 @@
 						{/if}
 					</div>
 					<div class="substatus clear">
-					{$value['create_time']}&nbsp;&nbsp;<span class="get_nums">{$value['goodnum']}人喜欢&nbsp;&nbsp;
-					{$value['talknum']}人评论</span>
+					{$value['create_time']}&nbsp;&nbsp;&nbsp;&nbsp;{$value['goodnum']}人喜欢&nbsp;&nbsp;&nbsp;&nbsp;
+					{$value['talknum']}人评论
 					</div>
+					
+				</div>
+				<div class="right delDiv" style="width: 180px;text-align: center; display: table-cell; vertical-align: middle;">
+				<a class="del" href="javascript:void(0);"  data-id="{$value['lid']}" style="border: 1px solid #999;border-radius: 5px;color: #999;display: block;font-size: 14px;height: 30px;line-height: 30px;margin: 15px auto;text-decoration: none;vertical-align: middle;width: 90px;">移除</a>
 				</div>
 			</li>
 			{/foreach}
@@ -75,6 +81,7 @@
 			</div>
 			{/if}
 			</ul>
+			<div>{$page}</div>
 		</div>
 	</div>
 	<div class="posthua" style="display: none;">
@@ -94,6 +101,7 @@
 	</div>
 </div><!-- 右侧结束 -->
 </div>
+{include file="public/footer"}
 <script type="text/javascript" src="__JS__/all.js"></script>
 
 <!--  <script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/jquery.dragsort.js"></script>
@@ -158,10 +166,22 @@
     $('.showhua').hide();
 
   }
+  $('.showhua li').each(function(){
+  	//console.log();
+  	$('.delDiv').css('marginTop',($(this).height())/3);
+  });
   $('.data-content').text($('.old-data').text()); 
-  $('input[name=delete]').click(function(){
+  $('.del').mouseover(function(){
+  	$(this).css({'background':'#FF6767','color':'white'});
+  });
+  $('.del').mouseout(function(){
+  	$(this).css({'background':'white','color':'#999999'});
+  });
+ 
+//  $('.delDiv').css('marginTop','');
+  $('.del').click(function(){
   	//console.log($(this).next('span').text());
-  	$.post("{:url('index/center/deHuati')}",{lid:$(this).next('span').text()},function(data){
+  	$.post("{:url('index/center/deHuati')}",{lid:$(this).attr('data-id')},function(data){
   		if(data){
   			alert('删除成功');
   			window.location.reload();
@@ -170,4 +190,5 @@
   		}
   	},'json');
   });
+
 </script>

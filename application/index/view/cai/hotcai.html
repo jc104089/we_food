@@ -41,7 +41,7 @@
 		background-color: #FDEDA4;
 		color: #333;
 	}
-		.all-classify{
+	.all-classify{
 		min-height: 270px;
 		width: 990px; 
 		border: 1px solid #CCC;
@@ -64,7 +64,7 @@
 	.all-classify-one li:first-child{
 		font-size: 16px;
 	}
-	.home_index_slider{
+	.main_body{
 		position: relative;
 		z-index: 1;
 	}
@@ -76,7 +76,8 @@
 {include file="public/cai_header"}	
 <div class="wrap" >
 	<div class="w clear">
-		<div class="all-classify classify" style="display:block;">
+		<!--无限分类 -->
+		<div class="all-classify classify" style="display:none;">
 			{if $all_classify}
 			{foreach $all_classify as $key => $value}
 			<ul class="all-classify-one classify">
@@ -90,7 +91,7 @@
 			{/foreach}
 			{/if}
 		</div>
-		<div>
+		<div class="main_body">
 			<div class="space_left">
 				<div class="ui_newlist_1 get_num" id="J_list">
 					<ul>
@@ -100,13 +101,13 @@
 
 						<li data-id="354246">
 							<div class="pic">
-								<a target="_blank" href="{:url('index/index/hotcai',['cid'=>$value['cid']])}" title="{$value['bookname']}">
+								<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}">
 								<img width="180" height="180" src="{$value['photo']}" class="imgLoad">
 								</a>
 							</div>
 							<div class="detail">
 								<h2>
-								<a target="_blank" href="{:url('index/index/hotcai',['cid'=>$value['cid']])}">{$value['bookname']}</a>
+								<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}">{$value['bookname']}</a>
 								</h2>
 								<p class="subline"><a target="_blank" href="http://home.meishichina.com/space-9993160.html">{$value['username']}</a></p>
 								<!-- <p class="subcontent">原料：杏鲍菇、青椒、红椒、红萝卜、水发木耳、葱、蒜子、姜、郫县豆瓣酱、生抽、料酒、米醋、白糖、鸡粉、生粉、水、盐。</p> -->
@@ -167,17 +168,6 @@
 	$('.logo_nav a:first').removeClass('on');
 	$('.logo_nav a:last').addClass('on');
 	// 分类显示关闭
-	var timer;
-	$('.classify').mouseover(function(){
-		clearTimeout(timer);
-		$('.all-classify').slideDown();
-	});
-	$('.classify').mouseout(function(){
-		timer = setTimeout(function(){
-			$('.all-classify').slideUp();
-		},2000);
-		
-	});
 	var timer;
 	$('.classify').mouseover(function(){
 		clearTimeout(timer);

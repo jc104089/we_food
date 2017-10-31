@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我收藏的菜谱 - 美食天下</title>
+<meta name="renderer" content="webkit">
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/center_all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/fenye.css">
+<script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+
+<!-- 主框架 -->
+<div class="w_main clear">
+{include file="public/center_left"}
+
+
+ <!-- 右侧 -->
+<div class="mod_right">
+
+<div id="mod_location">
+<div class="mod_location clear">
+
+<div class="left">
+<a class=on>我收藏的菜谱</a>
+</div>
+</div>
+</div>
+
+
+<div>
+<div class="ui_newlist_1 get_num mt60 clear" id="J_list">
+
+<ul>
+{if $all_data}	
+{foreach $all_data as $value}
+<li data-id="{$value['save_id']}">
+<div class="left">
+<div class="pic">
+<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
+<img class="imgLoad" src="{$value['photo']}" width="180" height="180" />
+</a>
+</div>
+
+<div class="detail">
+<h2>
+<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">{$value['bookname']}</a>
+</h2>
+<p class="subline"><a href="http://home.meishichina.com/space-135243.html" target="_blank">{$value['username']}</a></p>
+<p class="subcontent" style="width: 700px;overflow: hidden;text-overflow: ellipsis;">原料：{$value['material']|trim}</p>
+<div>{$value['goodnum']}人喜欢&nbsp;&nbsp;{$value['savenum']}人收藏</div>
+<div class="substatus clear">
+<span class="get_nums"></span>
+</div>
+</div>
+
+</div>
+<div class="right">
+<a class="del" href="javascript:void(0);"  data-id="{$value['save_id']}">移除</a>
+</div>
+</li>
+{/foreach}
+{else /}
+<div class="ui_newlist_1 get_num mt60 clear" id="J_list">
+	<div class="ui_no_data">
+		<p>您还没有收藏菜谱噢，快点<a href="{:url('cai/caipu')}">去收藏菜谱</a>吧！
+		</p>
+	</div>
+</div>
+{/if}
+</ul>
+
+</div>
+	<div>{$page}</div>	
+</div>					
+				
+
+
+<input type="hidden" name="uid" value="10557663">
+
+		</div><!-- 右侧结束 -->
+</div>
+<script type="text/javascript" src="__JS__/all.js"></script>
+<script type="text/javascript">
+/*msc.user.init();
+$("img.imgLoad").imgLoad();*/
+</script>
+<script type="text/javascript" src="__JS__/get_num.js"></script>
+<script type="text/javascript">
+/*$(".get_num li").get_num('recipe');*/
+
+
+</script>
+
+<script>
+
+/*$("li.top_bar_more").hoverDelay(function(){
+$("li.top_bar_more div").show();
+},function(){
+$("li.top_bar_more div").hide();
+},200,200);
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();*/
+</script>
+<script>
+/*(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();*/
+</script> </body>
+</html>
+<script type="text/javascript">
+	$('.del').click(function(){
+		var id = $(this).attr('data-id');
+		$.post("{:url('center/delSave')}",{id:id},function(data){
+			console.log(data);
+			if(data){
+				alert('删除成功');
+				window.location.reload();
+			}else{
+				alert('删除失败');
+			}
+		},'json');
+	});
+</script>
+
+
+
+ 
+
