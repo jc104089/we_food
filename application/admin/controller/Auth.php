@@ -9,13 +9,38 @@ use app\admin\model\Admin;
 use app\admin\model\Admin_login;
 use app\admin\model\Role;
 use app\admin\model\Image;
+use app\admin\model\User;
+use app\admin\model\UserInfo;
+use app\admin\model\Board;
+use app\admin\model\Material;
+use app\admin\model\Book;
+use app\admin\model\BookInfo;
+use app\admin\model\Message;
+use app\admin\model\Comment;
+use app\admin\model\Log;
+use app\admin\model\LogInfo;
+use app\admin\model\Link;
+use app\admin\model\Webset;
 
 class Auth extends Controller
 {
 	protected $admin;
 	protected $adminlogin;
 	protected $image;
+	protected $role;
 	protected $is_login = [''];
+	protected $user;
+	protected $userInfo;
+	protected $board;
+	protected $material;
+	protected $book;
+	protected $bookInfo;
+	protected $message;
+	protected $comment;
+	protected $log;
+	protected $logInfo;
+	protected $link;
+	protected $webset;
 
 	public function _initialize()
 	{
@@ -23,6 +48,18 @@ class Auth extends Controller
 		$this->adminlogin = new Admin_login();
 		$this->image = new Image();
 		$this->role = new Role();
+		$this->user = new User();
+		$this->userInfo = new UserInfo();
+		$this->board = new Board();
+		$this->material = new Material();
+		$this->book = new Book();
+		$this->bookInfo = new BookInfo();
+		$this->message = new Message();
+		$this->comment = new Comment();
+		$this->log = new Log();
+		$this->logInfo = new LogInfo();
+		$this->link = new Link();
+		$this->webset = new Webset();
 		if(!$this->checklogin() && in_array('*',$this->is_login)){
 			$this->error('没有登录请登录',url('admin/auth/login'));
 		}else{			
@@ -63,7 +100,8 @@ class Auth extends Controller
 									 'password'=>$userpwd,
 									 'islock' =>0,
 									])->find();
-		if($res){
+		//dump($res);die;
+		if(!empty($res)){
 			$aid = $res->aid;
 			$name = $res->username;
 			//登录记录

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+{include file="public/header" /}
+</head>
+
+<body class="user-select">
+<section class="container-fluid">
+  <header>
+     <!-- 顶部一行 -->
+    {include file="public/top" /}
+  </header>
+  <div class="row">
+    <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
+      {include file="public/left" /}
+    </aside>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+      <h1 class="page-header">修改栏目</h1>
+      <form action="{:url('column/updateColumn')}" method="post">
+        <div class="form-group">
+          <label for="category-name">栏目名称</label>
+          <input type="text" id="category-name" name="name" value="{$res.name}" class="form-control" placeholder="在此处输入栏目名称" required autocomplete="off">
+          <input type="hidden" name="id" value="{$res.id}" />
+          <span class="prompt-text">这将是它在站点上显示的名字。</span> </div>
+        <div class="form-group">
+          <label for="category-fname">父节点</label>
+          <select id="category-fname" class="form-control" name="fid">
+            <option value="4" selected>菜谱</option>
+           {if $all_classify}
+              {foreach $all_classify as $v}
+                <option value="{$v.id}">{$v.name}</option>
+              {/foreach}
+            {/if}
+          </select>
+          <span class="prompt-text">栏目是有层级关系的，您可以有一个“音乐”分类目录，在这个目录下可以有叫做“流行”和“古典”的子目录。</span> </div>
+        <div class="form-group">
+          <label for="category-keywords">关键字</label>
+          <input type="text" id="category-keywords" name="keywords" value="" class="form-control" placeholder="在此处输入栏目关键字" autocomplete="off">
+          <span class="prompt-text">关键字会出现在网页的keywords属性中。</span> </div>
+        <button class="btn btn-primary" type="submit" name="submit">更新</button>
+      </form>
+    </div>
+  </div>
+</section>
+{include file="public/footer" /}
+</body>
+</html>

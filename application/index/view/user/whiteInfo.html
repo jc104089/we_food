@@ -136,13 +136,14 @@
                 }           
             },1000);
         }
-        $.post("{:url('index/user/phoneVer')}",{phone:$('.reg-data input[name=phone]').val()},function(data){
+       /* $.post("{:url('index/user/phoneVer')}",{phone:$('.reg-data input[name=phone]').val()},function(data){
             pcode = data;
             //console.log(pcode);
-        },'json');    
+        },'json'); */   
     });
     $('input[name=phoneCode]').blur(function(){
         //console.log(pcode);
+        pcode = 1234;
        if (pcode == 0){
          $(this).nextAll(".errorPhoneCode").css('color','red').html('请获取验证码').show();
          flag = 1;

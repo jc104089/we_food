@@ -7,80 +7,52 @@
 <body class="user-select">
 <section class="container-fluid">
   <header>
-     <!-- 顶部一行 -->
+    <!-- 顶部一行 -->
     {include file="public/top" /}
   </header>
   <div class="row">
     <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
+      <!-- 左侧目录 -->
      {include file="public/left" /}
     </aside>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
       <div class="row">
-        <form action="/Article/update" method="post" class="add-article-form">
+        <form action="{:url('article/addShicai')}" method="post" class="add-article-form">
           <div class="col-md-9">
-            <h1 class="page-header">文章修改</h1>
+            <h1 class="page-header">撰写新文章</h1>
             <div class="form-group">
               <label for="article-title" class="sr-only">标题</label>
-              <input type="text" id="article-title" name="title" class="form-control" placeholder="在此处输入标题" value="这是测试的文章标题这是测试的文章标题这是测试的文章标题这是测试的文章标题" required autofocus autocomplete="off">
+              <input type="text" id="article-title" name="title" class="form-control" placeholder="在此处输入标题" required autofocus autocomplete="off">
             </div>
             <div class="form-group">
               <label for="article-content" class="sr-only">内容</label>
-              <script id="article-content" name="content" type="text/plain">这是测试的文章内容这是测试的文章内容这是测试的文章内容这是测试的文章内容这是测试的文章内容这是测试的文章内.</script>
+              <script id="article-content" name="content" type="text/plain"></script>
             </div>
             <div class="add-article-box">
               <h2 class="add-article-box-title"><span>关键字</span></h2>
               <div class="add-article-box-content">
-              	<input type="text" class="form-control" placeholder="请输入关键字" value="测试,文章" name="keywords" autocomplete="off">
+              	<input type="text" class="form-control" placeholder="请输入关键字" name="keywords" autocomplete="off">
                 <span class="prompt-text">多个标签请用英文逗号,隔开。</span>
-              </div>
-            </div>
-            <div class="add-article-box">
-              <h2 class="add-article-box-title"><span>描述</span></h2>
-              <div class="add-article-box-content">
-              	<textarea class="form-control" name="describe" autocomplete="off">这是测试的文章描是测试的文章描述这是测试的文章描述这是测试的文章描述这是测试的文章描述这是测试的文章描述这是测试的文章描述</textarea>
-                <span class="prompt-text">描述是可选的手工创建的内容总结，并可以在网页描述中使用</span>
               </div>
             </div>
           </div>
           <div class="col-md-3">
             <h1 class="page-header">操作</h1>
             <div class="add-article-box">
-              <h2 class="add-article-box-title"><span>栏目</span></h2>
+              <h2 class="add-article-box-title"><span>所属分类</span></h2>
               <div class="add-article-box-content">
                 <ul class="category-list">
+                  {if $res}
+                  {foreach $res as $va}
                   <li>
                     <label>
-                      <input name="category" type="radio" value="1">
-                      这是栏目 <em class="hidden-md">( 栏目ID: <span>1</span> )</em></label>
+                      <input name="category" type="radio" value="{$va.id}" checked>
+                      {$va.name}<em class="hidden-md">( 栏目ID: <span>{$va.id}</span> )</em></label>
                   </li>
-                  <li>
-                    <label>
-                      <input name="category" type="radio" value="2">
-                      这是栏目 <em class="hidden-md">( 栏目ID: <span>2</span> )</em></label>
-                  </li>
-                  <li>
-                    <label>
-                      <input name="category" type="radio" value="3" checked>
-                      这是栏目 <em class="hidden-md">( 栏目ID: <span>3</span> )</em></label>
-                  </li>
-                  <li>
-                    <label>
-                      <input name="category" type="radio" value="4">
-                      这是栏目 <em class="hidden-md">( 栏目ID: <span>4</span> )</em></label>
-                  </li>
-                  <li>
-                    <label>
-                      <input name="category" type="radio" value="5">
-                      这是栏目 <em class="hidden-md">( 栏目ID: <span>5</span> )</em></label>
-                  </li>
+                  {/foreach}
+                  {/if}
                 </ul>
               </div>
-            </div>
-            <div class="add-article-box">
-              <h2 class="add-article-box-title"><span>标签</span></h2>
-              <div class="add-article-box-content">
-                <input type="text" class="form-control" placeholder="输入新标签" value="测试,文章" name="tags" autocomplete="off">
-                <span class="prompt-text">多个标签请用英文逗号,隔开</span> </div>
             </div>
             <div class="add-article-box">
               <h2 class="add-article-box-title"><span>标题图片</span></h2>
@@ -93,13 +65,8 @@
             </div>
             <div class="add-article-box">
               <h2 class="add-article-box-title"><span>发布</span></h2>
-              <div class="add-article-box-content">
-              	<p><label>状态：</label><span class="article-status-display">已发布</span></p>
-                <p><label>公开度：</label><input type="radio" name="visibility" value="0" checked/>公开 <input type="radio" name="visibility" value="1" />加密</p>
-                <p><label>发布于：</label><span class="article-time-display"><input style="border: none;" type="datetime" name="time" value="2016-01-09 17:29:37" /></span></p>
-              </div>
               <div class="add-article-box-footer">
-                <button class="btn btn-primary" type="submit" name="submit">更新</button>
+                <button class="btn btn-primary" type="submit" name="submit">发布</button>
               </div>
             </div>
           </div>

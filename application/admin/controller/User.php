@@ -9,7 +9,7 @@ use app\admin\model\Admin_login;
 class User extends Auth
 {
 	protected $is_login = ['*'];
-	//管理员信息修改（个人修改，还没判断）
+	//管理员信息修改
 	public function update_admin()
 	{
 
@@ -153,6 +153,36 @@ class User extends Auth
 			echo 0;
 		}
 	}
+	//禁用和解锁普通用户
+	public function lockUser()
+	{
+		$userId = $this->request->param();
+		$uid = $userId['userid'];
+		//dump($uid);
+		$res = $this->userInfo->where('u_id',$uid)->value('islock');
+		if($res == 0){
+			$this->userInfo->save(['islock'=>1],['u_id'=>$uid]);
+			echo 1;
+		}else{
+			$this->userInfo->save(['islock'=>0],['u_id'=>$uid]);
+			echo 0;
+		}
+	}
+	//禁用和解锁VIP用户
+	public function lockVip()
+	{
+		$userId = $this->request->param();
+		$uid = $userId['userid'];
+		//dump($uid);
+		$res = $this->userInfo->where('u_id',$uid)->value('islock');
+		if($res == 0){
+			$this->userInfo->save(['islock'=>1],['u_id'=>$uid]);
+			echo 1;
+		}else{
+			$this->userInfo->save(['islock'=>0],['u_id'=>$uid]);
+			echo 0;
+		}
+	}
 	//修改管理员权限（还没加判断）
 	public function change_role()
 	{
@@ -190,12 +220,6 @@ class User extends Auth
 		Session::clear();
 		$this->success('退出成功',url('admin/auth/login'));
 	}
-	//分页
-	public function paging()
-	{
-		
-	}
-
 	public function changeOneData($user)
 	{
 		if(empty($user)){
@@ -209,6 +233,31 @@ class User extends Auth
 			return $all;
 		}
 		
+	}
+	//删除普通用户
+	public function deleteUser()
+	{
+		$data = $this->request->param();
+		//dump($data);
+		$uid = $data['uid'];
+		$id = $this->userInfo->where('u_id',$uid)->value('id');
+		//dump($id);die;
+		$result = $this->user->destroy($uid);
+
+		$res = $this->userInfo->destroy($id);
+		$this->redirect('index/manage_user');
+	}
+	//删除VIP
+	public function deleteVip()
+	{
+		$data = $this->request->param();
+		//dump($data);
+		$uid = $data['uid'];
+		// 查询
+		$result = $this->user->destroy(['uid'=>$uid]);
+		// 删除当前及关联模型
+		$res = $this->userInfo->destroy(['u_id'=>$uid]);
+		$this->redirect('index/manage_vip');		
 	}
 
 }

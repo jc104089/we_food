@@ -3,15 +3,13 @@ namespace app\admin\model;
 
 use think\Model;
 use traits\model\SoftDelete;
-
-class User extends Model
+class LogInfo extends Model
 {
 	use SoftDelete;
 	protected $deleteTime = 'delete_time';
-	//用户和其子表的一对一关联
-	public function userInfo()
+	public function log()
 	{
-		return $this->hasOne('UserInfo','u_id');
+		return $this->belongsTo('Log','l_id');
 	}
-	
+
 }
