@@ -40,10 +40,25 @@ class Article extends Auth
 	//食材页面便利
 	public function material()
 	{
-		$list = $this->material->paginate(1);
+		$info = $this->request->param('content');
+		//dump($info);
+		if(!empty($info)){
+			//dump($info);die;
+			//$content = $info['content'];
+			$where['name'] = ['like',"%"."$info"."%"]; 
+			$data = $this->material->where($where)->paginate(2);
+			//dump($data);die;
+			$page = $data->render();
+			$list = [];
+				if(!empty($data)){
+				$list = $data;				
+				}
+		}else{
+		$list = $this->material->paginate(2);
 		$page = $list->render();
 		//dump($list);
 		//dump($page);die;
+		}
 		$this->assign('material',$list);
 		$this->assign('materialPage',$page);
 		return $this->fetch();
@@ -102,31 +117,71 @@ class Article extends Auth
 	{
 		$count = $this->book->bookInfo()->count('c_id');
 		//dump($count);
-		$list = $this->book->bookInfo()->paginate(2);
-		$page = $list->render();
-		//dump($list);die;
-		$list = $this->changeMoreData($list,'book','c_id');
-		$list = $this->selectName($list);
-		$this->assign('count',$count);
-		$this->assign('BookList',$list);
-		$this->assign('BookPage',$page);
-		//dump($list);die;
-		return $this->fetch();
+		$info = $this->request->param('content');
+		//dump($info);
+		if(!empty($info)){
+			//dump($info);die;
+			//$content = $info['content'];
+			$where['bookname'] = ['like',"%"."$info"."%"]; 
+			$data = $this->book->where($where)->paginate();
+			//dump($data);die;
+			//$list = $this->book->bookInfo()->paginate(2);
+			$page = $data->render();
+			//dump($data);die;
+			$list = [];
+				if(!empty($data)){
+				$list = $data;
+				$list = $this->changeMoreData($list,'bookInfo','c_id');
+
+				$list = $this->selectName($list);				
+				}
+		}else{
+			$list = $this->book->bookInfo()->paginate(2);
+			$page = $list->render();
+			//dump($list);die;
+			$list = $this->changeMoreData($list,'book','c_id');
+			$list = $this->selectName($list);
+		}
+			$this->assign('count',$count);
+			$this->assign('BookList',$list);
+			$this->assign('BookPage',$page);
+			//dump($list);die;
+			return $this->fetch();
 	}
 	//所有的日志的遍历
 	public function log()
 	{
 		$count = $this->log->logInfo()->count('l_id');
 		//dump($count);
-		$list = $this->log->logInfo()->paginate(2);
-		$page = $list->render();
-		$list = $this->changeMoreData($list,'log','l_id');
-		$list = $this->selectUserName($list);
-		//dump($list);die;
-		$this->assign('logCount',$count);
-		$this->assign('logPage',$page);
-		$this->assign('logList',$list);
-		return $this->fetch();
+		$info = $this->request->param('content');
+		//dump($info);
+		if(!empty($info)){
+			//dump($info);die;
+			//$content = $info['content'];
+			$where['title'] = ['like',"%"."$info"."%"]; 
+			$data = $this->log->where($where)->paginate();
+			//dump($data);die;
+			//$list = $this->book->bookInfo()->paginate(2);
+			$page = $data->render();
+			//dump($data);die;
+			$list = [];
+				if(!empty($data)){
+				$list = $data;
+				$list = $this->changeMoreData($list,'logInfo','l_id');
+
+				$list = $this->selectUserName($list);				
+				}
+		}else{
+			$list = $this->log->logInfo()->paginate(2);
+			$page = $list->render();
+			$list = $this->changeMoreData($list,'log','l_id');
+			$list = $this->selectUserName($list);
+		}
+			//dump($list);die;
+			$this->assign('logCount',$count);
+			$this->assign('logPage',$page);
+			$this->assign('logList',$list);
+			return $this->fetch();
 	}
 	//审核单个日志页面遍历
 	public function checkLog()

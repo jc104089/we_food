@@ -191,10 +191,30 @@ class Index extends Auth
 	{
 		$count = $this->user->userInfo()->where('utype',0)->count('u_id');
 		//dump($count);
-		$list = $this->user->userInfo()->where('utype',0)->paginate(1);
-		$page = $list->render();
-		//dump($list);die;
-		$list = $this->changeMoreData($list,'user','u_id');
+		$info = $this->request->param('content');
+		//dump($info);
+		if(!empty($info)){
+			//dump($info);die;
+			//$content = $info['content'];
+			//$list = $this->user->userInfo()->where('utype',0)->paginate(1);
+			$where['username'] = ['like',"%"."$info"."%"];
+			//$where['utype'] = 0;
+			$data = $this->user->where($where)->paginate(1);
+			//dump($data);die;
+			$page = $data->render();
+			$list = [];
+				if(!empty($data)){
+				$list = $data;
+				$list = $this->changeMoreData($list,'userInfo','u_id');
+				//dump($list);die;
+				//$list = $this->selectName($list);				
+				}
+		}else{
+			$list = $this->user->userInfo()->where('utype',0)->paginate(1);
+			$page = $list->render();
+			//dump($list);die;
+			$list = $this->changeMoreData($list,'user','u_id');
+		}
 		//die;
 		//dump($page);
 		$this->assign('count',$count);

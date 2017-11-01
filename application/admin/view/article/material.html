@@ -15,9 +15,9 @@
      {include file="public/left" /}
     </aside>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
-        <form action="" method="post" class="navbar-form navbar-right" role="search">
+        <form action="{:url('article/material')}" method="post" class="navbar-form navbar-right" role="search">
         <div class="input-group" style="margin-top: -10px;">
-          <input type="text" class="form-control" autocomplete="off" placeholder="键入名称搜索" maxlength="15">
+          <input type="text" class="form-control" autocomplete="off" placeholder="键入名称搜索" maxlength="15" name="content">
           <span class="input-group-btn">
           <button class="btn btn-default" type="submit">搜索</button>
           </span> 
@@ -54,6 +54,8 @@
                 <td><a href="{:url('article/update_article',['fid'=>$value.fid])}">修改</a> <a href="{:url('article/deleteMaterial',['fid'=>$value.fid])}">删除</a></td>
               </tr>
               {/foreach}
+              {else /}
+                <tr><td>没有查询到相关的内容</td></tr>
               {/if}
             </tbody>
           </table>

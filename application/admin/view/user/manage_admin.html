@@ -17,7 +17,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
         <form action="" method="post" class="navbar-form navbar-right" role="search">
         <div class="input-group" style="margin-top: -10px;">
-          <input type="text" class="form-control" autocomplete="off" placeholder="键入关键字搜索" maxlength="15">
+          <input type="text" class="form-control" autocomplete="off" placeholder="键入关键字搜索" maxlength="15" name="content">
           <span class="input-group-btn">
           <button class="btn btn-default" type="submit">搜索</button>
           </span> 
@@ -41,6 +41,7 @@
               </tr>
             </thead>
             <tbody>
+              {if $manage_list}
               {foreach $manage_list as $vo}
               <tr>
                 <td class="getId">{$vo.aid}</td>
@@ -51,7 +52,9 @@
                 <td><a href="{:url('user/delete_admin',['aid'=>$vo.aid])}">删除</a> <a href="javascript:void(0);" class="lockadmin">{$vo.islock}</a><span style="display: none;">{$vo.aid}</span></td>
               </tr>
               {/foreach}
-              
+              {else /}
+                <tr><td>没有查询到相关的内容</td></tr>
+              {/if}
             </tbody>
           </table>
           <div class="manage_page" style="float: right;margin-right: 150px;">{$manage_page}</div>

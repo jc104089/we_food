@@ -65,11 +65,27 @@ class User extends Auth
 	//管理员列表（boos专有权限  管理管理员  增删查  改（在个人信息里修改））
 	public function manage_admin()
 	{
+
 		$count = $this->admin->count('aid');
+		$info = $this->request->param('content');
+		//dump($info);
+		if(!empty($info)){
+			//dump($info);die;
+			//$content = $info['content'];
+			$where['username'] = ['like',"%"."$info"."%"]; 
+			$data = $this->admin->where($where)->paginate(2);
+			//dump($data);die;
+			$page = $data->render();
+			$list = [];
+				if(!empty($data)){
+				$list = $data;				
+				}
+		}else{
 		 $list = $this->admin->paginate(2);
 		 //dump($list);die;
 		// // //dump(getLastSql());
 		 $page = $list->render();
+		}
 		// dump($page);die;
 		$this->assign('admin_count',$count);
 		$this->assign('manage_list',$list);
@@ -217,7 +233,8 @@ class User extends Auth
 	//退出
 	public function doOut()
 	{
-		Session::clear();
+		Session::delete('id');
+		Session::delete('username');
 		$this->success('退出成功',url('admin/auth/login'));
 	}
 	public function changeOneData($user)

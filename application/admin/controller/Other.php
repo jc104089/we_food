@@ -22,9 +22,10 @@ class Other extends Auth
 		return $this->fetch();
 	}
 	//添加轮播图
-	public function add_img()
+	public function addImg()
 	{
 		$data = $this->request->param();
+		//dump($data);die;
 		// 获取表单上传文件 例如上传了001.jpg
 		$file = request()->file('photo');
 		// 移动到框架应用根目录/public/uploads/ 目录下
@@ -54,7 +55,7 @@ class Other extends Auth
 		}
 	}
 	//删除轮播图
-	public function delete_img()
+	public function deleteImg()
 	{
 		$data = $this->request->param();
 		$pid = $data['pid'];
