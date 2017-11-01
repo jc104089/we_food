@@ -4,26 +4,95 @@ namespace app\index\controller;
 use think\Controller;
 use app\index\model\User as UserModel;
 use app\index\model\Webset;
+use app\index\model\Log;
+use app\index\model\Book;
+use app\index\model\LogInfo;
+use app\index\model\BookInfo;
+use app\index\model\Save;
+
 use  think\Session;
 use lib\Phoneyz;
+use lib\SaeTClientV2;
+use lib\SaeTOAuthV2;
 
 class User extends Controller
 {
 	protected $user;
+	protected $log;
+	protected $book;
+	
 	public function _initialize()
 	{
 		$this->user = new UserModel();
+		$this->log = new Log();
+		$this->book = new Book();
+		
 		
 	}
-	// 注册
+	// 注册页
 	public function whiteInfo()
 	{
 		return $this->fetch();
 	}
-	// 登录
+	// 登录页
 	public function loginInfo()
 	{
 		return $this->fetch('user/loginnew');
+	}
+	//个人信息
+	public function userdata()
+	{
+		$uid = $this->request->param('uid');
+		if(empty($uid)){
+			abort(404,'页面不存在');
+		}else{
+			$type     = $this->request->param('type');
+			$type     = $type ? $type : 0;
+			//查用户信息
+			$u_info   = $this->user->find($uid);
+			$u_info   = $this->changeOneData($u_info,'userInfo');
+			//dump($u_info);die;
+			// 查日志
+			$log_data = $this->log->where('u_id',$uid)->where('status','neq',0)->paginate(6);
+			$page_log = $log_data->render();
+			$log_data = $this->changeMoreData($log_data,'logInfo','lid',true);
+			$log_num  = count($log_data);
+			//dump($log_data);die;
+			// 查菜谱
+			$cai_data = $this->book->where('uid',$uid)->where('status','neq',0)->paginate(6);
+			$page_cai = $cai_data->render();
+			$cai_data = $this->changeMoreData($cai_data,'bookInfo','cid');
+			$cai_num  = count($cai_data);
+			//dump($cai_data);die;
+			// 查收藏
+			$save_id   = Save::where('u_id',$uid)->paginate(6);
+			$page_save = $save_id->render();
+			$save_num  = count($save_id);
+			$save_data = [];
+			if($save_id){
+				foreach ($save_id as $key => $value) {
+					$one_data = $this->book->where('cid',$value['data_id'])->find();
+					$one_data = $this->changeOneData($one_data,'bookInfo');
+					$save_data[$key] = $one_data;
+				}
+			}			
+			
+			$this->assign([
+				'type'       => $type,
+				'u_info'     => $u_info,
+				'log_data'   => $log_data,
+				'log_num'    => $log_num,
+				'cai_data'   => $cai_data,
+				'cai_num'    => $cai_num,
+				'save_num'   => $save_num,
+				'save_data'  => $save_data,
+				'page_log'   => $page_log,
+				'page_cai'   => $page_cai,
+				'page_save'  => $page_save,
+			]);
+			return $this->fetch();
+		}
+		
 	}
 	// 退出
 	public function quit()
@@ -36,24 +105,6 @@ class User extends Controller
 			$this->error('退出失败');
 		} 
 	}
-    public function test()
-    {
-
-		$this->user->data([
-		'username' => 'thinkphp2',
-		'password' => 'thinkphp@qq.com',
-		'phone'	   => '13333333333',
-		]);
-		$this->user->allowField(true)->save();
-		$user = $this->user->uid;
-		//dump($user);
-		$result = $this->user->where('uid',1)->find();
-		dump($result->username);
-		/*$newUser = $this->user->find($user);
-		// 如果还没有关联数据 则进行新增
-
-		$newUser->userInfo()->save(['phone' => '13333333333']);*/
-    }
     // 验证
     public function reg()
     {
@@ -184,34 +235,51 @@ class User extends Controller
 		}
 
 	}
-	public function changeMoreData($user)
+	public function changeMoreData($user,$ar,$id,$img = false)
 	{
 		$data = [];
 		if(empty($user)){
 			return false;
 		} else {
 			foreach ($user as $key => $value) {
-				$value->userInfo;
+				$value->$ar;
 				$value = $value->toArray();
-				//dump($value);
+				//dump($value);die;
 				$childInfo = array_pop($value);
-				$all = array_merge($value,$childInfo);
-				$data[$all['uid']] = $all;
+				if(is_array($childInfo)){
+					$all = array_merge($value,$childInfo);
+				} else{
+					$all = $value;
+				}	
+				//dump($all);die;
+				if($img){
+					if (strpos($all['img_url'],';')) {
+						$all['oneimg_url'] = substr($all['img_url'], 0,strpos($all['img_url'],';'));
+					}else{
+						$all['oneimg_url'] = $all['img_url'];
+					}
+				}
+				//dump($all);die;			
+				$data[$all[$id]] = $all;
 			}
+			//dump($data);die;
 			return $data;
-		}
-		
+		}		
 	}
-	public function changeOneData($user)
+	public function changeOneData($user,$ar)
 	{
 		if(empty($user)){
 			return false;
 		} else {
-			$user->userInfo;
+			$user->$ar;
 			$user = $user->toArray();
 			//dump($user);
 			$childInfo = array_pop($user);
-			$all = array_merge($user,$childInfo);
+			if(is_array($childInfo)){
+				$all = array_merge($user,$childInfo);
+			}else {
+				$all = $user;
+			}			
 			return $all;
 		}
 		

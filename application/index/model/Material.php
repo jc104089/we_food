@@ -4,8 +4,8 @@ use think\Model;
 use traits\model\SoftDelete;
 
 
-class Praise extends Model
+class Material extends Model
 {
-	use SoftDelete;
+    use SoftDelete;
 	protected $deleteTime = 'delete_time';
 }

@@ -45,8 +45,8 @@ class Market extends Controller
 		//取日志中的一张图
 		$log_data = [];
 		foreach ($data as $key => $value) {
-			if (strpos($value['img_url'],',')) {
-				$value['img_url'] = substr($value['img_url'], 0,strpos($value['img_url'],','));
+			if (strpos($value['img_url'],';')) {
+				$value['img_url'] = substr($value['img_url'], 0,strpos($value['img_url'],';'));
 			}
 			$log_data[$key] = $value;
 		}
@@ -77,7 +77,7 @@ class Market extends Controller
 			$l_data['username'] = $name->username;
 			//dump($name);die;
 			$l_data['photo'] = $name->userInfo->photo;
-			//dump($l_data);
+			//dump($l_data);die;
 			//查回复
 			$where['type_id'] = 1;
             $where['data_id'] = $lid;

@@ -18,37 +18,37 @@
 				width: 525px;
 				margin-bottom:20px;
 			}
-			.emoticons .publisher{
+	.emoticons .publisher{
 				padding-bottom: 10px;
 				margin-bottom: 10px;
 				border-bottom: 1px dotted #dbdbdb;
 			}
-			.emoticons .publisher textarea{
+	.emoticons .publisher textarea{
 				width: 500px;
 				height: 140px;
 				padding: 5px 10px;
 				border: 1px solid #dbdbdb;
 				resize: none;
 			}
-			.emoticons .publisher .trigger{
+	.emoticons .publisher .trigger{
 				font-size: 24px;
 				font-weight: bold;
 				color: #666;
 			}
-			.emoticons .publisher .trigger-active{
+	.emoticons .publisher .trigger-active{
 				color: #eb7350;
 			}
-			.emoticons .result{
+	.emoticons .result{
 				padding: 10px 15px;
 				border: 1px dotted #dbdbdb;
 				margin-top: 10px;
 				height: 150px;
 				line-height: 24px;
 			}
-			.emoticons .result img{
+	.emoticons .result img{
 				vertical-align: middle;
 			}
-			.widget-layer{
+	.widget-layer{
 				position: relative;
 				width: 410px;
 				margin-top: 8px;
@@ -56,7 +56,7 @@
 				border: 1px solid #dbdbdb;
 				border-radius: 2px;
 			}
-			.widget-layer:before{
+	.widget-layer:before{
 				position: absolute;
 				top: -16px;
 				left: 2px;
@@ -67,7 +67,7 @@
 				border: 8px solid transparent;
 				border-bottom-color: #dbdbdb;
 			}
-			.widget-layer:after{
+	.widget-layer:after{
 				position: absolute;
 				top: -15px;
 				left: 2px;
@@ -78,11 +78,11 @@
 				border: 8px solid transparent;
 				border-bottom-color: #f0f0f0;
 			}
-			.widget-layer .widget-tool{
+	.widget-layer .widget-tool{
 				height: 28px;
 				background: #f0f0f0;
 			}
-			.widget-layer .widget-close{
+	.widget-layer .widget-close{
 				float: right;
 				width: 28px;
 				height: 28px;
@@ -90,13 +90,13 @@
 				text-align: center;
 				font-family: Arial;
 			}
-			.widget-layer ul{
+	.widget-layer ul{
 				width: 372px;
 				margin: 0 auto;
 				padding: 15px 5px 20px;
 				overflow: hidden;
 			}
-			.widget-layer li{
+	.widget-layer li{
 				position: relative;
 				z-index: 8;
 				float: left;
@@ -108,14 +108,41 @@
 				border: 1px solid #e8e8e8;
 				cursor: pointer;
 			}
-			.widget-layer li:hover{
+	.widget-layer li:hover{
 				z-index: 9;
 				border-color: #eb7350;
 			}
-			.recipeStep img{
+	.recipeStep img{
 				width: 220px;
 				height: 294px;
 			}
+	.all-classify{
+		min-height: 270px;
+		width: 990px; 
+		border: 1px solid #CCC;
+		border-top: none;
+		position: absolute;
+		z-index: 10;
+		top:2px;
+		background: white;
+	}
+	.all-classify-one{
+		float: left;
+		width: 165px;
+
+	}
+	.all-classify-one li{
+		text-align: center;
+		line-height: 30px;
+		height:30px;
+	}
+	.all-classify-one li:first-child{
+		font-size: 16px;
+	}
+	.main_body{
+		position: relative;
+		z-index: 1;
+	}
 </style>
 </head>
 <body>
@@ -150,14 +177,14 @@
 			</ul>
 			{/foreach}
 			{/if}
-		</div>
-<div>
+	</div>
+<div class="main_body">
 	<div class="space_left">
 		<div class="userTop clear">
 			<h1 class="recipe_De_title"><a href="{:url('cai/recipe',['cid'=>$cai_data['cid']])}" id="recipe_title" title="{$cai_data['bookname']}">{$cai_data['bookname']}</a>
 			</h1>
 			<span id="now_id" style="display: none;">{$cai_data['cid']}</span>
-			<a title="{$cai_data['username']}" href="http://home.meishichina.com/space-8330558.html" target="_blank" class="uright">
+			<a title="{$cai_data['username']}" href="{:url('user/userdata',['uid'=>$cai_data['uid']])}" target="_blank" class="uright">
 			<span class="userName" id="recipe_username">{$cai_data['username']}</span>
 			</a>
 		</div>
@@ -271,14 +298,14 @@
 									{foreach $reply_data as $key => $value}
 									<li id="J_comment_item_14550369" data-id="14550369">
 										<div class="pic">
-											<a href="http://home.meishichina.com/space-9993160.html" target="_blank" title="点击进入 {$value['username']} 的主页">
+											<a href="{:url('user/userdata',['uid'=>$value['uid']])}" target="_blank" title="点击进入 {$value['username']} 的主页">
 												<img class="imgLoad" src="{$value['photo']}" width="48" height="48" style="display: block;">
 											</a>
 										</div>
 										<div class="detail">
 											<div class="tools">
 												<div class="left">
-													<a title="点击进入 {$value['username']} 的主页" href="http://home.meishichina.com/space-9993160.html" target="_blank">{$value['username']}
+													<a title="点击进入 {$value['username']} 的主页" href="{:url('user/userdata',['uid'=>$value['uid']])}" target="_blank">{$value['username']}
 													</a>
 													<span class="subtime" data-time="1509334157">{$value['create_time']}</span>
 												</div>
@@ -327,7 +354,7 @@
 		<div class="ui_title mt20 clear">
 			<div class="ui_title_wrap">
 			<h3 class="on">最受欢迎的菜谱</h3>
-			<a title="家常菜谱大全" href="http://home.meishichina.com/recipe-menu.html" class="right" target="_blank">更多</a>
+			<a title="家常菜谱大全" href="{:url('cai/caipu')}" class="right" target="_blank">更多</a>
 			</div>
 		</div>
 		<div class="gongxiao_r mt10">
@@ -351,7 +378,7 @@
 
 <!----> <script type="text/javascript" src="__JS__/get_num.js"></script> 
 
-<script type="text/javascript" src="__JS__/recipe_navlist.js?v=1"></script>
+<!-- <script type="text/javascript" src="__JS__/recipe_navlist.js?v=1"></script> -->
  <script type="text/javascript">	
 msc.goTop.init();
 msc.user.init();
@@ -393,6 +420,17 @@ var _hmt = _hmt || [];
 </html>
 <script type="text/javascript">
 $(function(){
+	var timer;
+	$('.classify').mouseover(function(){
+		clearTimeout(timer);
+		$('.all-classify').slideDown();
+	});
+	$('.classify').mouseout(function(){
+		timer = setTimeout(function(){
+			$('.all-classify').slideUp();
+		},2000);
+		
+	});
 	var cid = $('#now_id').html();
 	$('.comment-btn').click(function(){
 		console.log($('.text').val());

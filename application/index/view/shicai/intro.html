@@ -1,0 +1,121 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>牛肉的认识与选购技巧_怎么挑选_美食天下</title>
+<link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/category2_1.css">
+<script type="text/javascript" src="__JS__/dfp-list-5.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="w logo_wrap2">
+<div class="logo_inner left">
+<a href="/" title="美食天下">美食天下</a>
+</div>
+<div class="logo_current left">
+<h1><a href="{:url('shicai/base')}" title="食材">食材</a></h1>
+</div>
+<div class="logo_search right">
+<form id="form_search" action="http://home.meishichina.com/search/" method="post" target="_blank">
+<div class="searchBox J_search"><a href="javascript:;" title="搜索" class="search_Btn J_searchBTN right" id="search">搜索</a><input type="text" id="q" class="search_Text J_searchTxt right gay" data-first="on">
+</div>
+</form>
+</div>
+<div class="logo_nav">
+<a class=on href="{:url('shicai/base')}">食材首页<i></i><b></b></a>
+</div>
+</div>
+<div class="nav_wrap2">
+<ul>
+<li><a href="{:url('shicai/base')}" class="on" data-board="0">首页</a></li>
+<li><a title="肉禽类" href="{:url('shicai/base',['board_id'=>9])}" data-board="9">肉禽类</a></li>
+<li><a title="水产类" href="{:url('shicai/base',['board_id'=>10])}" data-board="10">水产类</a></li>
+<li><a title="蔬菜水果类" href="{:url('shicai/base',['board_id'=>11])}" data-board="11">蔬菜水果类</a></li>
+<span style="display: none;" class="board-param">{$board_id}</span>
+</ul>
+</div>
+<div class="w mt10 clear" style="height:90px;overflow:hidden;">
+<iframe width="100%" height="90" frameborder="0" scrolling="no" src="http://static.meishichina.com/v3/t1_1.html"></iframe>
+</div>
+<div class="w clear collect_d" style="border:none">
+<div class="collect_dp">
+<a title="{$shi_data['name']}" href="#"><img alt="{$shi_data['name']}" id="category_pic" class="imgLoad" src="{$shi_data['img_url']}" width=90 height=90></a>
+<h1><a title="{$shi_data['name']}" href="#" id="category_title">{$shi_data['name']}</a></h1>
+<span>为你介绍{$shi_data['name']}相关信息</span>
+</div>
+</div>
+<div class="wrap">
+<div class="w clear">
+<div class="space_left">
+<div class="ui_title" style="border-top:1px solid #EEEEEE;">
+</div>
+<div>
+{if $shi_data['img_url']}
+<div><img src="{$shi_data['img_url']}" alt="{$shi_data['name']}" width=640 height=400></div>
+{/if}
+{$shi_data['content']}
+</div>
+</div>
+</div>
+
+</div>
+<div class="space_right">
+</div>
+</div>
+</div>
+
+{include file="public/footer"}
+<script type="text/javascript" src="__JS__/all.js"></script>
+<script type="text/javascript">	
+msc.goTop.init();
+msc.user.init();
+$("img.imgLoad").imgLoad();
+
+	$(window).scroll(function() {
+		var omng = $(".keyshow").eq(0).offset();
+		var jtl = $("#smnbk").offset();
+		 if(omng){
+		if (omng.top < $(document).scrollTop() + 40) {
+			$(".keyshow").css({
+				position: "fixed",
+				top: 40,
+				margin: 0,
+				left: omng.left
+			});
+		} else if (omng.top < jtl.top + 200) {
+			$(".keyshow").css({
+				position: "static",
+				margin: "5px 0 0 0"
+			});
+		}
+		}
+	});
+$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});</script>
+<script type="text/javascript" src="__JS__/category_action2.js"></script>
+<script>
+
+$("li.top_bar_more").hoverDelay(function(){
+$("li.top_bar_more div").show();
+},function(){
+$("li.top_bar_more div").hide();
+},200,200);
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script> </body>
+</html>

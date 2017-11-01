@@ -1,0 +1,101 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>菜谱大全_美食天下</title>
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/recipe2.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
+<script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="w logo_wrap2">
+<div class="logo_inner left">
+<a href="/" title="美食天下">美食天下</a>
+</div>
+<div class="logo_current left">
+<h1><a href="{:url('shicai/base')}" title="食材">食材</a></h1>
+</div>
+<div class="logo_search right">
+<form id="form_search" action="http://home.meishichina.com/search/" method="post" target="_blank">
+<div class="searchBox J_search"><a href="javascript:;" title="搜索" class="search_Btn J_searchBTN right" id="search">搜索</a><input type="text" id="q" class="search_Text J_searchTxt right gay" data-first="on">
+</div>
+</form>
+</div>
+<div class="logo_nav">
+<a class=on href="{:url('shicai/base')}">食材首页<i></i><b></b></a>
+</div>
+</div>
+<div class="nav_wrap2">
+<ul>
+<li><a href="{:url('shicai/base')}" class="on" data-board="0">首页</a></li>
+<li><a title="肉禽类" href="{:url('shicai/base',['board_id'=>9])}" data-board="9">肉禽类</a></li>
+<li><a title="水产类" href="{:url('shicai/base',['board_id'=>10])}" data-board="10">水产类</a></li>
+<li><a title="蔬菜水果类" href="{:url('shicai/base',['board_id'=>11])}" data-board="11">蔬菜水果类</a></li>
+<span style="display: none;" class="board-param">{$board_id}</span>
+</ul>
+</div>
+<div class="wrap">
+<div class="w clear">
+
+<div class="big4_list clear mt10" id="recipeindex_living">
+<ul class="on">
+	{if $meta_data}
+	{foreach $meta_data as $value}
+<li style="display: none;">
+	
+<a title="{$value['name']}" href="{:url('shicai/intro',['fid'=>$value['fid'],'board_id'=>$value['board_id']])}" target="_blank">
+<i>
+<img alt="{$value['name']}" class="imgLoad" src="{$value['img_url']}">
+</i>
+<p>{$value['name']}</p>
+</a>
+</li>
+{/foreach}
+{/if}
+</ul>
+
+
+</div>
+<div class="ui-loading mt10" id="recipeindex_living_loading"> <a href="javascript:void(0);" class="">查看更多</a> </div>
+</div>
+</div>
+
+{include file="public/footer"}
+<script type="text/javascript" src="__JS__/all.js"></script>
+<script type="text/javascript" src="__JS__/get_num.js"></script>
+<script type="text/javascript" src="__JS__/recipe_navlist.js"></script>
+<script type="text/javascript">	
+msc.goTop.init();
+msc.user.init();
+$("img.imgLoad").imgLoad();
+//搜索
+$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});
+</script>
+<script src="__JS__/slider2.js" type="text/javascript"></script>
+</script> 
+</body>
+</html>
+<script type="text/javascript">
+	var objLi = $('#recipeindex_living li');
+	//console.log(objLi);
+	var num = 0;
+	showLi();
+	function showLi() {
+		for (var i = 0; i < 4; i++) {
+			objLi.eq(num).show();
+			num++;
+		}
+	}
+	$('#recipeindex_living_loading a').click(function(){
+		showLi();
+	});
+	$('.nav_wrap2 li a').each(function(){
+		if($(this).attr('data-board') == $('.board-param').text()){
+			$(this).addClass('on');
+		}else{
+			$(this).removeClass('on');
+		}
+	});
+</script>

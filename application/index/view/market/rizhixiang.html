@@ -153,7 +153,7 @@
 		<div class="userTop clear">
 			<h1><a title="{$l_data['title']}" id="blog_title" href="{:url('market/rizhixiang',['lid'=>$l_data['lid']])}">{$l_data['title']}</a></h1>
 			<span id="now_id" style="display: none;">{$l_data['lid']}</span>
-			<a class="uright" target="_blank" href="http://home.meishichina.com/space-34360.html" title="{$l_data['username']}">
+			<a class="uright" target="_blank" href="{:url('user/userdata',['uid'=>$l_data['u_id']])}" title="{$l_data['username']}">
 			<img src="{$l_data['photo']}">
 			<span id="blog_username" class="userName">{$l_data['username']}</span>
 			</a>
@@ -239,14 +239,14 @@
 									{foreach $reply_data as $key => $value}
 									<li id="J_comment_item_14550369" data-id="14550369">
 										<div class="pic">
-											<a href="http://home.meishichina.com/space-9993160.html" target="_blank" title="点击进入 {$value['username']} 的主页">
+											<a href="{:url('user/userdata',['uid'=>$l_data['u_id']])}" target="_blank" title="点击进入 {$value['username']} 的主页">
 												<img class="imgLoad" src="{$value['photo']}" width="48" height="48" style="display: block;">
 											</a>
 										</div>
 										<div class="detail">
 											<div class="tools">
 												<div class="left">
-													<a title="点击进入 {$value['username']} 的主页" href="http://home.meishichina.com/space-9993160.html" target="_blank">{$value['username']}
+													<a title="点击进入 {$value['username']} 的主页" href="{:url('user/userdata',['uid'=>$l_data['u_id']])}" target="_blank">{$value['username']}
 													</a>
 													<span class="subtime" data-time="1509334157">{$value['create_time']}</span>
 												</div>

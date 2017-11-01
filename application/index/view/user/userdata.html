@@ -1,0 +1,325 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$u_info['username']}的个人主页_美食天下</title>
+<link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/space.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/fenye.css">
+<script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div class="space_wrap">
+<div class="space_info w">
+<div class="mod clear">
+<div class="pic">
+<a href="{:url('user/userdata',['uid'=>$u_info['uid']])}"><img class="imgLoad" src="{$u_info['photo']}" width="150" height="150" alt=""></a>
+</div>
+<div class="detail">
+<div class="subname">
+<em><a href="{:url('user/userdata',['uid'=>$u_info['uid']])}">{$u_info['username']}</a></em>
+<span style="display: none;" class="sex">{$u_info['sex']}</span>
+<i class="space_icon"></i>
+<br>
+<i class="messagenum">{$u_info['create_time']}加入</i>
+</div>
+<div class="subtools clear">
+<!-- <div class="subbtn left" style="display:none">
+<a href="javascript:void(0);" id="sixin" class="letter" data-id="10313803"><i class="space_icon"></i>发私信</a>
+</div> -->
+<div class="right">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="space_nav_wrap">
+	<span style="display: none;">{$type}</span>
+<ul>
+<li><a title="主页" href="{:url('user/userdata',['uid'=>$u_info['uid']])}" class="on" status=0>主页</a></li>
+<li><a title="菜谱" href="{:url('user/userdata',['uid'=>$u_info['uid'],'type'=>1])}" status=1>菜谱</a></li>
+
+<li><a title="日志" href="{:url('user/userdata',['uid'=>$u_info['uid'],'type'=>2])}" status=2>日志</a></li>
+
+<li><a title="收藏" href="{:url('user/userdata',['uid'=>$u_info['uid'],'type'=>3])}" rel="nofollow" status=3>收藏</a></li>
+
+</ul>
+</div>
+<div class="wrap">
+<div class="w clear">
+	<div class="first" data-status="1" >
+		{if $cai_data}
+		<div class="ui_title mt10">
+		<div class="ui_title_wrap clear">
+		<h3 class="on">{$u_info['username']}的菜谱</h3>
+		<a target="_blank" class="right" href="{:url('user/userdata',['uid'=>$u_info['uid'],'type'=>1])}">共{$cai_num}篇</a>
+		</div>
+		</div>
+		<div class="big4_list clear mt10">
+				<ul>
+					{foreach $cai_data as $value}
+				<li>
+				<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
+				<i>
+				<img alt="{$value['bookname']}" class="imgLoad" src="{$value['photo']}">
+				</i>
+				<p>{$value['bookname']}</p>
+				</a>
+				</li>
+				{/foreach}
+				</ul>
+		</div>
+		{/if}
+	</div>
+	<div class="second" style="display:none ;" data-status="1">
+		{if $cai_data}
+		<div class="ui_title mt10">
+		<div class="ui_title_wrap clear">
+		<h3 class="on">{$u_info['username']}的菜谱</h3>
+		<a target="_blank" class="right" href="{:url('user/userdata',['uid'=>$u_info['uid'],'type'=>1])}">共{$cai_num}篇</a>
+		</div>
+		</div>
+		<div class="ui_newlist_1 get_num" >
+			<ul>
+				{foreach $cai_data as $value}
+				<li data-id="356122">
+				<div class="pic">
+				<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}">
+				<img width="180" height="180" src="{$value['photo']}" class="imgLoad">
+				</a>
+				</div>
+				<div class="detail">
+				<h2>
+				<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}">{$value['bookname']}</a>
+				{if condition="$value['status'] == 2"}
+				<span class="essence">&nbsp;精</span>
+				{/if}
+				</h2>
+				<p class="subline">{$value['create_time']}</p>
+				<p class="subcontent">原料：{$value['material']|trim}</p>
+				<div class="substatus clear">
+				<span class="get_nums">{$value['goodnum']}人点赞，{$value['savenum']}人收藏</span>
+				</div>
+				</div>
+				</li>
+				{/foreach}
+			</ul>
+			<div>{$page_cai}</div>
+		</div>
+		{/if}
+	</div>
+	<div class="first" data-status="2">
+		{if $log_data}
+		<div class="ui_title mt10">
+		<div class="ui_title_wrap clear">
+		<h3 class="on">{$u_info['username']}的日志</h3>
+		<a target="_blank" class="right" href="{:url('user/userdata',['uid'=>$u_info['uid'],'type'=>2])}">共{$log_num}个</a>
+		</div>
+		</div>
+		<div class="pin_list clear">
+			<ul>
+				
+				{foreach $log_data as $value}
+			<li>
+			<div class="u">
+			<a href="{:url('user/userdata',['uid'=>$u_info['uid']])}" target="_blank">
+				<img width="40" height="40" class="imgLoad" src="{$u_info['photo']}">
+			</a>
+			<div>
+			<a href="{:url('user/userdata',['uid'=>$u_info['uid']])}" class="t" target="_blank">{$u_info['username']}</a>
+			<span>{$value['create_time']}</span>
+			</div>
+			</div>
+			<div class="c clear">
+			<div class="pp"><a href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank"><strong>{$value['title']}</strong>
+				{if condition="$value['status'] == 2"}
+				<span class="essence">&nbsp;精</span>
+				{/if}
+				<br><span style="float: left;width: 440px;overflow: hidden;text-overflow: ellipsis;">{$value['content']}</span></a></div>
+			<a class="clear" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">
+				{if condition="!empty($value['oneimg_url'])"}
+			<img class="imgLoad" src="{$value['oneimg_url']}">
+				{/if}
+			</a>
+			<span>{$value['goodnum']}个喜欢，{$value['talknum']}条评论</span>
+			</div>
+			</li>
+			{/foreach}
+
+			</ul>
+		</div>
+		{/if}
+	</div>
+	<div class="second" style="display: none;" data-status="2">
+		{if $log_data}
+		<div class="ui_title mt10">
+		<div class="ui_title_wrap clear">
+		<h3 class="on">{$u_info['username']}的日志</h3>
+		<a target="_blank" class="right" href="{:url('user/userdata',['uid'=>$u_info['uid'],'type'=>2])}">共{$log_num}个</a>
+		</div>
+		</div>
+		<div class="ui_newlist_1 list_blog get_num">
+			<ul>
+				{foreach $log_data as $value}
+				<li data-id="1005471">
+				<div class="pic">
+				<a target="_blank" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" title="{$value['title']}">
+					{if condition="!empty($value['oneimg_url'])"}
+				<img width="180" height="135" src="{$value['oneimg_url']}" class="imgLoad">
+					{/if}
+				</a>
+				</div>
+				<div class="detail">
+				<h2>
+				<a target="_blank" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" title="{$value['title']}">{$value['title']}</a>
+				{if condition="$value['status'] == 2"}
+				<span class="essence">&nbsp;精</span>
+				{/if}
+				</h2>
+				<p class="subline">{$value['create_time']}</p>
+				<p style="display: none;" class="detachimg">{$value['content']}</p>
+				<p class="subcontent showcontent"></p>
+				<script type="text/javascript">
+					$('.showcontent').text($('.detachimg').text());
+				</script>
+				</div>
+				</li>
+				{/foreach}
+			</ul>
+			<div>{$page_log}</div>
+		</div>
+		{/if}
+	</div>
+	<div class="first" data-status="3" >
+		{if $save_data}
+		<div class="ui_title mt10">
+		<div class="ui_title_wrap clear">
+		<h3 class="on">{$u_info['username']}收藏的菜谱</h3>
+		<a target="_blank" class="right" href="{:url('user/userdata',['uid'=>$u_info['uid'],'type'=>3])}">共{$save_num}篇</a>
+		</div>
+		</div>
+		<div class="big4_list clear mt10">
+			<ul>
+				{foreach $save_data as $value}
+			<li>
+			<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
+			<i>
+			<img alt="{$value['bookname']}" class="imgLoad" src="{$value['photo']}">
+			</i>
+			<p>{$value['bookname']}</p>
+			</a>
+			</li>
+			{/foreach}
+			</ul>
+		</div>
+		{/if}
+	</div>
+	<div class="second" data-status="3" style="display: none;
+	">
+		{if $save_data}
+		<div class="ui_title mt10">
+		<div class="ui_title_wrap clear">
+		<h3 class="on">{$u_info['username']}收藏的菜谱</h3>
+		<a target="_blank" class="right" href="{:url('user/userdata',['uid'=>$u_info['uid'],'type'=>3])}">共{$save_num}篇</a>
+		</div>
+		</div>
+		<div class="ui_newlist_1 get_num" >
+			<ul>
+				{foreach $save_data as $value}
+				<li data-id="356122">
+				<div class="pic">
+				<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}">
+				<img width="180" height="180" src="{$value['photo']}" class="imgLoad">
+				</a>
+				</div>
+				<div class="detail">
+				<h2>
+				<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}">{$value['bookname']}</a>
+				{if condition="$value['status'] == 2"}
+				<span class="essence">&nbsp;精</span>
+				{/if}
+				</h2>
+				<p class="subline">{$value['create_time']}</p>
+				<p class="subcontent">原料：{$value['material']|trim}</p>
+				<div class="substatus clear">
+				<span class="get_nums">{$value['goodnum']}人点赞，{$value['savenum']}人收藏</span>
+				</div>
+				</div>
+				</li>
+				{/foreach}
+			</ul>
+			<div>{$page_save}</div>
+		</div>
+		{/if}
+	</div>
+</div>
+</div>
+{include file="public/footer"}
+<script type="text/javascript" src="__JS__/all.js"></script>
+<script type="text/javascript" src="__JS__/msc-tools-date.js"></script>
+<script type="text/javascript" src="__JS__/space_focus.js"></script>
+<script type="text/javascript" src="__JS__/sixin.js"></script>
+<script type="text/javascript" src="__JS__/charcount.js"></script>
+<script src="__JS__/get.js"></script>
+<script type="text/javascript">
+msc.goTop.init(); 
+$("img.imgLoad").imgLoad();
+</script>
+<script>
+
+$("li.top_bar_more").hoverDelay(function(){
+$("li.top_bar_more div").show();
+},function(){
+$("li.top_bar_more div").hide();
+},200,200);
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script> </body>
+</html>
+<script type="text/javascript">
+	var flag = $('.space_nav_wrap span').text();
+	$('.space_nav_wrap a').each(function(){
+		//console.log($('.space_nav_wrap span').text());
+		if($(this).attr('status') == flag){
+
+			$(this).addClass('on');
+		}else{
+			$(this).removeClass('on');
+		}
+	});
+	if(flag != 0){
+		$('.first').each(function(){
+			$(this).hide();
+		});
+		$('.second').each(function(){
+			if($(this).attr('data-status') == flag){
+				$(this).show();
+			}else{
+				$(this).hide();
+			}
+		});
+	}
+	if($('.sex').text() == 1){
+		$('.space_icon').addClass('man');
+	}else{
+		$('.space_icon').addClass('woman');
+	}
+	
+</script>

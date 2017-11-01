@@ -2,7 +2,7 @@
 	<ul class="bar-left left">
 	<li><a title="美食天下" href="/" target="_blank" class="top_bar_logo"><i>美食天下</i>首页</a></li>
 	<li> <a title="菜谱" href="{:url('Cai/caipu')}" target="_blank">菜谱</a></li>
-	<li> <a title="食材" href=food_fenlei.html target="_blank">食材</a></li>
+	<li> <a title="食材" href="{:url('shicai/base')}" target="_blank">食材</a></li>
 	<li> <a title="vip专区" href="http://www.meishichina.com/mofang/" target="_blank">vip专区</a></li>
 	<li> <a title="社区" href="{:url('market/rizhi')}" target="_blank">社区</a></li>
 
@@ -14,7 +14,7 @@
 		{if $Think.session.uid}
 		<ul class="bar-right left bar-after" style="padding-right: 50px;">
 			<li><a title="欢迎您" class="">欢迎您：</a></li>
-			<li><a class="" title="前往个人中心" style="cursor: pointer" href="{:url('center/info')}">{$Think.session.username}</a></li>
+			<li><a class="" title="个人信息" style="cursor: pointer" href="{:url('user/userdata',['uid'=>$Think.session.uid])}">{$Think.session.username}</a></li>
 			<li><a class="" title="个人中心" style="cursor: pointer" href="{:url('center/info')}">个人中心</a></li>
 			<li><a class="quitLogin" title="退出" style="cursor: pointer" href="{:url('user/quit')}">退出</a></li>
 		</ul>

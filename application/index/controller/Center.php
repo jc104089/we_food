@@ -9,6 +9,7 @@ use app\index\model\Board;
 use app\index\model\Book;
 use app\index\model\BookInfo;
 use app\index\model\Save;
+use app\index\model\Message;
 use  \think\Session;
 use  \think\Validate;
 use lib\Phoneyz;
@@ -20,6 +21,7 @@ class Center extends Controller
 	protected $board;
 	protected $book;
 	protected $saveCai;
+	protected $message;
 	public function _initialize()
 	{
 		$this->user = new UserModel();
@@ -27,6 +29,7 @@ class Center extends Controller
 		$this->board = new Board();
 		$this->book = new Book();
 		$this->saveCai = new Save();
+		$this->message = new Message();
 		if(!Session::has('uid')){
 			Session::delete('uid');
 			Session::delete('username');
@@ -377,5 +380,27 @@ class Center extends Controller
 		}else{
 			echo 0;
 		}
+	}
+	//会员页
+	public function vipcenter()
+	{
+		// 查消息
+		//$message_data = $this->message->where('mid',1)->find();
+		//dump($message_data);die;
+		$uid = Session::get('uid');
+		$message_data = $this->message->where('guid', $uid)->paginate(1);
+		$message_page = $message_data->render();
+		$userdata = $this->user->where('uid',Session::get('uid'))->find();
+		$userdata = $this->changeOneData($userdata,'userInfo');
+		//dump($message_data);die;
+		$this->assign('userdata',$userdata);
+		$this->assign('message_data',$message_data);
+		$this->assign('message_page',$message_page);
+		$this->assign('aeq',0);
+		return $this->fetch();
+	}
+	public function test()
+	{
+		dump($this->request->param());
 	}
 }

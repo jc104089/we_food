@@ -112,7 +112,7 @@
 							</i>
 							<p>{$value['bookname']}</p>
 							</a>
-							<a title="{$value['username']}" href="http://home.meishichina.com/space-8419178.html" target="_blank" class="u">{$value['username']}</a>
+							<a title="{$value['username']}" href="{:url('user/userdata',['uid'=>$value['uid']])}" target="_blank" class="u">{$value['username']}</a>
 						</li>
 					{/foreach}
 					{/if}

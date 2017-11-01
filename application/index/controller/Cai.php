@@ -9,6 +9,8 @@ use app\index\model\Board;
 use app\index\model\Comment;
 use app\index\model\Praise;
 use app\index\model\Save;
+use app\index\model\Log;
+use app\index\model\LogInfo;
 use  \think\Session;
 
 class Cai extends Controller
@@ -18,7 +20,8 @@ class Cai extends Controller
     protected $board;
     protected $comment;
     protected $parise;
-  	protected $saveCai;
+    protected $saveCai;
+  	protected $log;
 	public function _initialize()
 	{
 		$this->book = new Book();
@@ -26,7 +29,8 @@ class Cai extends Controller
         $this->board = new Board();
         $this->comment = new Comment();
         $this->praise = new Praise();
-		$this->saveCai = new Save();
+        $this->saveCai = new Save();
+		$this->log = new Log();
 	}
     //菜谱首页
 	public function caipu()
@@ -41,21 +45,12 @@ class Cai extends Controller
     	$scroll_data = $this->book->field('cid,uid,bookname,photo')->where('cid','in',$all_id)->select();
     	//dump($scroll_data);die;
     	//查找分类版块
-    	$board = $this->board->where('parent_id','in',[12,13])->select();
-    	$board = array_slice($board, 0, 8);
+    	$board = $this->board->boardClass();
     	//查找对应版块内容
     	$status = $this->request->param('status');
     	//dump(is_null($status));
     	$status = is_null($status) ? 0 : $status;
-    	if($status == 0){
-    		$where['status'] = ['=',3];
-    	}else {
-    		$where['status'] = ['neq',0];
-    		if($status != 1){
-    			$where['board_id'] = ['like',"%"."$status"."%"]; 
-    		}
-    	}
-    	$data = $this->book->where($where)->field('cid,uid,bookname,photo')->select();
+    	$data = $this->book->boardData($status);
     	$data = $this->selectName($data);
       //  dump($this->book->getLastSql());
     	//dump($data);die;
@@ -81,8 +76,12 @@ class Cai extends Controller
     	/*dump($page);
     	dump($data);die;*/
     	//查找分类版块
-    	$board = $this->board->where('parent_id','in',[12,13])->select();
-    	$board = array_slice($board, 0, 8);
+    	$board = $this->board->boardClass();
+        //查找日志热门
+        
+        $log_data = $this->log->hotLog();
+       // dump($log_data);die;
+        $this->assign('log_data',$log_data);
     	$this->assign('page',$page);
     	$this->assign('all_classify',$all_classify);
     	$this->assign('board',$board);
@@ -99,8 +98,7 @@ class Cai extends Controller
         }else{
             $all_classify = $this->board->allClass();
             //查找分类版块
-            $board = $this->board->where('parent_id','in',[12,13])->select();
-            $board = array_slice($board, 0, 8);
+             $board = $this->board->boardClass();
             // 查菜谱详情
             $cai_data = $this->book->where('cid',$cid)->find();
            // $cai_data = $this->book->bookInfo;

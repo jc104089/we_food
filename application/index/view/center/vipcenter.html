@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员中心 - 美食天下</title>
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css?a=8">
+<link rel="stylesheet" type="text/css" href="__CSS__/center_all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/center_home.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/fenye.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css">
+<script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
+<style type="text/css">
+  .notice_list i{display:none}
+  .notice_list #J_list li{float:left;display:block;display:table;padding:10px 0;width:100%;border-bottom:1px dotted #d4d4d4}
+  .notice_list .left{width:100%}
+  .notice_list #J_list li .right{float:none;display:inline-block;display:table-cell;width:15%;vertical-align:middle;text-align:center}
+  .notice_list .right a{opacity:0;display:block;margin:15px auto;width:90px;height:30px;border:1px solid #ff6767;border-radius:5px;color:#ff6767;vertical-align:middle;text-decoration:none;font-size:14px;line-height:30px}
+  .notice_list .right a.delete{border:1px solid #999;color:#999}
+  .notice_list .right a.delete:hover,.notice_list .right a:hover{border:1px solid #ff6767;background:#ff6767;color:#fff}
+  .notice_list .pic{float:left;width:48px;height:48px}
+  .notice_list .pic img{border-radius:50%;background:#f2f2f2 url(http://static.meishichina.com/v6/img/loading-16-16.gif) no-repeat scroll center center}
+  .notice_list .detail{padding:0 0 0 58px;font-size:14px}
+  .notice_list .subcontent{height:24px;color:#333;line-height:24px}
+  .notice_list .subtime{color:#999;font-size:12px}
+  .notice_list .subcontent a{padding:0 5px;color:#ff6767}
+  .notice_list a.author{padding-left:0}
+  .notice_list .quote{margin:3px 0;padding:0 0 0 2px;border-left:1px solid #787878;font-size:12px}
+  .notice_list .quote span{display:block;padding:0 5px;border-left:1px solid #787878;color:#787878}
+  .notice_list .quote span a{color:#787878}
+
+  .notice_list #J_list li:hover{background-color:#fafafa}
+  .notice_list #J_list li:hover .right a{opacity:1;}
+  #seeUserInfo{margin:50px auto;width: 50%;}
+</style>
+</head>
+<body>
+<div class="modal fade" id="seeUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <form action="{:url('center/test')}" method="post" enctype="multipart/form-data" onsubmit="return change();">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" >个人信息</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table" style="margin-bottom:0px;">
+            <thead>
+              <tr> </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td wdith="20%">订单号:</td>
+                <td width="80%"><input type="text" value="" id="adminName" class="form-control" name="username" maxlength="10" autocomplete="off" disabled="disabled" />
+                  <input type="hidden" name="p3_Amt" value="" class="dingdanNum">
+                </td>
+              </tr>
+               <tr>
+                <td wdith="20%">支付金额:</td>
+                <td width="80%"><input type="text" value="￥998" class="form-control" name="phone" maxlength="11" autocomplete="off" disabled="disabled" />
+                  <input type="hidden" name="p2_Order" value="0.01"></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr></tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default dingdan" data-dismiss="modal">取消</button>
+          <button type="submit" id="changeSubmit" class="btn btn-primary">提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{include file="public/header"}
+<!-- 主框架 -->
+<div class="w_main clear">
+
+{include file="public/center_left"}
+
+ <!-- 右侧 -->
+<div class="mod_right">
+
+
+<div class="space_info clear">
+
+<div class="pic">
+<a href="{:url('user/userdata',['uid'=>$userdata['uid']])}" target="_blank"><img class="imgLoad" src="{$userdata['photo']}" width="150" height="150"></a>
+</div>
+
+
+<div class="detail">
+
+<em><a href="{:url('user/userdata',['uid'=>$userdata['uid']])}" target="_blank">{$userdata['username']}</a></em>
+
+<div class="subtools">
+<a href="#" >通知
+</a>
+<a href="" data-toggle="modal" data-target="#seeUserInfo">成为会员</a>
+</div>
+
+</div>
+</div>
+
+<div class="notice_list mt60 clear" style="border-top:1px solid #EEEEEE; ">
+  <ul id="J_list">
+    {if $message_data}
+    {foreach $message_data as $value}
+  <li id="" style="">
+    <div class="left">
+        <div class="detail"> 
+          <div class="subcontent"> 
+           <span>发送者：{$value['pname']}</span>
+           <div> {$value['content']} </div>
+           <p class="subtime">{$value['create_time']}</p>
+          </div>
+        </div>
+      </div>
+      <div class="right"> 
+        <a href="javascript:void(0);" class="delete" data-id="33454092">删除</a> 
+      </div> 
+    </li>
+    {/foreach}
+    {/if}
+   </ul>
+   <div>{$message_page}</div>
+</div>
+
+</div><!-- 右侧结束 -->
+</div>
+<script type="text/javascript" src="__JS__/all.js"></script>
+<script type="text/javascript">
+msc.user.init();
+$("img.imgLoad").imgLoad();
+</script>
+<script type="text/javascript" src="__JS__/msc-tools-date.js"></script>
+<script type="text/javascript" src="__JS__/feed.js"></script>
+<script type="text/javascript">
+
+$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});
+
+ var feed = msc.tools.feed;
+    feed.init({
+        dom: {
+            list: $("#J_feed_list")
+        },
+        data: {
+            type: 'follow',
+            classid: '',
+			uid:'',
+            pageSize: 15,
+            page:1
+        },
+
+        render: function(html, data){
+            return '<li>'+ html +'</li>';
+        },
+		success:function(){
+				$("#J_feed_list li").each(function(){
+  if($(this).find('.detail p').html()==''){
+  $(this).hide().remove()
+  }
+});
+				}
+    });
+
+</script>
+
+<script>
+
+$("li.top_bar_more").hoverDelay(function(){
+$("li.top_bar_more div").show();
+},function(){
+$("li.top_bar_more div").hide();
+},200,200);
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb9cd9dcdda23cee0c7357db9be24acb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script> </body>
+</html>
+<script type="text/javascript">
+ getrandnum(); 
+  function getrandnum()
+  {
+     var str = '';
+     for(var i=0; i<16; i++){
+      var num = parseInt(Math.random() * 10);
+      str += num;
+     }
+     $('#adminName').val(str);
+     $('.dingdanNum').val(str);
+  }
+  
+  $('.dingdan').click(getrandnum);
+</script>
+

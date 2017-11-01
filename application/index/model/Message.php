@@ -4,7 +4,7 @@ use think\Model;
 use traits\model\SoftDelete;
 
 
-class Praise extends Model
+class Message extends Model
 {
 	use SoftDelete;
 	protected $deleteTime = 'delete_time';
