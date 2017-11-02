@@ -25,7 +25,7 @@ class Book extends Model
                 $where['board_id'] = ['like',"%"."$status"."%"]; 
             }
         }
-        $data = $this->where($where)->field('cid,uid,bookname,photo')->select();
+        $data = $this->where($where)->field('cid,uid,bookname,photo,status')->select();
         if($data){
             return $data;
         }else{

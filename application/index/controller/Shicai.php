@@ -3,6 +3,8 @@ namespace app\index\controller;
 
 use think\Controller;
 use app\index\model\Material;
+use app\index\model\Link;
+use app\index\model\Webset;
 
 class Shicai extends Controller
 {
@@ -10,6 +12,10 @@ class Shicai extends Controller
     public function _initialize()
     {
         $this->material = new Material();
+        $link = Link::select();
+		$webdata = Webset::find(1);
+		$this->assign('webdata',$webdata);
+		$this->assign('link',$link);
     }
     //食材首页
 	public function base()

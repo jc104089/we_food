@@ -9,7 +9,7 @@ use app\index\model\Book;
 use app\index\model\LogInfo;
 use app\index\model\BookInfo;
 use app\index\model\Save;
-
+use app\index\model\Link;
 use  think\Session;
 use lib\Phoneyz;
 use lib\SaeTClientV2;
@@ -26,7 +26,10 @@ class User extends Controller
 		$this->user = new UserModel();
 		$this->log = new Log();
 		$this->book = new Book();
-		
+		$link = Link::select();
+		$webdata = Webset::find(1);
+		$this->assign('webdata',$webdata);
+		$this->assign('link',$link);
 		
 	}
 	// 注册页

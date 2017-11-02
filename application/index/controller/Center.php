@@ -195,11 +195,29 @@ class Center extends Controller
 	//日志页
 	public function addhuati()
 	{
-		$data = $this->log->where('status',1)->paginate(1);
+		$status = $this->request->param('status');
+		if(is_null($status)){
+			$status = 1;
+		}
+		if($status == 1){
+			$where['status'] = ['in','1,2']; 
+		}else{
+			$where['status'] = ['=',0];
+		}
+		$data = $this->log->where($where)->paginate(1);
 		$page = $data->render();
 		//dump($data);		
 		$data = $this->changeMoreData($data,'loginfo','lid');
-		//dump($data);
+		if($data){
+			foreach ($data as $key => $value) {
+				if($value['img_url']){
+					$value['all_img'] = explode(';', $value['img_url']);
+				}
+				$data[$key] = $value;
+			}
+		}
+		//dump($data);die;
+		$this->assign('status',$status);
 		$this->assign('page',$page);
 		$this->assign('aeq',2);
 		$this->assign('data',$data);
@@ -287,17 +305,22 @@ class Center extends Controller
 	//菜谱页
 	public function caipu()
 	{
+		$status = $this->request->param('status');
+		if(is_null($status)){
+			$status = 1;
+		}
 		/*$board_style = $this->board->where('parent_id',12)->select();
 		$board_tyle = $this->board->where('parent_id',13)->select();*/	
 		$allClass = $this->board->allClass();
 		//dump($allClass);die;	
-		$data = $this->book->where('uid',Session::get('uid'))->paginate(1);
+		$data = $this->book->where('uid',Session::get('uid'))->where('status',$status)->paginate(1);
 		$page = $data->render();
 		$data = $this->changeMoreData($data,'bookInfo','cid');
 		//dump($data);die;
 		$this->assign('aeq',1);
 		/*$this->assign('board_style',$board_style);
 		$this->assign('board_tyle',$board_tyle);*/
+		$this->assign('status',$status);
 		$this->assign('page',$page);
 		$this->assign('allClass',$allClass);
 		$this->assign('data',$data);
@@ -402,6 +425,7 @@ class Center extends Controller
 		$this->assign('aeq',0);
 		return $this->fetch();
 	}
+
 	public function sendPayOrd()
 	{
 		//dump($this->request->param());
@@ -431,6 +455,21 @@ class Center extends Controller
 		$this->assign('hmac',$hmac);
 		$this->assign('p1_MerId',$p1_MerId);
 		return $this->fetch();
+	}
+
+	public function delMes()
+	{
+		$mid = $this->request->param('mid');
+		if($mid){
+			$result = $this->message->destroy($mid);
+			if($result){
+				echo 1;
+			}else{
+				echo 0;
+			}
+		}else{
+			echo 0;
+		}
 
 	}
 }

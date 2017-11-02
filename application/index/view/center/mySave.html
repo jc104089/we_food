@@ -121,16 +121,18 @@ var _hmt = _hmt || [];
 </html>
 <script type="text/javascript">
 	$('.del').click(function(){
-		var id = $(this).attr('data-id');
-		$.post("{:url('center/delSave')}",{id:id},function(data){
-			console.log(data);
-			if(data){
-				alert('删除成功');
-				window.location.reload();
-			}else{
-				alert('删除失败');
-			}
-		},'json');
+		if(confirm('此操作不可逆，确定删除吗？')){
+			var id = $(this).attr('data-id');
+			$.post("{:url('center/delSave')}",{id:id},function(data){
+				console.log(data);
+				if(data){
+					alert('删除成功');
+					window.location.reload();
+				}else{
+					alert('删除失败');
+				}
+			},'json');
+		}	
 	});
 </script>
 
