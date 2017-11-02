@@ -224,5 +224,27 @@ class Auth extends Controller
 		
 		return $privarr_urls; 
 	}*/
-		
+	public function getUpload($img)
+	{
+		$file = request()->file($img);
+		// 移动到框架应用根目录/public/uploads/ 目录下
+		//dump($file);
+		if($file){
+			$photo = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+			if($photo){
+				// 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
+				$path = $photo->getSaveName();
+				$path = '/uploads/' . $path;
+				
+				return $path;			
+			}else{
+			// 上传失败获取错误信息
+				return $file->getError();
+				//$this->error('修改失败');
+				//return false;
+			}
+		} else {
+			return false;
+		}
+	}	
 }

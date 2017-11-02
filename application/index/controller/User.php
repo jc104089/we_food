@@ -3,6 +3,7 @@ namespace app\index\controller;
 
 use think\Controller;
 use app\index\model\User as UserModel;
+use app\index\model\UserInfo;
 use app\index\model\Webset;
 use app\index\model\Log;
 use app\index\model\Book;
@@ -11,26 +12,90 @@ use app\index\model\BookInfo;
 use app\index\model\Save;
 use app\index\model\Link;
 use  think\Session;
+use  think\Cookie; 
 use lib\Phoneyz;
 use lib\SaeTClientV2;
 use lib\SaeTOAuthV2;
 
 class User extends Controller
 {
+	const WB_AKEY = '2771208683';
+	const WB_SKEY = '87382c99a983252a222b40b2bf1bc541';
+	const WB_CALLBACK_URL = 'http://food.userchao.top/index/User/weibo';
 	protected $user;
 	protected $log;
 	protected $book;
-	
+	protected $o;
+	protected $userinfo;
 	public function _initialize()
 	{
 		$this->user = new UserModel();
+		$this->userinfo = new UserInfo();
 		$this->log = new Log();
 		$this->book = new Book();
+		$this->o = new SaeTOAuthV2(self::WB_AKEY , self::WB_SKEY);
 		$link = Link::select();
 		$webdata = Webset::find(1);
 		$this->assign('webdata',$webdata);
 		$this->assign('link',$link);
 		
+	}
+	public function weibo()
+	{
+		if (isset($_REQUEST['code'])) {
+			$keys = array();
+			$keys['code'] = $_REQUEST['code'];
+			$keys['redirect_uri'] = self::WB_CALLBACK_URL;
+			try {
+				$token = $this->o->getAccessToken( 'code', $keys ) ;
+			} catch (OAuthException $e) {
+
+			}
+		}
+
+		if ($token) {
+			Session::set('token',$token);
+			// setcookie( 'weibojs_'.$o->client_id, http_build_query($token) );
+			Cookie::set('weibojs_'.$this->o->client_id, http_build_query($token));
+		}
+		$arr = Session::get('token');
+		$c = new SaeTClientV2( self::WB_AKEY , self::WB_SKEY , $arr['access_token'] );
+		// dump($c);
+		$ms  = $c->home_timeline(); // done
+		$uid_get = $c->get_uid();
+		$uid = $uid_get['uid'];
+		$user_message = $c->show_user_by_id( $uid);//
+		// dump($user_message);
+		//存入数据库
+		$user_weibo = $user_message['id'];
+		$user_name = $user_message['screen_name'];
+		//dump($user_weibo);
+		$user = $this->user->get(['user_weibo'=>$user_weibo]);
+		//dump($user);die;
+		if ($user) {
+			Session::set('uid',$user->user_id);
+			Session::set('username',$user->user_name);
+			//$user_id = $user->user_id;
+			//$userinfo = $this->userinfo->get(['u_id'=>$user_id]);
+			//Session::set('userinfo_headi',$userinfo->userinfo_headi);
+		}else{
+			$this->user->save(['user_weibo'=>$user_weibo,'username'=>$user_name]);
+			$user_id = $this->user->uid;
+			Session::set('uid',$user_id);
+			Session::set('username',$user_name);
+			//$image = $user_message['profile_image_url'];
+			// $image = Image::open($image);
+			// //将图片裁剪为300x300并保存为crop.png
+			// $haha = substr(str_shuffle(md5(str_shuffle('asdasd2423'))), 0, 8);
+			// $image->save(ROOT_PATH . 'public' . DS . 'uploads/' . $haha .'.png');
+			$newUser = $this->user->find($user_id);
+			// 如果还没有关联数据 则进行新增
+			//获取客户端ip
+			$newUser->userInfo()->save(['utype'=>0]);
+		 	//Session::set('userinfo_headi',$image);
+
+		}
+		$this->redirect('index/index');
 	}
 	// 注册页
 	public function whiteInfo()
@@ -40,6 +105,8 @@ class User extends Controller
 	// 登录页
 	public function loginInfo()
 	{
+		$code_url = $this->o->getAuthorizeURL( self::WB_CALLBACK_URL );
+		$this->assign('code_url',$code_url);
 		return $this->fetch('user/loginnew');
 	}
 	//个人信息
@@ -287,4 +354,84 @@ class User extends Controller
 		}
 		
 	}
+	public function vip()
+	{
+		$uid = session('uid');
+		if($uid){
+		$res = $this->user->userInfo()->find($uid);
+		$res = $res->toArray();
+		$res = $res['utype'];
+			if($res == 1){
+				$data = $this->request->param('postcode');
+				//配置您申请的appkey
+				$appkey = "ebf414bf6e2424d87a17fabd223d5b88";
+				//************1.邮编查询地名************
+				$url = "http://v.juhe.cn/postcode/query";
+				$params = array(
+				      "postcode" => $data,//邮编，如：215001
+				      "key" => $appkey,//应用APPKEY(应用详细页查询)
+				      "page" => "",//页数，默认1
+				      "pagesize" => 1,//每页返回，默认:20,最大不超过50
+				      "dtype" => "",//返回数据的格式,xml或json，默认json
+				);
+				$paramstring = http_build_query($params);
+				$content = $this->juhecurl($url,$paramstring);
+				$result = json_decode($content,true);
+				if($result){
+				    if($result['error_code']=='0'){
+				        print_r($result);
+				    }else{
+				        echo $result['error_code'].":".$result['reason'];
+				    }
+				}else{
+				    echo "请求失败";
+				}
+				$result = $result['result']['list'][0];
+				//dump($result);die;
+				//dump($data);die;
+				$this->assign('result',$result);
+				return $this->fetch();
+			}else{
+				$this->error('您不是会员','center/vipcenter');
+			}
+			//dump($uid);dump($res);die;
+			
+			}
+		
+	}
+	public function juhecurl($url,$params=false,$ispost=0){
+	    $httpInfo = array();
+	    $ch = curl_init();
+	 
+	    curl_setopt( $ch, CURLOPT_HTTP_VERSION , CURL_HTTP_VERSION_1_1 );
+	    curl_setopt( $ch, CURLOPT_USERAGENT , 'JuheData' );
+	    curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT , 60 );
+	    curl_setopt( $ch, CURLOPT_TIMEOUT , 60);
+	    curl_setopt( $ch, CURLOPT_RETURNTRANSFER , true );
+	    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	    if( $ispost )
+	    {
+	        curl_setopt( $ch , CURLOPT_POST , true );
+	        curl_setopt( $ch , CURLOPT_POSTFIELDS , $params );
+	        curl_setopt( $ch , CURLOPT_URL , $url );
+	    }
+	    else
+	    {
+	        if($params){
+	            curl_setopt( $ch , CURLOPT_URL , $url.'?'.$params );
+	        }else{
+	            curl_setopt( $ch , CURLOPT_URL , $url);
+	        }
+	    }
+	    $response = curl_exec( $ch );
+	    if ($response === FALSE) {
+	        //echo "cURL Error: " . curl_error($ch);
+	        return false;
+	    }
+	    $httpCode = curl_getinfo( $ch , CURLINFO_HTTP_CODE );
+	    $httpInfo = array_merge( $httpInfo , curl_getinfo( $ch ) );
+	    curl_close( $ch );
+	    return $response;
+	}
+
 }

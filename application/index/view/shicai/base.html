@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>菜谱大全_美食天下</title>
+<title>菜谱大全_味蕾</title>
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/recipe2.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
@@ -12,17 +12,12 @@
 {include file="public/header"}
 <div class="w logo_wrap2">
 <div class="logo_inner left">
-<a href="/" title="美食天下">美食天下</a>
+<a href="/" title="味蕾">味蕾</a>
 </div>
 <div class="logo_current left">
 <h1><a href="{:url('shicai/base')}" title="食材">食材</a></h1>
 </div>
-<div class="logo_search right">
-<form id="form_search" action="http://home.meishichina.com/search/" method="post" target="_blank">
-<div class="searchBox J_search"><a href="javascript:;" title="搜索" class="search_Btn J_searchBTN right" id="search">搜索</a><input type="text" id="q" class="search_Text J_searchTxt right gay" data-first="on">
-</div>
-</form>
-</div>
+{include file="public/all_search"}
 <div class="logo_nav">
 <a class=on href="{:url('shicai/base')}">食材首页<i></i><b></b></a>
 </div>
@@ -47,7 +42,7 @@
 	
 <a title="{$value['name']}" href="{:url('shicai/intro',['fid'=>$value['fid'],'board_id'=>$value['board_id']])}" target="_blank">
 <i>
-<img alt="{$value['name']}" class="imgLoad" src="{$value['img_url']}">
+<img alt="{$value['name']}" class="imgLoad" src="__WEB__{$value['img_url']}">
 </i>
 <p>{$value['name']}</p>
 </a>
@@ -71,7 +66,7 @@ msc.goTop.init();
 msc.user.init();
 $("img.imgLoad").imgLoad();
 //搜索
-$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});
+/*$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});*/
 </script>
 <script src="__JS__/slider2.js" type="text/javascript"></script>
 </script> 

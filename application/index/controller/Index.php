@@ -50,12 +50,15 @@ class Index extends Controller
     	//dump($new_cai);die;
     	// 最受欢迎菜谱
     	$like_cai = BookInfo::field('c_id')->order('goodnum desc')->select();
-    	foreach ($like_cai as $key => $value) {
-    		$all_id[] = $value['c_id'];    		
+    	if($like_cai){
+    		foreach ($like_cai as $key => $value) {
+    			$all_id[] = $value['c_id'];    		
+    		}
+    	
+	    	$like_cai = $this->book->where('cid','in',$all_id)->where('status','neq',0)->limit(16)->select();
+			$like_cai = $this->selectName($like_cai);
     	}
     	
-    	$like_cai = $this->book->where('cid','in',$all_id)->where('status','neq',0)->limit(16)->select();
-		$like_cai = $this->selectName($like_cai);
 		//dump($like_cai);die;
 		// 查食材
 		$tui_material = $this->material->limit(7)->select();
@@ -84,13 +87,18 @@ class Index extends Controller
     public function getImg($log)
     {
     	$i = 0;
-    	foreach ($log as $key => $value) {
+    	if(is_array($log)){
+    		foreach ($log as $key => $value) {
     		if(!empty($value['logInfo']['img_url'])){
     			$value['all_img'] = array_slice(explode(';', $value['logInfo']['img_url']), 0,4) ;
     		}
-    		$log[$key] = $value;
+    			$log[$key] = $value;
+    		}
+    		return $log;
+    	}else{
+    		return false;
     	}
-    	return $log;
+    	
     }
     public function selectName($data,$pho=false,$uid='uid')
 	{
@@ -147,7 +155,7 @@ class Index extends Controller
 	{
 
 		$searchContent = $this->request->param('searchContent');
-		dump($searchContent);
+		//dump($searchContent);
 		$end_data = [];
 		if(!empty($searchContent)){
 			$cai_data = $this->book->where('bookname','like','%'.$searchContent.'%')->where('status','neq',0)->select();
@@ -177,6 +185,7 @@ class Index extends Controller
 			$this->assign('searchContent',$searchContent);
 		}
 		$this->assign('end_data',$end_data);
+		//dump($end_data);die;
 		return $this->fetch();
 	}
 	public function searchData()

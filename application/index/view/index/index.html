@@ -4,10 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache" />
 
-<title>美食天下_原创菜谱与美食生活社区，我所有的朋友都是吃货！</title>
-<meta name="keywords" content="美食,菜谱,烹饪,家常菜谱大全,美食网,美食天下" />
-<meta name="description" content="美食天下是最大的中文美食网站与厨艺交流社区，拥有海量的优质原创美食菜谱，聚集超千万美食家。我所有的朋友都是吃货，欢迎您加入！" />
-   
+<title>味蕾_菜谱与美食生活社区，我所有的朋友都是吃货！</title>
+
+ <script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>  
 <script type="text/javascript" src="__JS__/jquery-1.8.2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
@@ -17,19 +16,14 @@
 <div style="position: absolute;z-index: 10;width: 100%;top:0;" id="real_body">
 <div class="w logo_wrap2">
 	<div class="logo_inner left">
-	<a href="/" title="美食天下">美食天下</a>
+	<a href="/" title="味蕾">味蕾</a>
 	</div>
-	<div class="logo_search right">
-		<form id="form_search" action="http://home.meishichina.com/search/" method="post" target="_blank">
-		<div class="searchBox J_search"><a href="javascript:;" title="搜索" class="search_Btn J_searchBTN right" id="search">搜索</a><input type="text" id="q" class="search_Text J_searchTxt right gay" data-first="on">
-		</div>
-		</form>
-	</div>
+	{include file="public/all_search"}
 	<div class="logo_nav">
 		<a title="首页" href="/" class="on" target="_blank">首页</a>
 		<a title="菜谱" href="{:url('cai/caipu')}" target="_blank">菜谱</a>
 		<a title="食材" href="{:url('shicai/base')}" target="_blank">食材</a>
-		<a title="vip专区" href="http://www.meishichina.com/mofang/" target="_blank">vip专区</a>
+		
 		<a title="社区" href="{:url('market/rizhi')}" target="_blank">社区</a>
 	</div>
 </div>
@@ -42,7 +36,7 @@
 					{if $move_pic}
 					{foreach $move_pic as $value}
 					<li>
-					<a title="{$value['title']}" href="{$value['link_url']}" target="_blank"><img src="{$value['upurl']}"></a>
+					<a title="{$value['title']}" href="{$value['link_url']}" target="_blank"><img src="__WEB__{$value['upurl']}"></a>
 					</li>
 					{/foreach}
 					{/if}
@@ -50,7 +44,7 @@
 			</div>
 			<div class="w1_1">
 			<ul>
-				<li class="i1"><a class="la" href="{:url('cai/caipu')}" target="_blank">菜谱大全</a>
+				<li class="i1" style="text-align: center;"><a class="la" href="{:url('cai/caipu')}" target="_blank" >菜谱大全</a>
 					<ul class="sub">
 					{if $cai_class}
 					{foreach $cai_class as $value}					
@@ -63,7 +57,7 @@
 					{/if}
 				</ul>
 				</li>
-				<li class="i2"><a class="la" href="{:url('shicai/base')}" target="_blank">食材大全</a>
+				<li class="i2" style="text-align: center;"><a class="la" href="{:url('shicai/base')}" target="_blank">食材大全</a>
 					<ul class="sub">
 						{if $shi_class}
 						{foreach $shi_class as $value}
@@ -99,7 +93,7 @@
 				<span class="copyright">推荐</span>
 					{/if}
 				<i>
-				<img alt="{$value['bookname']}" class="imgLoad" src="{$value['photo']}">
+				<img alt="{$value['bookname']}" class="imgLoad" src="__WEB__{$value['photo']}">
 				</i>
 				<p>{$value['bookname']}</p>
 				</a>
@@ -110,7 +104,7 @@
 			</ul>
 			{/if}
 			{if $like_cai}
-			<ul class="on">
+			<ul class="on" style="display: none;">
 				{foreach $like_cai as $value}
 				<li>
 				<a title="{$value['bookname']}" href="{:url('cai/caipu',['cid'=>$value['cid']])}" target="_blank">
@@ -118,7 +112,7 @@
 				<span class="copyright">推荐</span>
 					{/if}
 				<i>
-				<img alt="{$value['bookname']}" class="imgLoad" src="{$value['photo']}">
+				<img alt="{$value['bookname']}" class="imgLoad" src="__WEB__{$value['photo']}">
 				</i>
 				<p>{$value['bookname']}</p>
 				</a>
@@ -146,7 +140,7 @@
 				<ul>
 					{if $tui_material}
 					{foreach $tui_material as $value}
-				<li><a title="{$value['name']}" href="{:url('shicai/intro',['fid'=>$value['fid'],'board_id'=>$value['board_id']])}" target="_blank"><img class="imgLoad" src="{$value['img_url']}" />{$value['name']}</a><span></span></li>
+				<li><a title="{$value['name']}" href="{:url('shicai/intro',['fid'=>$value['fid'],'board_id'=>$value['board_id']])}" target="_blank"><img class="imgLoad" src="__WEB__{$value['img_url']}" />{$value['name']}</a><span></span></li>
 				{/foreach}
 				{/if}
 				</ul>
@@ -166,25 +160,19 @@
 					{foreach $hot_log as $value}
 				<li>
 					<div class="u">
-					<a href="{:url('user/userdata',['uid'=>$value['u_id']])}" target="_blank"><img width="40" height="40" class="imgLoad" src="{$value['photo']}"></a>
+					<a href="{:url('user/userdata',['uid'=>$value['u_id']])}" target="_blank"><img width="40" height="40" class="imgLoad" src="__WEB__{$value['photo']}"></a>
 					<div>
 					<a href="{:url('user/userdata',['uid'=>$value['u_id']])}" class="t" target="_blank">{$value['username']}</a>
 					<span>{$value['create_time']}</span>
 					</div>
 					</div>
 					<div class="c clear">
-					<div class="pp"><a href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank"><strong><span>{$value['title']}</strong><br>
+					<div class="pp"><a href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank"><strong><span>{$value['title']}</strong><br><br/>
 						<span style="display: none;
-					" class="all_content">{$value['logInfo']['content']}</span>
-					<span class="showcontent" style="float: left;width: 440px;overflow: hidden;text-overflow: ellipsis;">
+					" class="all_content">{$value['logInfo']['content']|strip_tags}</span>
+					<span class="showcontent" style="float: left;width: 440px;overflow: hidden;text-overflow: ellipsis;height: 100px;line-height: 14px;font-family: ">
 					</span></a></div>
-					<a class="clear" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">
-					{if condition="!empty($value['all_img'])"}
-					{foreach $value['all_img'] as $v}
-					<img class="imgLoad" src="{$v}" >
-					{/foreach}
-					{/if}
-					</a>
+					
 					<span>{$value['logInfo']['goodnum']}个喜欢，{$value['logInfo']['talknum']}条评论</span>
 					</div>
 				</li>
@@ -199,7 +187,7 @@
 					{foreach $tui_log as $value}
 				<li>
 					<div class="u">
-					<a href="{:url('user/userdata',['uid'=>$value['u_id']])}" target="_blank"><img width="40" height="40" class="imgLoad" src="{$value['photo']}"></a>
+					<a href="{:url('user/userdata',['uid'=>$value['u_id']])}" target="_blank"><img width="40" height="40" class="imgLoad" src="__WEB__{$value['photo']}"></a>
 					<div>
 					<a href="{:url('user/userdata',['uid'=>$value['u_id']])}" class="t" target="_blank">{$value['username']}</a>
 					<span>{$value['create_time']}</span>
@@ -209,11 +197,7 @@
 					<div class="pp"><a href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank"><strong><span>{$value['title']}</strong><br>
 					</a></div>
 					<a class="clear" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">
-					{if condition="!empty($value['all_img'])"}
-					{foreach $value['all_img'] as $v}
-					<img class="imgLoad" src="{$v}" >
-					{/foreach}
-					{/if}
+					
 					</a>
 					<span>{$value['logInfo']['goodnum']}个喜欢，{$value['logInfo']['talknum']}条评论</span>
 					</div>
@@ -243,7 +227,7 @@
 	$("img.imgLoad").imgLoad();
 	msc.goTop.init();
 
-	$(".search_Text").click(function(){
+	/*$(".search_Text").click(function(){
 		var f=$(this).attr("data-first");
 		if(f=="on"){
 			$(this).val("");
@@ -263,7 +247,7 @@
 				$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}
 			}
 		});
-
+*/
 	var sudoSlider = $("#home_index_slider").sudoSlider({continuous: true,
 	auto: true,
 	effect: "fade",

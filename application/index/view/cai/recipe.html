@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{$cai_data['bookname']}的做法_菜谱_美食天下</title>
+<title>{$cai_data['bookname']}的做法_菜谱_味蕾</title>
 <link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/all3.css">
@@ -153,7 +153,7 @@
 <div class="w mt10 clear">
 
 <div id="path" class="clear">
-您的位置：<a title="美食天下" href="/">美食天下</a> > <a title="菜谱" href="{:url('cai/caipu')}">菜谱</a>
+您的位置：<a title="味蕾" href="/">味蕾</a> > <a title="菜谱" href="{:url('cai/caipu')}">菜谱</a>
 &nbsp;>&nbsp;
 {if $cai_type}
 {foreach $cai_type as $value}
@@ -194,7 +194,7 @@
 		<div class="space_box_home">
 			<div class="recipDetail">
 				<div class="recipe_De_imgBox" id="recipe_De_imgBox">
-				<a class="J_photo" title="{$cai_data['bookname']}的做法"><span></span><img src="{$cai_data['photo']}" alt="{$cai_data['bookname']}的做法" style="max-width: 640px;"> </a>
+				<a class="J_photo" title="{$cai_data['bookname']}的做法"><span></span><img src="__WEB__{$cai_data['photo']}" alt="{$cai_data['bookname']}的做法" style="max-width: 640px;"> </a>
 				</div>
 				<blockquote class="block_txt" id="block_txt">
 				<div id="block_txt1"><span class="txt_tart">“</span>{$cai_data['message']}<span class="txt_end">” </span>
@@ -302,7 +302,7 @@
 									<li id="J_comment_item_14550369" data-id="14550369">
 										<div class="pic">
 											<a href="{:url('user/userdata',['uid'=>$value['uid']])}" target="_blank" title="点击进入 {$value['username']} 的主页">
-												<img class="imgLoad" src="{$value['photo']}" width="48" height="48" style="display: block;">
+												<img class="imgLoad" src="__WEB__{$value['photo']}" width="48" height="48" style="display: block;">
 											</a>
 										</div>
 										<div class="detail">

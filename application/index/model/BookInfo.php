@@ -17,4 +17,14 @@ class BookInfo extends Model
 	{
 		return request()->ip();
 	}*/
+	protected function setContentAttr($value)
+    {
+        $data = strtolower(str_replace('\\', '/', $value));
+        return $data;
+    }
+    protected function setImgUrlAttr($value)
+    {
+        $data = strtolower(str_replace('\\', '/', $value));
+        return $data;
+    }
 }

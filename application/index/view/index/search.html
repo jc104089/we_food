@@ -40,9 +40,9 @@
 {if condition="$value['type'] == 1"}
 <a href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
 {else /}
-<a href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">
+<a href="{:url('market/rizhixiang',['fid'=>$value['fid']])}" target="_blank">
 {/if}
-<img class="imgLoad" src="{$value['photo']}" width="120" height="120" />
+<img class="imgLoad" src="__WEB__{$value['photo']}" width="120" height="120" />
 </a>
 </div>
 <div class="detail">
@@ -50,7 +50,7 @@
 	{if condition="$value['type'] == 1"}
 	<a href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">{$value['bookname']}</a> 
 	{else /}
-	<a href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">{$value['name']}</a> 
+	<a href="{:url('market/rizhixiang',['fid'=>$value['fid']])}" target="_blank">{$value['name']}</a> 
 	{/if}
 </h4>
 <span style="display: none;" class="all_content">{$value['content']}</span>
@@ -70,15 +70,11 @@
 	});
 </script>
 </div>
-<div class="ui-page mt20">
-<div class="ui-page-inner">
-<a class='now_page'>1</a>
+{else /}
 
-</div>
-</div>
-{/if}
 <div style="font-size: 20px;color: #999;">没有找到相关内容</div>
 </div>
+{/if}
 <div class="space_right">
 
 </div>
@@ -97,12 +93,12 @@ $("#search").click(function() {
 	$("#form_search").attr("action", $("#form_search").attr("action")+ $("#q").val() + "/");
 	$("#form_search").submit()
 });*/
-$('#q').keydown(function(event) {
+/*$('#q').keydown(function(event) {
 	if (event.keyCode == 13) {
 		if ($("#q").val().replace(/\s+/g, "").replace("　", "") != '') 
 		$("#form_search").attr("action", $("#form_search").attr("action")+ $("#q").val() + "/");
 	}
-});
+});*/
 $(window).scroll(function() {
 if($(".space_right").length>0){
 var omng = $(".space_right").eq(0).offset();

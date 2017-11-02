@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>会员中心 - 美食天下</title>
+<title>会员中心 - 味蕾</title>
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css?a=8">
 <link rel="stylesheet" type="text/css" href="__CSS__/center_all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/center_home.css">
@@ -89,14 +89,16 @@
 <div class="space_info clear">
 
 <div class="pic">
-<a href="{:url('user/userdata',['uid'=>$userdata['uid']])}" target="_blank"><img class="imgLoad" src="{$userdata['photo']}" width="150" height="150"></a>
+<a href="{:url('user/userdata',['uid'=>$userdata['uid']])}" target="_blank"><img class="imgLoad" src="__WEB__{$userdata['photo']}" width="150" height="150"></a>
 </div>
 
 
 <div class="detail">
 
 <em><a href="{:url('user/userdata',['uid'=>$userdata['uid']])}" target="_blank">{$userdata['username']}</a></em>
-
+{if $userdata['utype']}
+<span><img src="__IMG__/vipcenter.png" width="33" height="33"></span>
+{/if}
 <div class="subtools">
 <a href="#" >通知
 </a>

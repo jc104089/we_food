@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>发布新话题 - 美食天下</title>
+<title>发布新话题 - 味蕾</title>
 <meta name="renderer" content="webkit">
 <meta name="keywords" content="">
 <meta name="description" content="" />
@@ -45,7 +45,7 @@
 					<div class="pp">
 						
 					 		<div class="data-title" style="height:30px;width:100px;line-height: 30px;overflow: hidden;text-overflow: ellipsis;font-weight: bold;font-size: 16px;">
-					 			<a href="" target="_blank">{$value['title']}</a>
+					 			<a href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">{$value['title']}</a>
 								<!-- <span class="right"><input type="button" name="delete" value="删除" style="border-radius: 5px;background: #FF6767;cursor: pointer;width: 40px;height: 25px;line-height: 25px;">
 									<span style="display: none;">{$value['lid']}</span>
 								</span> -->
@@ -60,7 +60,7 @@
 					<div>
 						{if !empty($value['img_url'])}
 						<a class="clear" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">
-						<img  class="imgLoad" src="{$value['all_img'][0]}" width="100" height="100" /></a>
+						<img  class="imgLoad" src="__WEB__{$value['img_url']}" width="100" height="100" /></a>
 						{/if}
 					</div>
 					<div class="substatus clear">
@@ -89,8 +89,11 @@
 	<div class="posthua" style="display: none;">
 		<form action="{:url('index/center/postHuati')}" id="J_form" enctype="multipart/form-data" method="post">
 			<div class="mr_edit mr_edit_center clear">
-				<label>加个标题（非必填）</label><br>
+				<label>加个标题</label><br>
 				<input id="com_title" name="title" class="inputM" type="text">
+				<br />
+				<label>上传图片</label><br>
+				<input type="file" name="img_url"> 
 				<div class="form-group">
 			        <label for="article-content" class="sr-only">内容</label>
 			        <script id="editor" type="text/plain" style="width:800px;height:500px;" name="content"></script>

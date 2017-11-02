@@ -2,9 +2,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>一周热门_菜谱排行榜_美食天下</title>
-<meta name="keywords" content="一周热门,菜谱排行,热门菜谱排行榜,家常菜谱怎么做好吃" />
-<meta name="description" content="美食天下分享中外美食菜谱,介绍最新的关于菜谱排行,热门菜谱排行榜,家常菜谱怎么做好吃等信息,还有最正宗的菜谱做法图解,很简单,一定要尝试哦！~" />
+<title>菜谱排行榜_味蕾</title>
+
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/recipe2.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
@@ -102,7 +101,7 @@
 						<li data-id="354246">
 							<div class="pic">
 								<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}">
-								<img width="180" height="180" src="{$value['photo']}" class="imgLoad">
+								<img width="180" height="180" src="__WEB__{$value['photo']}" class="imgLoad">
 								</a>
 							</div>
 							<div class="detail">
@@ -136,7 +135,7 @@
 						{foreach $log_data as $value}
 						<li>
 							<a title="{$value['title']}" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank" class="pic">
-							<img width=60 height=60 src="{$value['logInfo']['img_url']}" class="imgLoad">
+							<img width=60 height=60 src="__WEB__{$value['logInfo']['img_url']}" class="imgLoad">
 							</a>
 							<p><a title="{$value['title']}" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">{$value['title']}</a></p>
 						</li>

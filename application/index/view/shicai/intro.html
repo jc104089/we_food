@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>牛肉的认识与选购技巧_怎么挑选_美食天下</title>
+<title>{$shi_data['name']}_味蕾</title>
 <link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/category2_1.css">
@@ -12,17 +12,12 @@
 {include file="public/header"}
 <div class="w logo_wrap2">
 <div class="logo_inner left">
-<a href="/" title="美食天下">美食天下</a>
+<a href="/" title="味蕾">味蕾</a>
 </div>
 <div class="logo_current left">
 <h1><a href="{:url('shicai/base')}" title="食材">食材</a></h1>
 </div>
-<div class="logo_search right">
-<form id="form_search" action="http://home.meishichina.com/search/" method="post" target="_blank">
-<div class="searchBox J_search"><a href="javascript:;" title="搜索" class="search_Btn J_searchBTN right" id="search">搜索</a><input type="text" id="q" class="search_Text J_searchTxt right gay" data-first="on">
-</div>
-</form>
-</div>
+{include file="public/all_search"}
 <div class="logo_nav">
 <a class=on href="{:url('shicai/base')}">食材首页<i></i><b></b></a>
 </div>
@@ -41,7 +36,7 @@
 </div>
 <div class="w clear collect_d" style="border:none">
 <div class="collect_dp">
-<a title="{$shi_data['name']}" href="#"><img alt="{$shi_data['name']}" id="category_pic" class="imgLoad" src="{$shi_data['img_url']}" width=90 height=90></a>
+<a title="{$shi_data['name']}" href="#"><img alt="{$shi_data['name']}" id="category_pic" class="imgLoad" src="__WEB__{$shi_data['img_url']}" width=90 height=90></a>
 <h1><a title="{$shi_data['name']}" href="#" id="category_title">{$shi_data['name']}</a></h1>
 <span>为你介绍{$shi_data['name']}相关信息</span>
 </div>
@@ -53,7 +48,7 @@
 </div>
 <div>
 {if $shi_data['img_url']}
-<div><img src="{$shi_data['img_url']}" alt="{$shi_data['name']}" width=640 height=400></div>
+<div><img src="__WEB__{$shi_data['img_url']}" alt="{$shi_data['name']}" width=640 height=400></div>
 {/if}
 {$shi_data['content']}
 </div>
@@ -92,7 +87,8 @@ $("img.imgLoad").imgLoad();
 		}
 		}
 	});
-$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});</script>
+/*$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});*/
+</script>
 <script type="text/javascript" src="__JS__/category_action2.js"></script>
 <script>
 

@@ -1,16 +1,11 @@
 <div class="w logo_wrap2">
 	<div class="logo_inner left">
-	<a href="/" title="美食天下">美食天下</a>
+	<a href="/" title="味蕾">味蕾</a>
 	</div>
 	<div class="logo_current left">
 	<h1><a href="{:url('cai/caipu')}" title="菜谱">菜谱</a></h1>
 	</div>
-	<div class="logo_search right">
-	<form id="form_search" action="http://home.meishichina.com/search/" method="post" target="_blank">
-	<div class="searchBox J_search"><a href="javascript:;" title="搜索" class="search_Btn J_searchBTN right" id="search">搜索</a><input type="text" id="q" class="search_Text J_searchTxt right gay" data-first="on">
-	</div>
-	</form>
-	</div>
+	{include file="public/all_search"}
 	<div class="logo_nav">
 	<a class=on href="{:url('cai/caipu')}">菜谱首页<i></i><b></b></a>
 	<a href="{:url('cai/hotcai')}">排行<i></i><b></b></a>

@@ -25,9 +25,12 @@ class Article extends Auth
 	public function addShicai()
 	{
 		$data = $this->request->param();
-		//dump($data);
+		$img_url = '';
+		$img_url = $this->getUpload('img_url');
+		//dump($img_url);
+		//dump($data);die;
 		$res = $this->material->save(['name'=>$data['title'],'content'=>$data['content'],
-									  'img_url'=>$data['titlepic'],'board_id'=>$data['category'],
+									  'img_url'=>$img_url,'board_id'=>$data['category'],
 									]);
 		if($res){
 			$this->redirect('article/material');
@@ -76,7 +79,7 @@ class Article extends Auth
 			$this->assign('result',$result);
 		}
 		$data = $this->request->param();
-		//dump($data);
+		//dump($data);die;
 		$fid = $data['fid'];
 		$res = $this->material->where('fid',$fid)->find();
 		$res = $res->toArray();
@@ -88,10 +91,22 @@ class Article extends Auth
 	public function updateShicai()
 	{
 		$data = $this->request->param();
-		//dump($data);
-		$res = $this->material->save(['name'=>$data['title'],'content'=>$data['content'],
-									  'img_url'=>$data['titlepic'],'board_id'=>$data['category'],
-									],['fid'=>$data['fid']]);
+		$img_url = $this->getUpload('img_url');
+		//dump($img_url);
+		//dump($data);die;
+		if(!empty($data['title'])){
+			$info['name'] = $data['title'];
+		}
+		if(!empty($data['content'])){
+			$info['content'] = $data['content'];
+		}
+		if(!empty($img_url)){
+			$info['img_url'] = $img_url;
+		}
+		if(!empty($data['category'])){
+			$info['board_id'] = $data['category'];
+		}
+		$res = $this->material->save($info,['fid'=>$data['fid']]);
 		if($res){
 			$this->redirect('article/material');
 		}else{
@@ -159,7 +174,7 @@ class Article extends Auth
 			//dump($info);die;
 			//$content = $info['content'];
 			$where['title'] = ['like',"%"."$info"."%"]; 
-			$data = $this->log->where($where)->paginate();
+			$data = $this->log->where($where)->paginate(2);
 			//dump($data);die;
 			//$list = $this->book->bookInfo()->paginate(2);
 			$page = $data->render();
@@ -174,7 +189,9 @@ class Article extends Auth
 		}else{
 			$list = $this->log->logInfo()->paginate(2);
 			$page = $list->render();
+			
 			$list = $this->changeMoreData($list,'log','l_id');
+			//dump($list);die;
 			$list = $this->selectUserName($list);
 		}
 			//dump($list);die;

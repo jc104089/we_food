@@ -44,10 +44,10 @@
                 </form>
                
                 <div class="input_item f-tac f-pb30">
-                    <a href="javascript:void(0)" class="iconQQ" onclick="openQQ();"></a>
-                    <a href="javascript:void(0)" class="iconWX" onclick="openWeiXin();"></a>
-                    <a href="javascript:void(0)" class="iconWB" onclick="openWeiBo();"></a>
-                    <a href="javascript:void(0)" class="iconZFB" onclick="openAliPay();"></a>
+                    <!-- <a href="javascript:void(0)" class="iconQQ" onclick="openQQ();"></a>
+                    <a href="javascript:void(0)" class="iconWX" onclick="openWeiXin();"></a> -->
+                    <a href="{$code_url}" class="iconWB" onclick="openWeiBo();"></a>
+                    <!-- <a href="javascript:void(0)" class="iconZFB" onclick="openAliPay();"></a> -->
                 </div>
             </div>
             <div class="login_validate loginPhone_validate" style="display:none;">
@@ -86,7 +86,9 @@
                 </div>
                 </form>
                 <div class="input_item f-tac f-pb30">
-                    <a href="javascript:void(0)" class="iconQQ"></a><a href="javascript:void(0)" class="iconWX"></a><a href="javascript:void(0)" class="iconWB"></a><a href="javascript:void(0)" class="iconZFB"></a>
+                    <!-- <a href="javascript:void(0)" class="iconQQ"></a><a href="javascript:void(0)" class="iconWX"></a> -->
+                    <a href="{$code_url}" class="iconWB"></a>
+                   <!--  <a href="javascript:void(0)" class="iconZFB"></a> -->
                 </div>
             </div>
              <div class="login_validate find_pwd" style="display:none;">
@@ -135,13 +137,13 @@
                 </div>
                 </form>
                 <div class="input_item f-tac f-pb30">
-                    <a href="javascript:void(0)" class="iconQQ"></a><a href="javascript:void(0)" class="iconWX"></a><a href="javascript:void(0)" class="iconWB"></a><a href="javascript:void(0)" class="iconZFB"></a>
+                    <!-- <a href="javascript:void(0)" class="iconQQ"></a><a href="javascript:void(0)" class="iconWX"> </a>--><a href="{$code_url}" class="iconWB"> </a><!--<a href="javascript:void(0)" class="iconZFB"></a> -->
                 </div>
             </div>
             <div class="login_change">
                  <div style="float: right;width: 100px;height: 25px;cursor: pointer;line-height: 25px;" class="go_find">忘记密码？</div>
                 <p>还没有账号？</p>
-                <a href="javascript:void(0)">注  册</a>
+                <a href="{:url('user/whiteInfo')}">注  册</a>
             </div>
         </div>
         <div class="login_right">
@@ -157,6 +159,15 @@
 </html>
 <script type="text/javascript" src="__JS__/jquery-1.12.3.min.js"></script>
 <script type="text/javascript">
+    window.onload = function(){
+        $('.clearVal').each(function(i){
+            if($(this).is('input')){
+                $(this).val('');
+            }else{
+                $(this).html('');
+            }
+        });
+    }
     //切换
 $(document).on("click",".account_login",function(){
     $(this).hide();
@@ -198,7 +209,7 @@ $('.go_find').click(function(){
         if (jishi == null) {
             jishi = setInterval(function(){
                 num = num - 1;
-                console.log(num);
+                //console.log(num);
                 if (num >= 0) {
                     $('.jishi').attr('value',num + 's后可重发');
                 }
@@ -217,8 +228,8 @@ $('.go_find').click(function(){
         },'json');    
     });
     $('input[name=phoneCode]').blur(function(){
-        pcode = 1234;
-        console.log(pcode);
+       // pcode = 1234;
+       // console.log(pcode);
         //console.log( $(this).nextAll(".errorloginCode"));
         if (pcode == 0){
              $(this).nextAll(".errorloginCode").css('color','red').html('请获取验证码').show();

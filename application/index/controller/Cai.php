@@ -44,11 +44,11 @@ class Cai extends Controller
     	$all_classify = $this->board->allClass();
     	// 轮播
     	$all_id = [];
-    	$scroll_data = BookInfo::field('c_id')->order('goodnum desc')->limit(6)->select();
+    	$scroll_data = BookInfo::field('c_id')->order('goodnum desc')->limit(9)->select();
     	foreach ($scroll_data as $key => $value) {
     		$all_id[] = $value['c_id'];    		
     	}
-    	$scroll_data = $this->book->field('cid,uid,bookname,photo')->where('cid','in',$all_id)->select();
+    	$scroll_data = $this->book->field('cid,uid,bookname,photo')->where('status','neq',0)->where('cid','in',$all_id)->select();
     	//dump($scroll_data);die;
     	//查找分类版块
     	$board = $this->board->boardClass();
@@ -76,7 +76,7 @@ class Cai extends Controller
     	foreach ($data as $key => $value) {
     		$all_id[] = $value['c_id'];    		
     	}
-    	$data = $this->book->field('cid,uid,bookname,photo,status')->where('cid','in',$all_id)->paginate(2);
+    	$data = $this->book->field('cid,uid,bookname,photo,status')->where('status','neq',0)->where('cid','in',$all_id)->paginate(2);
     	$page = $data->render();
     	$data = $this->selectName($data);
     	/*dump($page);
@@ -121,7 +121,7 @@ class Cai extends Controller
             foreach ($scroll_data as $key => $value) {
                 $all_id[] = $value['c_id'];         
             }
-            $scroll_data = $this->book->field('cid,uid,bookname,photo,status')->where('cid','in',$all_id)->select();
+            $scroll_data = $this->book->field('cid,uid,bookname,photo,status')->where('status','neq',0)->where('cid','in',$all_id)->select();
             //查回复
             $where['type_id'] = 0;
             $where['data_id'] = $cid;

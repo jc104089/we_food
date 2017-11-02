@@ -10,7 +10,7 @@
 <ul>
 	{if $cai_data}
 	{foreach $cai_data as $key => $value}
-<li><a href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}" target="_blank"><img width="140" height="105" border="0" src="{$value['photo']}"></a></li>
+<li><a href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}" target="_blank"><img width="140" height="105" border="0" src="__WEB__{$value['photo']}"></a></li>
 	{/foreach}
 	{/if}
 </div>

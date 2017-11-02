@@ -17,12 +17,16 @@
     </aside>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
       <div class="row">
-        <form action="{:url('article/addShicai')}" method="post" class="add-article-form">
+        <form action="{:url('article/addShicai')}" method="post" class="add-article-form" enctype="multipart/form-data">
           <div class="col-md-9">
-            <h1 class="page-header">撰写新文章</h1>
+            <h1 class="page-header">撰写新食材</h1>
             <div class="form-group">
               <label for="article-title" class="sr-only">标题</label>
               <input type="text" id="article-title" name="title" class="form-control" placeholder="在此处输入标题" required autofocus autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="article-content" class="sr-only">选择图片</label>
+              选择图片<input type="file" name="img_url">
             </div>
             <div class="form-group">
               <label for="article-content" class="sr-only">内容</label>
@@ -54,7 +58,7 @@
                 </ul>
               </div>
             </div>
-            <div class="add-article-box">
+            <!-- <div class="add-article-box">
               <h2 class="add-article-box-title"><span>标题图片</span></h2>
               <div class="add-article-box-content">
                 <input type="text" class="form-control" placeholder="点击按钮选择图片" id="pictureUpload" name="titlepic" autocomplete="off">
@@ -62,7 +66,7 @@
               <div class="add-article-box-footer">
                 <button class="btn btn-default" type="button" ID="upImage">选择</button>
               </div>
-            </div>
+            </div> -->
             <div class="add-article-box">
               <h2 class="add-article-box-title"><span>发布</span></h2>
               <div class="add-article-box-footer">

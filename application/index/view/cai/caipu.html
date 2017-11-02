@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>菜谱大全_美食天下</title>
+<title>菜谱大全_味蕾</title>
 <meta name="keywords" content="菜谱,菜谱大全,家常菜谱大全,菜谱家常菜做法,家常菜图片做法大全" />
 <meta name="description" content="" />
 <meta name="renderer" content="webkit">
@@ -72,7 +72,7 @@
 				<li class="{$value['cid']}" style="width: 345px;">
 				<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
 
-					<i><img class="imgLoad" src="{$value['photo']}" alt="{$value['bookname']}"></i>
+					<i><img class="imgLoad" src="__WEB__{$value['photo']}" alt="{$value['bookname']}"></i>
 					<div class="os"></div>
 					<p class="line2">{$value['bookname']}<br><span></span></p>
 				</a>
@@ -112,7 +112,7 @@
 								<span class="copyright">推荐</span>
 								{/if}
 							<i>
-							<img alt="{$value['bookname']}" class="imgLoad" src="{$value['photo']}">
+							<img alt="{$value['bookname']}" class="imgLoad" src="__WEB__{$value['photo']}">
 							</i>
 							<p>{$value['bookname']}</p>
 							</a>

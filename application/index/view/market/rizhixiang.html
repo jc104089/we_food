@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>【食·色蛋糕】——黄桃酸奶蛋糕_黄桃酸奶蛋糕_食·色的日志_美食天下</title>
+<title>{$l_data['title']}的日志_味蕾</title>
 <link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/all2.css">
@@ -123,17 +123,12 @@
 <div>
 	<div class="w logo_wrap2">
 		<div class="logo_inner left">
-		<a href="/" title="美食天下">美食天下</a>
+		<a href="/" title="味蕾">味蕾</a>
 		</div>
 		<div class="logo_current left">
 		<h1><a href="{:url('market/rizhi')}" title="社区">社区</a></h1>
 		</div>
-		<div class="logo_search right">
-			<form id="form_search" action="http://home.meishichina.com/search/" method="post" target="_blank">
-			<div class="searchBox J_search"><a href="javascript:;" title="搜索" class="search_Btn J_searchBTN right" id="search">搜索</a><input type="text" id="q" class="search_Text J_searchTxt right gay" data-first="on">
-			</div>
-			</form>
-		</div>
+		{include file="public/all_search"}
 		<div class="logo_nav">
 		<a class="on" href="{:url('market/rizhi')}" title="日志">日志<i></i><b></b></a>
 		</div>
@@ -154,7 +149,7 @@
 			<h1><a title="{$l_data['title']}" id="blog_title" href="{:url('market/rizhixiang',['lid'=>$l_data['lid']])}">{$l_data['title']}</a></h1>
 			<span id="now_id" style="display: none;">{$l_data['lid']}</span>
 			<a class="uright" target="_blank" href="{:url('user/userdata',['uid'=>$l_data['u_id']])}" title="{$l_data['username']}">
-			<img src="{$l_data['photo']}">
+			<img src="__WEB__{$l_data['photo']}">
 			<span id="blog_username" class="userName">{$l_data['username']}</span>
 			</a>
 			<span class="rtime">
@@ -163,7 +158,11 @@
 				{/if}
 			发表于{$l_data['create_time']}</span>
 		</div>
+			{if $l_data['img_url']}
+			<img src="__WEB__{$l_data['img_url']}">
+			{/if}
 			<div>{$l_data['content']}</div>
+			
 		<div class="recipeArction mt10 clear">
 				<span style="display: none;" class="praise_flag">{$praise_flag}</span>
 				<ul class="collect_da">
@@ -240,7 +239,7 @@
 									<li id="J_comment_item_14550369" data-id="14550369">
 										<div class="pic">
 											<a href="{:url('user/userdata',['uid'=>$l_data['u_id']])}" target="_blank" title="点击进入 {$value['username']} 的主页">
-												<img class="imgLoad" src="{$value['photo']}" width="48" height="48" style="display: block;">
+												<img class="imgLoad" src="__WEB__{$value['photo']}" width="48" height="48" style="display: block;">
 											</a>
 										</div>
 										<div class="detail">
@@ -326,7 +325,7 @@ msc.goTop.init();
 msc.user.init();
 $("img.imgLoad").imgLoad();
 //搜索
-$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});
+/*$(".search_Text").click(function(){var f=$(this).attr("data-first");if(f=="on"){$(this).val("");$(this).attr("data-first","off")}$(this).removeClass("gay")});$("#search").click(function(){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}$("#form_search").submit()});$("#q").keydown(function(event){if(event.keyCode==13){if($("#q").val().replace(/\s+/g,"").replace("　","")!=""){$("#form_search").attr("action","http://home.meishichina.com/search/"+$("#q").val()+"/")}}});*/
 /*
 	$(window).scroll(function() {
 		var omng = $(".keyshow").eq(0).offset();

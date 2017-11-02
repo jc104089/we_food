@@ -44,7 +44,7 @@ class Market extends Controller
 		//查日志
 		$status = $this->request->param('status');
 		$status = $status ? $status : 2;
-        $status = 2;
+       // $status = 2;
 		$data = $this->log->where('status',$status)->order('create_time desc')->paginate(2);
 		$page = $data->render();
 		$data = $this->changeMoreData($data,'logInfo','lid');
@@ -63,7 +63,9 @@ class Market extends Controller
     	foreach ($cai_data as $key => $value) {
     		$all_id[] = $value['c_id'];    		
     	}
-    	$cai_data = $this->book->field('cid,uid,bookname,photo')->where('cid','in',$all_id)->select();
+    	$cai_data = $this->book->field('cid,uid,bookname,photo')->where('status','neq',0)->where('cid','in',$all_id)->select();
+        //dump($cai_data);die;
+        $this->assign('status',$status);
     	$this->assign('cai_data',$cai_data);
 		$this->assign('page',$page);
 		$this->assign('log_data',$log_data);
@@ -111,7 +113,7 @@ class Market extends Controller
     		foreach ($cai_data as $key => $value) {
     			$all_id[] = $value['c_id'];    		
     		}
-    		$cai_data = $this->book->field('cid,uid,bookname,photo')->where('cid','in',$all_id)->select();
+    		$cai_data = $this->book->field('cid,uid,bookname,photo')->where('status','neq',0)->where('cid','in',$all_id)->select();
     		$this->assign('cai_data',$cai_data);
             $this->assign('praise_flag',$praise_flag);
             $this->assign('reply_data',$reply_data);

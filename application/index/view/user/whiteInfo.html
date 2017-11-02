@@ -12,12 +12,12 @@
 </head>
 <body class="bgf4" onpagehide="myFunction()">
 <div class="login-box f-mt10 f-pb50">
-	<div class="main bgf">    
+	<div class="main bgf" style="margin-top: 40px;">    
     	<div class="reg-box-pan display-inline">  
             <div style="text-align: center;line-height: 80px;height: 80px;font-size: 30px;font-weight: bold;width: 910px;color:#17125A;">味蕾</div>
             <div class="register">
                 <div class="reg-title">立即注册
-                    <span style="font-size: 10px;color:#ccc;font-weight: normal;">已有账号？<a class="jumpLogin" title="登陆" style="cursor: pointer">立即登陆</a></span>
+                    <span style="font-size: 10px;color:#ccc;font-weight: normal;">已有账号？<a class="jumpLogin" title="登陆" style="cursor: pointer" href="{:url('user/loginInfo')}">立即登陆</a></span>
 
                     <span style="float: right;position: relative;top:3px;right:20px;font-size: 20px;cursor:pointer;font-weight: bold;" id="closeReg">X</span>
                     <span style="float: right;position: relative;top:3px;right:20px;font-size: 15px;cursor:pointer;margin-right: 10px;" id="closeReg"><a href="{:url('index/index/index')}">回到首页</a></span>
@@ -136,14 +136,14 @@
                 }           
             },1000);
         }
-       /* $.post("{:url('index/user/phoneVer')}",{phone:$('.reg-data input[name=phone]').val()},function(data){
+        $.post("{:url('index/user/phoneVer')}",{phone:$('.reg-data input[name=phone]').val()},function(data){
             pcode = data;
-            //console.log(pcode);
-        },'json'); */   
+            console.log(pcode);
+        },'json');    
     });
     $('input[name=phoneCode]').blur(function(){
         //console.log(pcode);
-        pcode = 1234;
+       // pcode = 1234;
        if (pcode == 0){
          $(this).nextAll(".errorPhoneCode").css('color','red').html('请获取验证码').show();
          flag = 1;

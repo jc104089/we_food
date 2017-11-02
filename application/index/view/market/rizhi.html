@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>日志_原创美食博客_美食天下</title>
+<title>日志_味蕾</title>
 <link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/all2.css">
@@ -14,17 +14,12 @@
 {include file="public/header"}
 <div class="w logo_wrap2">
 <div class="logo_inner left">
-<a href="/" title="美食天下">美食天下</a>
+<a href="/" title="味蕾">味蕾</a>
 </div>
 <div class="logo_current left">
 <h1><a href="#" title="社区">社区</a></h1>
 </div>
-<div class="logo_search right">
-<form id="form_search" action="http://home.meishichina.com/search/" method="post" target="_blank">
-<div class="searchBox J_search"><a href="javascript:;" title="搜索" class="search_Btn J_searchBTN right" id="search">搜索</a><input type="text" id="q" class="search_Text J_searchTxt right gay" data-first="on">
-</div>
-</form>
-</div>
+{include file="public/all_search"}
 <div class="logo_nav">
 
 <a class="on" href="#" title="日志">日志<i></i><b></b></a>
@@ -33,10 +28,17 @@
 </div>
 <div class="w nav_wrap2">
 <ul>
-<li><a class="on" href="{:url('market/rizhi','status=2')}">精华日志</a></li>
-<li><a href="{:url('market/rizhi','status=1')}">最新日志</a></li>
+<li><a class="on data-two" href="{:url('market/rizhi','status=2')}">精华日志</a></li>
+<li><a href="{:url('market/rizhi','status=1')}" class="data-one">最新日志</a></li>
 </ul>
 </div>
+<span style="display: none;" class="data-status">{$status}</span>
+<script type="text/javascript">
+	if($('.data-status').text()==1){
+		$('.data-two').removeClass('on');
+		$('.data-one').addClass('on');
+	}
+</script>
 <div class="wrap">
 <div class="w clear">
 <div class="space_left">
@@ -48,7 +50,7 @@
 <div class="pic">
 	{if !empty($value['img_url'])}
 <a target="_blank" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" title="{$value['title']}">
-<img width="180" height="135" src="{$value['img_url']}" class="imgLoad">
+<img width="180" height="135" src="__WEB__{$value['img_url']}" class="imgLoad">
 </a>
 {else /}
 <a title="{$value['title']}">
@@ -62,7 +64,7 @@
 </h2>
 <p class="subline">{$value['create_time']}</p>
 <span style="display: none;" class="all_content">{$value['content']}</span>
-<p class="subcontent"></p>
+<p class="subcontent" style="height: 71px;overflow: hidden;text-overflow: ellipsis;"></p>
 <div class="substatus clear">
 <span class="get_nums"></span>
 </div>

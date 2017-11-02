@@ -104,7 +104,7 @@ class Center extends Controller
 			if($photo){
 				// 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
 				$path = $photo->getSaveName();
-				$path = '\\Uploads\\' . $path;
+				$path = '/uploads/' . $path;
 				
 				return $path;			
 			}else{
@@ -204,7 +204,7 @@ class Center extends Controller
 		}else{
 			$where['status'] = ['=',0];
 		}
-		$data = $this->log->where($where)->paginate(1);
+		$data = $this->log->where($where)->where('u_id',Session::get('uid'))->paginate(1);
 		$page = $data->render();
 		//dump($data);		
 		$data = $this->changeMoreData($data,'loginfo','lid');
@@ -231,9 +231,10 @@ class Center extends Controller
 		//dump($content);
 		//dump($title);
 		$img_url = '';
+		$img_url = $this->getUpload('img_url');
 		if(!empty($content)){
 			//正则表达式匹配查找图片路径
-			$img_url = $this->getUrl($content);
+			//$img_url = $this->getUrl($content);
 			$this->log->u_id = Session::get('uid');
 			$this->log->title = $title;
 			$logInfo = new LogInfo;

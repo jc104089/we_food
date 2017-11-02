@@ -32,4 +32,9 @@ class Book extends Model
             return false;
         }
     }
+    protected function setPhotoAttr($value)
+    {
+        $data = strtolower(str_replace('\\', '/', $value));
+        return $data;
+    }
 }

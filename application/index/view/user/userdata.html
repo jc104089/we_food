@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{$u_info['username']}的个人主页_美食天下</title>
+<title>{$u_info['username']}的个人主页_味蕾</title>
 <link rel="stylesheet" type="text/css" href="__CSS__/wwwindex2.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/all.css">
 <link rel="stylesheet" type="text/css" href="__CSS__/space.css">
@@ -15,7 +15,7 @@
 <div class="space_info w">
 <div class="mod clear">
 <div class="pic">
-<a href="{:url('user/userdata',['uid'=>$u_info['uid']])}"><img class="imgLoad" src="{$u_info['photo']}" width="150" height="150" alt=""></a>
+<a href="{:url('user/userdata',['uid'=>$u_info['uid']])}"><img class="imgLoad" src="__WEB__{$u_info['photo']}" width="150" height="150" alt=""></a>
 </div>
 <div class="detail">
 <div class="subname">
@@ -64,7 +64,7 @@
 				<li>
 				<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
 				<i>
-				<img alt="{$value['bookname']}" class="imgLoad" src="{$value['photo']}">
+				<img alt="{$value['bookname']}" class="imgLoad" src="__WEB__{$value['photo']}">
 				</i>
 				<p>{$value['bookname']}</p>
 				</a>
@@ -88,7 +88,7 @@
 				<li data-id="356122">
 				<div class="pic">
 				<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}">
-				<img width="180" height="180" src="{$value['photo']}" class="imgLoad">
+				<img width="180" height="180" src="__WEB__{$value['photo']}" class="imgLoad">
 				</a>
 				</div>
 				<div class="detail">
@@ -126,7 +126,7 @@
 			<li>
 			<div class="u">
 			<a href="{:url('user/userdata',['uid'=>$u_info['uid']])}" target="_blank">
-				<img width="40" height="40" class="imgLoad" src="{$u_info['photo']}">
+				<img width="40" height="40" class="imgLoad" src="__WEB__{$u_info['photo']}">
 			</a>
 			<div>
 			<a href="{:url('user/userdata',['uid'=>$u_info['uid']])}" class="t" target="_blank">{$u_info['username']}</a>
@@ -141,7 +141,7 @@
 				<br><span style="float: left;width: 440px;overflow: hidden;text-overflow: ellipsis;">{$value['content']}</span></a></div>
 			<a class="clear" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">
 				{if condition="!empty($value['oneimg_url'])"}
-			<img class="imgLoad" src="{$value['oneimg_url']}">
+			<img class="imgLoad" src="__WEB__{$value['oneimg_url']}">
 				{/if}
 			</a>
 			<span>{$value['goodnum']}个喜欢，{$value['talknum']}条评论</span>
@@ -168,7 +168,7 @@
 				<div class="pic">
 				<a target="_blank" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" title="{$value['title']}">
 					{if condition="!empty($value['oneimg_url'])"}
-				<img width="180" height="135" src="{$value['oneimg_url']}" class="imgLoad">
+				<img width="180" height="135" src="__WEB__{$value['oneimg_url']}" class="imgLoad">
 					{/if}
 				</a>
 				</div>
@@ -207,7 +207,7 @@
 			<li>
 			<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
 			<i>
-			<img alt="{$value['bookname']}" class="imgLoad" src="{$value['photo']}">
+			<img alt="{$value['bookname']}" class="imgLoad" src="__WEB__{$value['photo']}">
 			</i>
 			<p>{$value['bookname']}</p>
 			</a>
@@ -232,7 +232,7 @@
 				<li data-id="356122">
 				<div class="pic">
 				<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}">
-				<img width="180" height="180" src="{$value['photo']}" class="imgLoad">
+				<img width="180" height="180" src="__WEB__{$value['photo']}" class="imgLoad">
 				</a>
 				</div>
 				<div class="detail">

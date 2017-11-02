@@ -1,0 +1,32 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>综合搜索_味蕾</title>
+<link rel="stylesheet" type="text/css" href="__CSS__/all.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/all_2.css">
+</head>
+<body>
+{include file="public/header"}
+<div class="w clear search_nav">
+<div class="nv">
+<a class="on">为尊贵的会员提供了邮编归属地查询服务(不要意外不要惊喜)</a><br />
+<a class="on">请输入正确的邮编号码</a>
+<!-- <a href="{:url('index/search',['type'=>1])}">菜谱</a>
+<a href="{:url('index/search',['type'=>0])}">食材</a> -->
+</div>
+<form id="form_search" action="{:url('user/vip')}"" method="post">
+<div class="searchBox J_search">
+<input type="text" id="q" class="search_Text J_searchTxt" value="" autocomplete="off" name="postcode">
+<button class="search_Btn J_searchBTN" id="search" style="border: 0;">搜 索</button><br />
+
+</div>
+</form>
+
+</div>
+<span style="margin-left: 380px;font-size: 16px;color:red;">结果如下：</span><br />
+{if $result}
+<span style="margin-left: 380px;font-size: 16px;color:red;">{$result.Province}->{$result.City}->{$result.District}->{$result.Address}</span>
+{/if}
+</body>
+</html>
