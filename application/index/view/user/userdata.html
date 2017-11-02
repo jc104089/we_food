@@ -95,7 +95,7 @@
 				<h2>
 				<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}">{$value['bookname']}</a>
 				{if condition="$value['status'] == 2"}
-				<span class="essence">&nbsp;精</span>
+				<span class="essence" style="color:red;">&nbsp;精</span>
 				{/if}
 				</h2>
 				<p class="subline">{$value['create_time']}</p>
@@ -136,7 +136,7 @@
 			<div class="c clear">
 			<div class="pp"><a href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank"><strong>{$value['title']}</strong>
 				{if condition="$value['status'] == 2"}
-				<span class="essence">&nbsp;精</span>
+				<span class="essence" style="color:red;">&nbsp;精</span>
 				{/if}
 				<br><span style="float: left;width: 440px;overflow: hidden;text-overflow: ellipsis;">{$value['content']}</span></a></div>
 			<a class="clear" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">
@@ -176,7 +176,7 @@
 				<h2>
 				<a target="_blank" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" title="{$value['title']}">{$value['title']}</a>
 				{if condition="$value['status'] == 2"}
-				<span class="essence">&nbsp;精</span>
+				<span class="essence" style="color:red;">&nbsp;精</span>
 				{/if}
 				</h2>
 				<p class="subline">{$value['create_time']}</p>
@@ -239,7 +239,7 @@
 				<h2>
 				<a target="_blank" href="{:url('cai/recipe',['cid'=>$value['cid']])}" title="{$value['bookname']}">{$value['bookname']}</a>
 				{if condition="$value['status'] == 2"}
-				<span class="essence">&nbsp;精</span>
+				<span class="essence" style="color:red;">&nbsp;精</span>
 				{/if}
 				</h2>
 				<p class="subline">{$value['create_time']}</p>

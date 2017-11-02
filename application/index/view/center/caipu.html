@@ -27,6 +27,7 @@
     font-weight: bold;
     font-size: 15px;
   }
+ /*  a{color: #333;} */
 </style>
 
 </head>
@@ -44,8 +45,10 @@
 <div id="mod_location">
   <div class="mod_location clear">
     <div class="left showMy">
-          我的菜谱&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="javascript:void(0);" title="我的菜谱" class="goEdit" >发布菜谱</a>        
+      <span style="display: none;" class="data-sta">{$status}</span>
+      <a href="{:url('center/caipu',['status'=>1])}" class=on data-status="1">我的菜谱</a>
+      <a href="{:url('center/caipu',['status'=>0])}" data-status="0">待审核</a>
+      <a href="javascript:void(0);" title="我的菜谱" class="goEdit" >发布菜谱</a>                
     </div>
     <div class="left returnMy" style="display: none;">
     <a href="javascript:void(0);" title="回到我的菜谱" class="return" > </a>
@@ -192,6 +195,15 @@ $("img.imgLoad").imgLoad();
   window.onresize=function(){
       window.location.reload();
   }
+ // console.log($('.data-sta').text());
+  $('.showMy a').each(function(){
+    if($(this).attr('data-status') == $('.data-sta').text()){
+      $(this).addClass('on');
+    }else{
+      $(this).removeClass('on');
+    }
+  });
+  // 展示页和发布页跳转
   $('.return').click(function(){
     $('.returnMy').hide();
     $('.editCai').hide();
@@ -204,6 +216,7 @@ $("img.imgLoad").imgLoad();
     $('.returnMy').show();
     $('.editCai').show();
   });
+
   $('.showCai li').each(function(){
     //console.log();
     $('.delDiv').css('marginTop',($(this).height())/3);

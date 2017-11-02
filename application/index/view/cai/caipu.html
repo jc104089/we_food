@@ -71,6 +71,7 @@
 				{foreach $scroll_data as $key => $value}
 				<li class="{$value['cid']}" style="width: 345px;">
 				<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
+
 					<i><img class="imgLoad" src="{$value['photo']}" alt="{$value['bookname']}"></i>
 					<div class="os"></div>
 					<p class="line2">{$value['bookname']}<br><span></span></p>
@@ -107,6 +108,9 @@
 					{foreach $data as $value}
 						<li style="display: none;">
 							<a title="{$value['bookname']}" href="{:url('cai/recipe',['cid'=>$value['cid']])}" target="_blank">
+								{if condition="$value['status'] == 2"}
+								<span class="copyright">推荐</span>
+								{/if}
 							<i>
 							<img alt="{$value['bookname']}" class="imgLoad" src="{$value['photo']}">
 							</i>

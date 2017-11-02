@@ -10,6 +10,8 @@ use app\index\model\Board;
 use app\index\model\Log;
 use app\index\model\LogInfo;
 use app\index\model\Comment;
+use app\index\model\Link;
+use app\index\model\Webset;
 use  \think\Session;
 use app\index\model\Praise;
 use think\Db;
@@ -32,12 +34,17 @@ class Market extends Controller
 		$this->log = new Log();
 		$this->comment = new Comment();
 		$this->praise = new Praise();
+        $link = Link::select();
+        $webdata = Webset::find(1);
+        $this->assign('webdata',$webdata);
+        $this->assign('link',$link);
 	}
 	public function rizhi()
 	{
 		//查日志
 		$status = $this->request->param('status');
 		$status = $status ? $status : 2;
+        $status = 2;
 		$data = $this->log->where('status',$status)->order('create_time desc')->paginate(2);
 		$page = $data->render();
 		$data = $this->changeMoreData($data,'logInfo','lid');

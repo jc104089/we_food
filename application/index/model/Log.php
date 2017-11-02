@@ -13,7 +13,7 @@ class Log extends Model
 		return $this->hasOne('LogInfo' , 'l_id');
 	}
 	//热门日志
-	public function hotLog()
+	public function hotLog($status=false)
 	{
 		$all_log = [];//存id
 		$all_data = [];
@@ -22,7 +22,12 @@ class Log extends Model
         	foreach ($data as $k => $v) {
 	            $all_log[] = $v['l_id'];     
 	        }
-	        $log_data = $this->where('lid','in',$all_log)->where('status','neq',0)->limit(5)->select();
+	        if($status){
+	        	$where['status'] = ['=',2];
+	        }else{
+	        	$where['status'] = ['neq',0];
+	        }
+	        $log_data = $this->where('lid','in',$all_log)->where($where)->limit(6)->select();
 	        if($log_data){
 	        	foreach ($log_data as $key => $value) {
 	        		$value->logInfo;

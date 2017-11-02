@@ -25,8 +25,10 @@
 	<div id="mod_location">
 		<div class="mod_location clear">
 			<div class="left">
-				<a href="javascript:void(0);" class="on data" onclick="changeData();">我的</a>
-				<a href="javascript:void(0);" title="发布新话题" onclick="showData();" class="data"> 发布</a>
+				<span style="display: none;" class="getStatus">{$status}</span>
+				<a href="{:url('center/addhuati',['status'=>1])}" class="on data myLog" data-sta="1">我的</a>
+				<a href="{:url('center/addhuati',['status'=>0])}" class="data myLog" data-sta="0">待审核</a>
+				<a href="javascript:void(0);" title="发布新话题" onclick="showData();" class="data postLog"> 发布</a>
 				
 			</div>
 		</div>
@@ -57,8 +59,8 @@
 					</div>
 					<div>
 						{if !empty($value['img_url'])}
-						<a class="clear" href="http://home.meishichina.com/pai-828159.html" target="_blank">
-						<img  class="imgLoad" src="{$value['img_url']}" width="100" height="100" /></a>
+						<a class="clear" href="{:url('market/rizhixiang',['lid'=>$value['lid']])}" target="_blank">
+						<img  class="imgLoad" src="{$value['all_img'][0]}" width="100" height="100" /></a>
 						{/if}
 					</div>
 					<div class="substatus clear">
@@ -101,7 +103,7 @@
 	</div>
 </div><!-- 右侧结束 -->
 </div>
-{include file="public/footer"}
+
 <script type="text/javascript" src="__JS__/all.js"></script>
 
 <!--  <script type="text/javascript" src="http://static.meishichina.com/v6/js/lib/jquery.dragsort.js"></script>
@@ -153,15 +155,17 @@
 	}
 </script>
 <script type="text/javascript">
-	function changeData()
-  {
-     $('.data').toggleClass('on');
-    $('.showhua').show();
-    $('.posthua').hide();
-  }
+	$('.myLog').each(function(){
+		if($(this).attr('data-sta') == $('.getStatus').text()){
+			$(this).addClass('on');
+		}else{
+			$(this).removeClass('on');
+		}
+	});
   function showData()
   {
-  	 $('.data').toggleClass('on');
+  	 $('.data').removeClass('on');
+  	 $('.postLog').addClass('on');
     $('.posthua').show();
     $('.showhua').hide();
 
@@ -181,14 +185,16 @@
 //  $('.delDiv').css('marginTop','');
   $('.del').click(function(){
   	//console.log($(this).next('span').text());
-  	$.post("{:url('index/center/deHuati')}",{lid:$(this).attr('data-id')},function(data){
-  		if(data){
-  			alert('删除成功');
-  			window.location.reload();
-  		}else{
-  			alert('删除失败');
-  		}
-  	},'json');
+  	  if(confirm('此操作不可逆，确定删除吗？')){
+		  	$.post("{:url('index/center/deHuati')}",{lid:$(this).attr('data-id')},function(data){
+		  		if(data){
+		  			alert('删除成功');
+		  			window.location.reload();
+		  		}else{
+		  			alert('删除失败');
+		  		}
+		  	},'json');
+		}
   });
 
 </script>

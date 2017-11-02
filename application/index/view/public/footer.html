@@ -8,10 +8,14 @@
 		<div class="w_links clear">
 			<ul>
 				<li><strong>友情链接：</strong></li>
-				<li><a target="_blank" href="http://life.iqiyi.com/">爱奇艺生活</a></li>
-				<li><a target="_blank" href="http://www.appchina.com/">应用汇</a></li>
+				{if $link}
+				{foreach $link as $value}
+				<li><a target="_blank" href="{$value['url']}">{$value['name']}</a></li>
+				{/foreach}
+				{/if}
+				<!-- <li><a target="_blank" href="http://www.appchina.com/">应用汇</a></li>
 				<li><a target="_blank" href="http://www.zhms.cn/">中华美食网</a></li>
-				<li><a target="_blank" href="http://www.pcbaby.com.cn/">太平洋亲子网</a></li>
+				<li><a target="_blank" href="http://www.pcbaby.com.cn/">太平洋亲子网</a></li> -->
 
 			</ul>
 		</div>
@@ -20,7 +24,7 @@
 <div id="J_footer_box" class="footer-info">
 	<div class="w">
 		<p>
-		版权所有 &copy; 2004-2017 <a target="_blank" href=# title="美食天下 - 让吃更美好！">美食天下</a> 保留所有权利 - <img height="14" src="__PIC__/beian.png"> / 京ICP证090244号 / <a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">京ICP备10020153号</a>
+		版权所有 &copy; 2004-2017 <a target="_blank" href=# title="美食天下 - 让吃更美好！">美食天下</a> 保留所有权利 - <img height="14" src="__PIC__/beian.png">/ <a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">{$webdata['ICP']}</a>
 		</p>
 		
 	</div>

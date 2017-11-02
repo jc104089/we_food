@@ -182,6 +182,9 @@
 	<div class="space_left">
 		<div class="userTop clear">
 			<h1 class="recipe_De_title"><a href="{:url('cai/recipe',['cid'=>$cai_data['cid']])}" id="recipe_title" title="{$cai_data['bookname']}">{$cai_data['bookname']}</a>
+				{if condition="$cai_data['status'] == 2"}
+				<span class="copyright">推荐</span>
+				{/if}
 			</h1>
 			<span id="now_id" style="display: none;">{$cai_data['cid']}</span>
 			<a title="{$cai_data['username']}" href="{:url('user/userdata',['uid'=>$cai_data['uid']])}" target="_blank" class="uright">

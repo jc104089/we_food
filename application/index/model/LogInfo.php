@@ -17,12 +17,4 @@ class LogInfo extends Model
 	{
 		return request()->ip();
 	}*/
-	public function setContentAttr($value)
-	{
-		return addslashes($value);
-	}
-	public function getContentAttr($value)
-	{
-		return stripslashes($value);
-	}
 }

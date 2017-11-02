@@ -11,6 +11,8 @@ use app\index\model\Praise;
 use app\index\model\Save;
 use app\index\model\Log;
 use app\index\model\LogInfo;
+use app\index\model\Link;
+use app\index\model\Webset;
 use  \think\Session;
 
 class Cai extends Controller
@@ -31,6 +33,10 @@ class Cai extends Controller
         $this->praise = new Praise();
         $this->saveCai = new Save();
 		$this->log = new Log();
+        $link = Link::select();
+        $webdata = Webset::find(1);
+        $this->assign('webdata',$webdata);
+        $this->assign('link',$link);
 	}
     //菜谱首页
 	public function caipu()
@@ -70,7 +76,7 @@ class Cai extends Controller
     	foreach ($data as $key => $value) {
     		$all_id[] = $value['c_id'];    		
     	}
-    	$data = $this->book->field('cid,uid,bookname,photo')->where('cid','in',$all_id)->paginate(2);
+    	$data = $this->book->field('cid,uid,bookname,photo,status')->where('cid','in',$all_id)->paginate(2);
     	$page = $data->render();
     	$data = $this->selectName($data);
     	/*dump($page);
@@ -115,7 +121,7 @@ class Cai extends Controller
             foreach ($scroll_data as $key => $value) {
                 $all_id[] = $value['c_id'];         
             }
-            $scroll_data = $this->book->field('cid,uid,bookname,photo')->where('cid','in',$all_id)->select();
+            $scroll_data = $this->book->field('cid,uid,bookname,photo,status')->where('cid','in',$all_id)->select();
             //查回复
             $where['type_id'] = 0;
             $where['data_id'] = $cid;
