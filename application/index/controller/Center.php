@@ -3,6 +3,7 @@ namespace app\index\controller;
 
 use think\Controller;
 use app\index\model\User as UserModel;
+use app\index\model\UserInfo;
 use app\index\model\Log;
 use app\index\model\LogInfo;
 use app\index\model\Board;
@@ -22,6 +23,7 @@ class Center extends Controller
 	protected $book;
 	protected $saveCai;
 	protected $message;
+	protected $userinfo;
 	public function _initialize()
 	{
 		$this->user = new UserModel();
@@ -30,6 +32,7 @@ class Center extends Controller
 		$this->book = new Book();
 		$this->saveCai = new Save();
 		$this->message = new Message();
+		$this->userinfo = new UserInfo();
 		if(!Session::has('uid')){
 			Session::delete('uid');
 			Session::delete('username');
@@ -399,8 +402,35 @@ class Center extends Controller
 		$this->assign('aeq',0);
 		return $this->fetch();
 	}
-	public function test()
+	public function sendPayOrd()
 	{
-		dump($this->request->param());
+		//dump($this->request->param());
+		//dump(session('uid'));
+		$uid = session('uid');
+		//$res = $this->user->find($uid);
+		$this->userinfo->save(['utype'=>1],['u_id'=>$uid]);
+		include 'yeepayCommon.php';
+		$data = array();
+		#业务类型
+		$data['p0_Cmd']				= "Buy";
+		#	商户订单号,选填.
+		$data['p1_MerId']     = $p1_MerId;
+		##若不为""，提交的订单号必须在自身账户交易中唯一;为""时，易宝支付会自动生成随机的商户订单号.
+		$data['p2_Order']			= $this->request->param('p2_Order');
+		#	支付金额,必填.
+		##单位:元，精确到分.
+		$data['p3_Amt']			  = $this->request->param('p3_Amt');
+		#	交易币种,固定值"CNY".
+		$data['p4_Cur']				= "CNY";
+		#	商户接收支付成功数据的地址,支付成功后易宝支付会向该地址发送两次成功通知.
+		$data['p8_Url']			  = '';	
+		#签名串
+		$hmac                         = HmacMd5(implode($data),$merchantKey);
+		$this->assign('data',$data);
+		$this->assign('reqURL_onLine',$reqURL_onLine);
+		$this->assign('hmac',$hmac);
+		$this->assign('p1_MerId',$p1_MerId);
+		return $this->fetch();
+
 	}
 }

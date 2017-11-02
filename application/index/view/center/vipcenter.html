@@ -37,7 +37,7 @@
 <body>
 <div class="modal fade" id="seeUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <form action="{:url('center/test')}" method="post" enctype="multipart/form-data" onsubmit="return change();">
+    <form action="{:url('center/sendPayOrd')}" method="post" enctype="multipart/form-data" onsubmit="return change();">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -52,13 +52,13 @@
               <tr>
                 <td wdith="20%">订单号:</td>
                 <td width="80%"><input type="text" value="" id="adminName" class="form-control" name="username" maxlength="10" autocomplete="off" disabled="disabled" />
-                  <input type="hidden" name="p3_Amt" value="" class="dingdanNum">
+                  <input type="hidden" name="p2_Order" value="" class="dingdanNum">
                 </td>
               </tr>
                <tr>
                 <td wdith="20%">支付金额:</td>
                 <td width="80%"><input type="text" value="￥998" class="form-control" name="phone" maxlength="11" autocomplete="off" disabled="disabled" />
-                  <input type="hidden" name="p2_Order" value="0.01"></td>
+                  <input type="hidden" name="p3_Amt" value="0.01"></td>
               </tr>
             </tbody>
             <tfoot>
